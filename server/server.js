@@ -1,4 +1,23 @@
 require('dotenv').config();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ----------------  TWILIO  ----------------- //
+
 const Twilio = require('twilio');
 
 // phone numbers
@@ -12,9 +31,9 @@ const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new Twilio(twilioSID, twilioAuthToken);
 
 // list entire message history
-client.messages.list((err, data) => {
-  data.messages.forEach(message => console.log(message.body));
-});
+// client.messages.list((err, data) => {
+//   data.messages.forEach(message => console.log(message.body));
+// });
 
 
 // send a text!
@@ -23,3 +42,5 @@ client.messages.list((err, data) => {
 //   to: '+17276564164',
 //   from: twilioNumber
 // }).then(message => console.log(message));
+
+// -------------------------------------------- //
