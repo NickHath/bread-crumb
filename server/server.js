@@ -62,14 +62,11 @@ const textingController = require('./controllers/textingController');
 // i.e receive message body and reply with either
 // 1. next clue, or 2. 'Try again'
 
-// Need to send messages and listen for received messages using the same
-// bodyparser...????
-// NOT USING FRIENDLY NAME!!!!!!
-
-// listens for texts... req.body needs a Body and a To (their vars)
+// listens for texts... req.body needs a Body and a To (their var names)
 app.post('/message', textingController.receiveText);
 
-// receives a body and to in the req.body, sends text
+// receives a 'body' and 'to' in the req.body, sends text
+// {'body':'hi','to':'1231321'}
 app.post('/send', textingController.sendText);
 
 // given a phone number and name, verify the number and set its friendlyName
