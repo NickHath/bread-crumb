@@ -1,39 +1,33 @@
 .dashboard {
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background-color: #F8F1FF;
-  color: #534d56;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.dashboard h1 {
-  font-weight: 700;
-  font-size: 48px;
+.header {
+  margin-left: 2em;
 }
 
-.dashboard .text-container {
-  background-color: rgba(247,197,159, 0.8);
-  height: 60%;
-  width: 65%;
-  margin: auto;
-  border-radius: 3px;
-  padding: 40px;
+.dashboard-contents {
+  height: 90%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.dashboard button {
-  font-size: 1.25em;
-  height: 40px;
-  width: 125px;
-  border: none;
-  border-radius: 3px;
-  margin-right: 60px;
+.container {
+  background-color: #FFF;
+  width: 100%;
+  padding: 2em;
 }
 
-.button1 {
-  color: white;
-  background-color: #028090;
+.scav-hunts {
+  height: 50%;  
 }
 
-.button2 {
-  color: black;
-  background-color: #7C9EB2;
+.new-scav-hunt {
+  height: 15%;
 }
