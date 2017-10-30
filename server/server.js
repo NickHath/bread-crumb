@@ -73,6 +73,7 @@ app.post('/message', textingController.receiveText);
 app.post('/send', textingController.sendText);
 
 // given a phone number and name, verify the number and set its friendlyName
+app.post('/addcallerid', textingController.verifyCallerID);
 
 // list all outgoing Caller IDs
 app.get('/callerids', textingController.listCallerIDs);
