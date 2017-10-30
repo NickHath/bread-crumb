@@ -8,6 +8,7 @@ const express = require('express')
 
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
 app.use(session({
@@ -53,54 +54,30 @@ app.get('/logout', (req, res) => {
   res.redirect('http://localhost:3000/');
 })
 
-app.listen(process.env.SERVER_PORT, console.log(`I'm listening... port: ${process.env.SERVER_PORT}`));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ----------------  TWILIO  ----------------- //
 
-// const Twilio = require('twilio');
+const textingController = require('./controllers/textingController');
 
-// // phone numbers
-// const twilioNumber = process.env.TWILIO_PHONE_NUMBER;
-// const personalNumber = process.env.PERSONAL_NUMBER;
+// listen for texts at /message and handle replies 
+// i.e receive message body and reply with either
+// 1. next clue, or 2. 'Try again'
 
-// // API credentials
-// const twilioSID = process.env.TWILIO_ACCOUNT_SID;
-// const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
+// Need to send messages and listen for received messages using the same
+// bodyparser...????
+// NOT USING FRIENDLY NAME!!!!!!
 
-// const client = new Twilio(twilioSID, twilioAuthToken);
+// listens for texts... req.body needs a Body and a To (their vars)
+app.post('/message', textingController.receiveText);
 
-// list entire message history
-// client.messages.list((err, data) => {
-//   data.messages.forEach(message => console.log(message.body));
-// });
+// receives a body and to in the req.body, sends text
+app.post('/send', textingController.sendText);
 
+// given a phone number and name, verify the number and set its friendlyName
 
-// send a text!
-// client.messages.create({
-//   body: 'Test from Node.js server!',
-//   to: '+17276564164',
-//   from: twilioNumber
-// }).then(message => console.log(message));
+// list all outgoing Caller IDs
+app.get('/callerids', textingController.listCallerIDs);
+
 
 // -------------------------------------------- //
+
+app.listen(process.env.SERVER_PORT, console.log(`I'm listening... port: ${process.env.SERVER_PORT}`));
