@@ -1,7 +1,11 @@
 import React from 'react';
+import NavBar from '../NavBar/NavBar';
 
 const Creator = () => (
-  <div>Creator Component</div>
+  <div>
+    <NavBar />
+    <p>Creator Component</p>
+</div>
 );
 
 export default Creator;

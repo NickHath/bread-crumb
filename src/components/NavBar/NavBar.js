@@ -9,7 +9,7 @@ const NavBar = () => (
     </div>
     <div className='nav-content'>
       <Link className='link' to='/settings'><p>Settings</p></Link>
-      <Link className='link' to='#'><p>Sign Out</p></Link>
+      <a className='link' href='http://localhost:4200/logout'><p>Sign Out</p></a>
     </div>
   </div>
 )
