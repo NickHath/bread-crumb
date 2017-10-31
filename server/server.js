@@ -55,16 +55,40 @@ app.get('/logout', (req, res) => {
 })
 
 
-// controllers
+// require controllers
 const accountController = require('./controllers/accountController');
 const scavHuntController = require('./controllers/scavHuntController');
 const recipientController = require('./controllers/recipientController');
 const taskController = require('./controllers/taskController');
 
-// accountController
-app.get('/account/:id', accountController.getAccount);
-app.get('/accounts', accountController.getAccount);
+// get all, get, create, edit, delete
 
+// // accountController -- wait to test Auth0 before writitng these endpoints
+// app.get('/account/:id', accountController.getAccount);
+// app.get('/accounts', accountController.getAccounts);
+// app.put('/accounts/edit/:id', accountController.editAccount);
+// app.delete('/accounts/delete/:id', accountController.deleteAccount);
+
+// scavHuntController
+app.get('/scav/hunts', scavHuntController.getHunts);
+app.get('/scav/hunt/:id', scavHuntController.getHunt);
+app.post('/scav/create', scavHuntController.createHunt);
+app.put('/scav/edit/:id', scavHuntController.editHunt);
+app.delete('/scav/delete/:id', scavHuntController.deleteHunt);
+
+// recipientController
+app.get('/recipients', recipientRecipientController.getRecipients);
+app.get('/recipient/:id', recipientRecipientController.getRecipient);
+app.post('/recipient/create', recipientRecipientController.createRecipient);
+app.put('/recipient/edit/:id', recipientRecipientController.editRecipient);
+app.delete('/recipient/delete/:id', recipientRecipientController.deleteRecipient);
+
+// taskHuntController
+app.get('/tasks', taskController.getTasks);
+app.get('/task/:id', taskController.getTask);
+app.post('/task/create', taskController.createTask);
+app.put('/task/edit/:id', taskController.editTask);
+app.delete('/task/delete/:id', taskController.deleteTask);
 
 
 
