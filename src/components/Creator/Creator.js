@@ -1,6 +1,5 @@
 import React from 'react';
 import './Creator.css';
-import NavBar from '../NavBar/NavBar';
 
 // Material UI
 import TextField from 'material-ui/TextField';
@@ -12,7 +11,6 @@ const underlineFocusStyle = {
 
 const Creator = () => (
   <div className='creator-wrapper'>
-    <NavBar />    
     <div className='creator'>
       <div className='creator-contents'>
         <h1 className='creator-heading'>Scavenger Hunt Tasks</h1>

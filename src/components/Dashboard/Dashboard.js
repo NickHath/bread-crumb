@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NavBar from '../NavBar/NavBar';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 
@@ -50,7 +49,6 @@ export default class Dashboard extends Component {
     })
     return(
     <div className='wrapper'>
-    <NavBar />  
     <div className='dashboard'>
       <div className='dashboard-contents'>
         <div className='header'>

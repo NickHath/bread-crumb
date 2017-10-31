@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 // my components
@@ -9,10 +9,13 @@ import Editor from './components/Editor/Editor';
 import Creator from './components/Creator/Creator';
 import Settings from './components/Settings/Settings';
 
+import NavBar from './components/NavBar/NavBar';
+
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <div class='main-wrapper'>
+        <NavBar />
         <Switch>
           <Route exact path='/' component={ Login }/>
           <Route path='/dashboard' component={ Dashboard }/>
@@ -20,7 +23,7 @@ class App extends Component {
           <Route path='/creator' component={ Creator }/>
           <Route path='/settings' component={ Settings }/>
         </Switch>
-      </BrowserRouter>
+      </div>
     );
   }
 }
