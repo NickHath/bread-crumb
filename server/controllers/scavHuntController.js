@@ -1,10 +1,9 @@
 module.exports = {
   getHunts: function(req, res) {
     const db = req.app.get('db');
-    db.QUERY()
-      .then(() => res.status(200).send())
+    db.scavenger_hunts.get_scavenger_hunts()
+      .then(hunts => res.status(200).send(hunts))
       .catch(err => res.status(500).send(err));
-
   },
 
 

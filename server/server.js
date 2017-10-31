@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express')
+    , massive = require('massive')
     , session = require('express-session')
     , passport = require('passport')
     , Auth0Strategy = require('passport-auth0')
@@ -7,10 +8,17 @@ const express = require('express')
     , cors = require('cors');
 
 const app = express();
+
+// set up postgres DB
+massive(process.env.CONNECTION_STRING).then(db => app.set('db', db));
+
+// middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
+
+// set up express-session
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -77,11 +85,11 @@ app.put('/scav/edit/:id', scavHuntController.editHunt);
 app.delete('/scav/delete/:id', scavHuntController.deleteHunt);
 
 // recipientController
-app.get('/recipients', recipientRecipientController.getRecipients);
-app.get('/recipient/:id', recipientRecipientController.getRecipient);
-app.post('/recipient/create', recipientRecipientController.createRecipient);
-app.put('/recipient/edit/:id', recipientRecipientController.editRecipient);
-app.delete('/recipient/delete/:id', recipientRecipientController.deleteRecipient);
+app.get('/recipients', recipientController.getRecipients);
+app.get('/recipient/:id', recipientController.getRecipient);
+app.post('/recipient/create', recipientController.createRecipient);
+app.put('/recipient/edit/:id', recipientController.editRecipient);
+app.delete('/recipient/delete/:id', recipientController.deleteRecipient);
 
 // taskHuntController
 app.get('/tasks', taskController.getTasks);
