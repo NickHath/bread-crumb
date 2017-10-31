@@ -1,7 +1,28 @@
 import React from 'react';
+import './Login.css';
+
+// Mui components and colors
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  margin: 12
+}
 
 const Login = () => (
-  <a href={ process.env.REACT_APP_LOGIN }><button>Login Mofo!</button></a>
+  <div className='landing'>
+    <div className='landing-content'>
+      <i className='fa fa-book'/>
+      <h1>Start your adventure.</h1>
+      <div className='login-buttons'>
+        <a href={ process.env.REACT_APP_LOGIN }>
+          <RaisedButton label='Register' style={ style }></RaisedButton>
+        </a>
+        <a href={ process.env.REACT_APP_LOGIN }>
+          <RaisedButton label='Login' style={ style }></RaisedButton>
+        </a>
+      </div>
+    </div>
+  </div>
 );
 
 export default Login;
