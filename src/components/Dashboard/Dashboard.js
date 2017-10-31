@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
     <div className='dashboard'>
       <div className='dashboard-contents'>
         <div className='header'>
-          <h1>Bread Crumb</h1>        
+          <h1>BreadCrumb</h1>        
           <p>Start your journey. Create and manage multiple scavenger hunts at once.</p>
         </div>
         <div className='container scav-hunts'>
