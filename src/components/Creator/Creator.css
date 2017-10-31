@@ -1,0 +1,29 @@
+.creator-wrapper, .creator {
+  height: 100%;
+  width: 100%;
+}
+
+.creator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.creator-contents {
+  width: 60%;
+  background-color: #FFF;
+  padding: 2em;
+  margin-top: 17%;
+}
+
+.creator-heading {
+  margin-bottom: 1em;
+}
+
+.creator-task {
+  margin-bottom: 1.5em;
+  display: flex;
+  flex-direction: column;
+}
+

@@ -7,7 +7,7 @@ import './Dashboard.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
-import {yellow500} from 'material-ui/styles/colors';
+import {amber500} from 'material-ui/styles/colors';
 
 // models
 import ScavHunt from '../../models/ScavHunt';
@@ -18,7 +18,7 @@ const style = {
 }
 
 const underlineFocusStyle = {
-  borderColor: yellow500
+  borderColor: amber500
 }
 
 export default class Dashboard extends Component {
@@ -58,9 +58,11 @@ export default class Dashboard extends Component {
           <p>Start your journey. Create and manage multiple scavenger hunts at once.</p>
         </div>
         <div className='container scav-hunts'>
+          <h2>My scavenger hunts</h2>
           { scavHunts }
         </div>
         <div className='container new-scav-hunt'>
+          <h2>Create a new scavenger hunt</h2>
           <TextField placeholder='Create a new scavenger hunt'
                      underlineFocusStyle={underlineFocusStyle} />
           <Link className='link' to='/creator'><RaisedButton label='Begin' style={style}/></Link>
