@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './Dashboard.css'
+import NavBar from '../NavBar/NavBar';
+import { Link } from 'react-router-dom';
+import './Dashboard.css';
 
 // Mui components and colors
 import TextField from 'material-ui/TextField';
@@ -47,6 +49,8 @@ export default class Dashboard extends Component {
       );
     })
     return(
+    <div className='wrapper'>
+    <NavBar />  
     <div className='dashboard'>
       <div className='dashboard-contents'>
         <div className='header'>
@@ -59,9 +63,10 @@ export default class Dashboard extends Component {
         <div className='container new-scav-hunt'>
           <TextField placeholder='Create a new scavenger hunt'
                      underlineFocusStyle={underlineFocusStyle} />
-          <RaisedButton label='Begin' style={style}/>
+          <Link className='link' to='/creator'><RaisedButton label='Begin' style={style}/></Link>
         </div>
       </div>
+    </div>
     </div>
     );
   }

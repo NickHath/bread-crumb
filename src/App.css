@@ -17,3 +17,9 @@ p {
   font-size: 1em;
   font-weight: 400;
 }
+
+.link {
+  text-decoration: none;
+  color: #424242;
+  font-style: italic;  
+}
