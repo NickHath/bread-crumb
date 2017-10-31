@@ -33,7 +33,7 @@ passport.serializeUser((profile, done) => {
   done(null, profile);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser((profile, done) => {
   done(null, profile);
 });
 
