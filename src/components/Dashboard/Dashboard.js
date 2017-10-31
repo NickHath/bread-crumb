@@ -14,7 +14,7 @@ import ScavHunt from '../../models/ScavHunt';
 
 // styles
 const style = {
-  margin: 12
+  margin: 12,
 }
 
 const underlineFocusStyle = {
@@ -55,7 +55,7 @@ export default class Dashboard extends Component {
       <div className='dashboard-contents'>
         <div className='header'>
           <h1>BreadCrumb</h1>        
-          <p>Start your journey. Create and manage multiple scavenger hunts at once.</p>
+          <p>Send scavenger hunts to your friends using text messaging.</p>
         </div>
         <div className='container scav-hunts'>
           <h2>My scavenger hunts</h2>

@@ -18,7 +18,7 @@ const Creator = () => (
         <h1 className='creator-heading'>Scavenger Hunt Tasks</h1>
         <div className='creator-task'>
           <h2>Task #1</h2>
-          <TextField className='prompt' placeholder='Bring the One Ring to Mordor...' underlineFocusStyle={underlineFocusStyle}/>
+          <TextField className='prompt' placeholder='Bring the One Ring to Mordor' underlineFocusStyle={underlineFocusStyle}/>
           <TextField className='hint' placeholder='Try resisting its influence' underlineFocusStyle={underlineFocusStyle}/>
           <TextField className='answers' placeholder='We did it!' underlineFocusStyle={underlineFocusStyle}/>
         </div>

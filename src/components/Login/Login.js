@@ -5,7 +5,7 @@ import './Login.css';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
-  margin: 12,
+  margin: 12
 }
 
 const Login = () => (
@@ -19,10 +19,10 @@ const Login = () => (
         <h1>Start your adventure.</h1>
         <div className='login-buttons'>
           <a href={ process.env.REACT_APP_LOGIN }>
-            <RaisedButton label='Register' style={ style }></RaisedButton>
+            <RaisedButton label={<span style={{ color: '#FFA000', fontWeight: 700 }}>Register</span>} style={ style }></RaisedButton>
           </a>
           <a href={ process.env.REACT_APP_LOGIN }>
-            <RaisedButton label='Login' style={ style }></RaisedButton>
+            <RaisedButton label={<span style={{ color: '#FFA000', fontWeight: 700 }}>Login</span>} style={ style }></RaisedButton>
           </a>
         </div>
       </div>
