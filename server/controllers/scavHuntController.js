@@ -17,16 +17,18 @@ module.exports = {
 
   createHunt: function(req, res) {
     const db = req.app.get('db');
-    db.QUERY()
-      .then(() => res.status(200).send())
+    const { title, description, account_id } = req.body;
+    db.scavenger_hunts.create_scavenger_hunt([title, description, account_id])
+      .then(() => res.status(200).send('Created!'))
       .catch(err => res.status(500).send(err));
   },
 
 
   editHunt: function(req, res) {
     const db = req.app.get('db');
-    db.QUERY()
-      .then(() => res.status(200).send())
+    const { title, description } = req.body;
+    db.scavenger_hunts.edit_scavenger_hunt([req.params.id, title, description])
+      .then(() => res.status(200).send(`Edited scavenger hunt ${req.params.id}`))
       .catch(err => res.status(500).send(err));
   },
 
