@@ -54,6 +54,20 @@ app.get('/logout', (req, res) => {
   res.redirect('http://localhost:3000/');
 })
 
+
+// controllers
+const accountController = require('./controllers/accountController');
+const scavHuntController = require('./controllers/scavHuntController');
+const recipientController = require('./controllers/recipientController');
+const taskController = require('./controllers/taskController');
+
+// accountController
+app.get('/account/:id', accountController.getAccount);
+app.get('/accounts', accountController.getAccount);
+
+
+
+
 // ----------------  TWILIO  ----------------- //
 
 const textingController = require('./controllers/textingController');
