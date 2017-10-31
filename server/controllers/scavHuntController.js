@@ -9,8 +9,8 @@ module.exports = {
 
   getHunt: function(req, res) {
     const db = req.app.get('db');
-    db.QUERY()
-      .then(() => res.status(200).send())
+    db.scavenger_hunts.get_scavenger_hunt_by_id([req.params.id])
+      .then(hunt => res.status(200).send(hunt))
       .catch(err => res.status(500).send(err));
   },
 
