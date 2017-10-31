@@ -19,7 +19,7 @@ module.exports = {
     const db = req.app.get('db');
     const { title, description, account_id } = req.body;
     db.scavenger_hunts.create_scavenger_hunt([title, description, account_id])
-      .then(() => res.status(200).send('Created!'))
+      .then(() => res.status(200).send('Created new scavenger hunt'))
       .catch(err => res.status(500).send(err));
   },
 
