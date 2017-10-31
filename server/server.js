@@ -32,14 +32,29 @@ passport.use(new Auth0Strategy({
   clientID: process.env.AUTH_CLIENT_ID,
   clientSecret: process.env.AUTH_CLIENT_SECRET,
   callbackURL: process.env.AUTH_CALLBACK
-}, (accessToken, refreshToken, extraParams, profile, done) => {
-     done(null, profile);
+}, function (accessToken, refreshToken, extraParams, profile, done) {
+     const db = app.get('db');
+     const userData = profile._json;
+     const { given_name, family_name } = userData;
+     const auth_id = userData.identities[0].user_id;
+     db.accounts.get_account_by_auth_id([auth_id])
+       .then(user => {
+         if (user[0]) {
+           return done(null, user[0].account_id)
+         } else {
+           db.accounts.create_account([given_name, family_name, auth_id])
+             .then(user => {done(null, user[0].account_id)})
+             .catch(err => console.log(err));
+         }
+       })
 }));
-passport.serializeUser((profile, done) => {
-  done(null, profile);
+passport.serializeUser((account_id, done) => {
+  done(null, account_id);
 });
-passport.deserializeUser((profile, done) => {
-  done(null, profile);
+passport.deserializeUser((account_id, done) => {
+  const db = app.get('db');
+  db.accounts.get_account_by_id([account_id])
+    .then(user => done(null, user[0]));
 });
 
 // auth0 endpoints
