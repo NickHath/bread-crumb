@@ -69,13 +69,14 @@ const scavHuntController = require('./controllers/scavHuntController');
 const recipientController = require('./controllers/recipientController');
 const taskController = require('./controllers/taskController');
 
+// each controller can...
 // get all, get, create, edit, delete
 
-// // accountController -- wait to test Auth0 before writitng these endpoints
-// app.get('/account/:id', accountController.getAccount);
-// app.get('/accounts', accountController.getAccounts);
-// app.put('/accounts/edit/:id', accountController.editAccount);
-// app.delete('/accounts/delete/:id', accountController.deleteAccount);
+// accountController -- wait to test Auth0 before writitng these endpoints
+app.get('/account/:id', accountController.getAccount);
+app.get('/accounts', accountController.getAccounts);
+app.put('/account/edit/:id', accountController.editAccount);
+app.delete('/account/delete/:id', accountController.deleteAccount);
 
 // scavHuntController
 app.get('/scav/hunts', scavHuntController.getHunts);
