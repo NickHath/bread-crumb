@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
     const scavHunts = this.state.scavHunts.map(hunt => {
       const tasks = hunt.tasks.map(task => <li>{task}</li>);
       return(
-        <Card>
+        <Card className='scav-hunt-summary'>
           <CardHeader
             title={hunt.title}
             subtitle={`with ${hunt.recipients.join(', ')}`}

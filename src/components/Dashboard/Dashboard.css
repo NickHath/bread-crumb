@@ -33,6 +33,10 @@
   height: 50%;  
 }
 
+.scav-hunt-summary {
+  margin-bottom: 1.5em;
+}
+
 .new-scav-hunt {
   height: 15%;
 }
