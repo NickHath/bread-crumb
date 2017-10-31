@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
-
 // set up express-session
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -25,9 +24,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// set up passport
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.use(new Auth0Strategy({
   domain: process.env.AUTH_DOMAIN,
   clientID: process.env.AUTH_CLIENT_ID,
@@ -36,15 +35,14 @@ passport.use(new Auth0Strategy({
 }, (accessToken, refreshToken, extraParams, profile, done) => {
      done(null, profile);
 }));
-
 passport.serializeUser((profile, done) => {
   done(null, profile);
 });
-
 passport.deserializeUser((profile, done) => {
   done(null, profile);
 });
 
+// auth0 endpoints
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/auth/callback', passport.authenticate('auth0', {
   successRedirect: 'http://localhost:3000/dashboard',
@@ -62,16 +60,13 @@ app.get('/logout', (req, res) => {
   res.redirect('http://localhost:3000/');
 })
 
-
 // require controllers
 const accountController = require('./controllers/accountController');
 const scavHuntController = require('./controllers/scavHuntController');
 const recipientController = require('./controllers/recipientController');
 const taskController = require('./controllers/taskController');
 
-// each controller can...
-// get all, get, create, edit, delete
-
+// ---- endpoints ---- //
 // accountController -- wait to test Auth0 before writitng these endpoints
 app.get('/account/:id', accountController.getAccount);
 app.get('/accounts', accountController.getAccounts);
@@ -99,10 +94,7 @@ app.post('/task/create', taskController.createTask);
 app.put('/task/edit/:id', taskController.editTask);
 app.delete('/task/delete/:id', taskController.deleteTask);
 
-
-
 // ----------------  TWILIO  ----------------- //
-
 const textingController = require('./controllers/textingController');
 
 // listen for texts at /message and handle replies 
@@ -121,8 +113,6 @@ app.post('/addcallerid', textingController.verifyCallerID);
 
 // list all outgoing Caller IDs
 app.get('/callerids', textingController.listCallerIDs);
-
-
 // -------------------------------------------- //
 
 app.listen(process.env.SERVER_PORT, console.log(`I'm listening... port: ${process.env.SERVER_PORT}`));
