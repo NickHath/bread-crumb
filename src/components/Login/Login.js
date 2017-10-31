@@ -5,21 +5,26 @@ import './Login.css';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
-  margin: 12
+  margin: 12,
 }
 
 const Login = () => (
-  <div className='landing'>
-    <div className='landing-content'>
-      <i className='fa fa-book'/>
-      <h1>Start your adventure.</h1>
-      <div className='login-buttons'>
-        <a href={ process.env.REACT_APP_LOGIN }>
-          <RaisedButton label='Register' style={ style }></RaisedButton>
-        </a>
-        <a href={ process.env.REACT_APP_LOGIN }>
-          <RaisedButton label='Login' style={ style }></RaisedButton>
-        </a>
+  <div className='landing-wrapper'>
+    <div className='landing-nav'>
+      <h1>BreadCrumb</h1>
+    </div>
+    <div className='landing'>
+      <div className='landing-content'>
+        <i className='fa fa-book' style={{"color": "white"}}/>      
+        <h1>Start your adventure.</h1>
+        <div className='login-buttons'>
+          <a href={ process.env.REACT_APP_LOGIN }>
+            <RaisedButton label='Register' style={ style }></RaisedButton>
+          </a>
+          <a href={ process.env.REACT_APP_LOGIN }>
+            <RaisedButton label='Login' style={ style }></RaisedButton>
+          </a>
+        </div>
       </div>
     </div>
   </div>
