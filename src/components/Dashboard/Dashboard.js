@@ -63,7 +63,7 @@ export default class Dashboard extends Component {
         </div>
         <div className='container new-scav-hunt'>
           <h2>Create a new scavenger hunt</h2>
-          <TextField placeholder='Create a new scavenger hunt'
+          <TextField placeholder='My scavenger hunt'
                      underlineFocusStyle={underlineFocusStyle} />
           <Link className='link' to='/creator'><RaisedButton label='Begin' style={style}/></Link>
         </div>

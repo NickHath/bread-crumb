@@ -1,0 +1,18 @@
+.settings-wrapper, .settings {
+  height: 100%;
+  width: 100%;
+}
+
+.settings {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-contents {
+  width: 60%;
+  height: 55%;
+  background-color: #FFF;
+  padding: 2em;
+}

@@ -32,7 +32,7 @@ const Creator = () => (
           <h2>Task #3</h2>
           <TextField placeholder='Find some trustworthy adventurers' underlineFocusStyle={underlineFocusStyle}/>
           <TextField placeholder='Check out the Council of Elrond' underlineFocusStyle={underlineFocusStyle}/>
-          <TextField placeholder='They lent me their bows and axes and things!' underlineFocusStyle={underlineFocusStyle}/>
+          <TextField placeholder='They lent me their bows and axes!' underlineFocusStyle={underlineFocusStyle}/>
         </div>
       </div>
     </div>
