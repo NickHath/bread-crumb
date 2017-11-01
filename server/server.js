@@ -117,13 +117,14 @@ const textingController = require('./controllers/textingController');
 // 1. next clue, or 2. 'Try again'
 
 // receives a 'body' and 'to' in the req.body, sends text
-// {'body':'hi','to':'1231321'}
+// expects {'body':'hi','to':'1231321'}
 app.post('/send', textingController.sendText);
 
 // listens for texts... req.body needs a Body and a To (their var names)
 app.post('/message', textingController.receiveText);
 
 // list all outgoing Caller IDs
+// expects {phone: '+17276564164'}
 app.get('/callerids', textingController.listCallerIDs);
 
 // given a phone number and name, verify the number and set its friendlyName

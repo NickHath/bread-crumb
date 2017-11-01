@@ -41,7 +41,12 @@ module.exports = {
 
 
   addCallerID: (req, res) => {
-    
+    const { phone, name } = req.body;
+    // calls them, console logs code they need
+    client.validationRequests.create({
+      friendlyName: name,
+      phoneNumber: phone
+    }).then(data => console.log(data.validationCode));
   },
 
 
