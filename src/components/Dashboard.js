@@ -10,13 +10,13 @@ import { amber500 } from 'material-ui/styles/colors';
 // models
 import ScavHunt from '../models/ScavHunt';
 
-// styles
-const style = {
-  margin: 12,
-}
-
-const underlineFocusStyle = {
-  borderColor: amber500
+const styles = {
+  buttonStyle: {
+    margin: 12
+  },
+  underlineFocusStyle: {
+    borderColor: amber500
+  }
 }
 
 export default class Dashboard extends Component {
@@ -60,8 +60,8 @@ export default class Dashboard extends Component {
         <div className='container new-scav-hunt'>
           <h2>Create a new scavenger hunt</h2>
           <TextField placeholder='My scavenger hunt'
-                     underlineFocusStyle={underlineFocusStyle} />
-          <Link className='link' to='/creator'><RaisedButton label='Begin' style={style}/></Link>
+                     underlineFocusStyle={styles.underlineFocusStyle} />
+          <Link className='link' to='/creator'><RaisedButton label='Begin' style={styles.buttonStyle}/></Link>
         </div>
       </div>
     </div>

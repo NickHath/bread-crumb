@@ -3,8 +3,14 @@ import React from 'react';
 // Mui components and colors
 import RaisedButton from 'material-ui/RaisedButton';
 
-const style = {
-  margin: 12
+const styles = {
+  buttonStyle: {
+    margin: 12
+  },
+  buttonText: {
+    color: '#FFA000',
+    fontWeight: 700
+  }
 }
 
 const Login = () => (
@@ -18,10 +24,10 @@ const Login = () => (
         <h1>Start your adventure.</h1>
         <div className='login-buttons'>
           <a href={ process.env.REACT_APP_LOGIN }>
-            <RaisedButton label={<span style={{ color: '#FFA000', fontWeight: 700 }}>Register</span>} style={ style }></RaisedButton>
+            <RaisedButton label={<span style={styles.buttonText}>Register</span>} style={ styles.buttonStyle }></RaisedButton>
           </a>
           <a href={ process.env.REACT_APP_LOGIN }>
-            <RaisedButton label={<span style={{ color: '#FFA000', fontWeight: 700 }}>Login</span>} style={ style }></RaisedButton>
+            <RaisedButton label={<span style={styles.buttonText}>Login</span>} style={ styles.buttonStyle }></RaisedButton>
           </a>
         </div>
       </div>
