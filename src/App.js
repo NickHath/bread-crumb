@@ -16,7 +16,7 @@ import NavBar from './components/NavBar';
 class App extends Component {
   render() {
     return (
-      <div class='main-wrapper'>
+      <div className='main-wrapper'>
         <NavBar />
         <Switch>
           <Route exact path='/' component={ Login }/>
