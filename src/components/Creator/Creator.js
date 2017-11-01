@@ -12,7 +12,7 @@ const underlineFocusStyle = {
 const Creator = () => (
   <div className='creator-wrapper'>
     <div className='creator'>
-      <div className='creator-contents'>
+      <div className='container creator-contents'>
         <h1 className='creator-heading'>Scavenger Hunt Tasks</h1>
         <div className='creator-task'>
           <h2>Task #1</h2>
