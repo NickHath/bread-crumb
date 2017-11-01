@@ -19,7 +19,11 @@ module.exports = {
       body: body, 
       to: to, 
       from: twilioNumber 
-    }).then(message => console.log(message));
+    }).then(message => {
+      console.log(message)
+      res.status(200).send(`Sent message "${body}" to ${to}`);
+      })
+      .catch(err => res.status(500).send(err));
   },
 
   
@@ -29,7 +33,7 @@ module.exports = {
     res.send(`
       <Response>
         <Message>
-          Hello ${From}. You said: ${Body}
+          Hello ${From}. You said: "${Body}"
         </Message>
       </Response>
     `);
@@ -46,13 +50,11 @@ module.exports = {
     let callerIDs = [];
     client.outgoingCallerIds.list((err, data) => {
       data.forEach(callerID => {
-        // console.log for testing
-        // console.log(`User: ${callerID.friendlyName}\nPhone No: ${callerID.phoneNumber}\n`);
         let currentCallerID = {};
         currentCallerID[callerID.friendlyName] = callerID.phoneNumber;
         callerIDs.push(currentCallerID);
       })
     }).then(()=> res.status(200).send(JSON.stringify(callerIDs)))
-      .catch(err => console.log(err));
+      .catch(err => res.status(500).send(err));
   }
 }
