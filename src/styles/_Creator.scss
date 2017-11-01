@@ -2,8 +2,7 @@
   width: 100%;
 }
 .creator-contents {
-  width: 60%;
-  margin: auto;
+  @include text-container;
 }
 .creator-heading {
   margin-bottom: 1em;
