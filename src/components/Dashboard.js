@@ -51,7 +51,7 @@ export default class Dashboard extends Component {
       <div className='dashboard-contents'>
         <div className='header'>
           <h1>BreadCrumb</h1>        
-          <p>Send scavenger hunts to your friends using text messaging.</p>
+          <p>Create and send scavenger hunts to your friends</p>
         </div>
         <div className='container scav-hunts'>
           <h2>My scavenger hunts</h2>

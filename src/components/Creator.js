@@ -34,11 +34,17 @@ export default class Creator extends Component{
       <div className='creator-wrapper'>
       <div className='creator'>
         <div className='container creator-contents'>
-          <h1 className='creator-heading'>Scavenger Hunt Tasks</h1>
+          <h1 className='creator-heading'>New Scavenger Hunt</h1>
           <h2>Recipients:</h2>              
           <div className='recipients' style={ styles.wrapper }>
             <Chip style={ styles.chip } onRequestDelete={this.handleRequestDelete}>+1727654164</Chip>
             <Chip style={ styles.chip } onRequestDelete={this.handleRequestDelete}>+1234567890</Chip>
+          </div>
+          <div className='creator-task'>
+            <h2>Task #1</h2>
+            <TextField className='prompt' placeholder='Task Description' underlineFocusStyle={styles.taskFocusStyle}/>
+            <TextField className='hint' placeholder='Hint' underlineFocusStyle={styles.hintFocusStyle}/>
+            <TextField className='answers' placeholder='Accepted Answers' underlineFocusStyle={styles.answerFocusStyle}/>
           </div>
           <div className='creator-task'>
             <h2>Task #1</h2>

@@ -7,13 +7,21 @@
 }
 .header {
   margin-left: 1.75em;
+  margin-bottom: 1.75em;
 }
-.scav-hunts {
-  height: 50%;  
+.header h1 {
+  margin-bottom: 0.15em;
+}
+.header p {
+  font-style: italic;
 }
 .scav-hunt-summary {
   margin-bottom: 1.5em;
 }
+.scav-hunts {
+  margin-bottom: 2em;
+}
 .new-scav-hunt {
   height: 15%;
+  margin-bottom: 4em;
 }
