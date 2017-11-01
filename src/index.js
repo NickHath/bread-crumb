@@ -5,9 +5,6 @@ import registerServiceWorker from './registerServiceWorker';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter } from 'react-router-dom';
 
-// includes reset.css
-import './index.css';
-
 ReactDOM.render(
 <MuiThemeProvider>
   <BrowserRouter>

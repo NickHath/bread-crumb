@@ -1,9 +1,8 @@
 import React from 'react';
-import './Creator.css';
 
 // Material UI
 import TextField from 'material-ui/TextField';
-import {amber500} from 'material-ui/styles/colors';
+import { amber500 } from 'material-ui/styles/colors';
 
 const underlineFocusStyle = {
   borderColor: amber500

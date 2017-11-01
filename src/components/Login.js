@@ -1,5 +1,4 @@
 import React from 'react';
-import './Login.css';
 
 // Mui components and colors
 import RaisedButton from 'material-ui/RaisedButton';

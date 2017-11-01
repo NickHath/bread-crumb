@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,700');
+
+$font-color: #424242;
+
 body {
   width: 100%;
   height: 100vh;
   background-color: #EEE;  
-  color: #424242;
+  color: $font-color;
   font-family: 'Roboto', sans-serif;
 }
 h1 {
@@ -20,7 +24,7 @@ p {
 }
 .link {
   text-decoration: none;
-  color: #424242;
+  color: $font-color;
   font-style: italic;  
 }
 .main-wrapper {

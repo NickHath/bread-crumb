@@ -5,13 +5,13 @@ import { Route, Switch } from 'react-router-dom';
 import './styles/main.css';
 
 // my components
-import Login from './components/Login/Login';
-import Dashboard from './components/Dashboard/Dashboard';
-import Editor from './components/Editor/Editor';
-import Creator from './components/Creator/Creator';
-import Settings from './components/Settings/Settings';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import Editor from './components/Editor';
+import Creator from './components/Creator';
+import Settings from './components/Settings';
 
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/NavBar';
 
 class App extends Component {
   render() {

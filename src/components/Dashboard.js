@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 // Mui components and colors
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
-import {amber500} from 'material-ui/styles/colors';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
+import { amber500 } from 'material-ui/styles/colors';
 
 // models
-import ScavHunt from '../../models/ScavHunt';
+import ScavHunt from '../models/ScavHunt';
 
 // styles
 const style = {
