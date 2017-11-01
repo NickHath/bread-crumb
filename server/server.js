@@ -116,18 +116,19 @@ const textingController = require('./controllers/textingController');
 // i.e receive message body and reply with either
 // 1. next clue, or 2. 'Try again'
 
-// listens for texts... req.body needs a Body and a To (their var names)
-app.post('/message', textingController.receiveText);
-
 // receives a 'body' and 'to' in the req.body, sends text
 // {'body':'hi','to':'1231321'}
 app.post('/send', textingController.sendText);
 
-// given a phone number and name, verify the number and set its friendlyName
-app.post('/addcallerid', textingController.verifyCallerID);
+// listens for texts... req.body needs a Body and a To (their var names)
+app.post('/message', textingController.receiveText);
 
 // list all outgoing Caller IDs
 app.get('/callerids', textingController.listCallerIDs);
+
+// given a phone number and name, verify the number and set its friendlyName
+app.post('/addcaller', textingController.addCallerID);
+
 // -------------------------------------------- //
 
 app.listen(process.env.SERVER_PORT, console.log(`I'm listening... port: ${process.env.SERVER_PORT}`));

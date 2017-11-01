@@ -36,7 +36,7 @@ module.exports = {
   },
 
 
-  verifyCallerID: (req, res) => {
+  addCallerID: (req, res) => {
     
   },
 
@@ -46,12 +46,13 @@ module.exports = {
     let callerIDs = [];
     client.outgoingCallerIds.list((err, data) => {
       data.forEach(callerID => {
-        console.log(`User: ${callerID.friendlyName}\nPhone No: ${callerID.phoneNumber}\n`);
-        // let currentCallerID = {};
-        // currentCallerID[callerID.friendlyName] = callerID.phoneNumber;
-        // callerIDs.push(currentCallerID);
+        // console.log for testing
+        // console.log(`User: ${callerID.friendlyName}\nPhone No: ${callerID.phoneNumber}\n`);
+        let currentCallerID = {};
+        currentCallerID[callerID.friendlyName] = callerID.phoneNumber;
+        callerIDs.push(currentCallerID);
       })
-    });
-    // res.status(200).send(JSON.stringify(callerIDs));
+    }).then(()=> res.status(200).send(JSON.stringify(callerIDs)))
+      .catch(err => console.log(err));
   }
 }
