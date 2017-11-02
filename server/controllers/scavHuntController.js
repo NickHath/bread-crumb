@@ -1,7 +1,15 @@
 module.exports = {
+  // getHunts: function(req, res) {
+  //   const db = req.app.get('db');
+  //   db.scavenger_hunts.get_scavenger_hunts()
+  //     .then(hunts => res.status(200).send(hunts))
+  //     .catch(err => res.status(500).send(err));
+  // },
+
   getHunts: function(req, res) {
     const db = req.app.get('db');
-    db.scavenger_hunts.get_scavenger_hunts()
+    if (!req.user) { res.status(200).send([]); };
+    db.scavenger_hunts.get_scavenger_hunt_by_account_id([req.user.account_id])
       .then(hunts => res.status(200).send(hunts))
       .catch(err => res.status(500).send(err));
   },

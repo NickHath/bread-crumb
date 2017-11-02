@@ -43,16 +43,18 @@ passport.use(new Auth0Strategy({
            return done(null, user[0].account_id)
          } else {
            db.accounts.create_account([given_name, family_name, auth_id])
-             .then(user => {done(null, user[0].account_id)})
+             .then(user => done(null, user[0].account_id))
              .catch(err => console.log(err));
          }
        })
 }));
 passport.serializeUser((account_id, done) => {
+  console.log('serialize')
   done(null, account_id);
 });
 passport.deserializeUser((account_id, done) => {
   const db = app.get('db');
+  console.log('deserialize')
   db.accounts.get_account_by_id([account_id])
     .then(user => done(null, user[0]));
 });

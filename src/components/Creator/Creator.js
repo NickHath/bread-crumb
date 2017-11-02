@@ -35,7 +35,7 @@ export default class Creator extends Component{
     // SEND ARRAY OF RECIPIENTS, ONE AT A TIME
     // test with boilerplate
     this.state.recipients.forEach(recipient => {
-      axios.post('http://localhost:4200/recipient/create', 
+      axios.post('/recipient/create', 
       { 
         first_name: '', 
         last_name: '', 
@@ -54,7 +54,7 @@ export default class Creator extends Component{
         answer: this.refs[currentAnswer].input.value,
         hunt_id: 3
       }
-      axios.post('http://localhost:4200/task/create', task);
+      axios.post('/task/create', task);
     }
   }
 

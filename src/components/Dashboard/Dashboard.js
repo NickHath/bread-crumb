@@ -15,15 +15,24 @@ export default class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      scavHunts: [new ScavHunt('25th Anniversary', ['My GF'], ['First Task', 'Second Task', 'Third Task']), new ScavHunt('Freshman Icebreaker', ['Johnny Appleseed', 'Nikola Tesla', 'Sergei Eisenstein'], ['First Task', 'Second Task', 'Third Task', 'Fourth Task']), new ScavHunt('Ms. Clemens 5th Grade History Hunt', ['Little Timmy', 'Jennifer', 'T-bone'], ['First Task', 'Second Task'])],
-      huntName: '',
+      // scavHunts: [new ScavHunt('25th Anniversary', ['My GF'], ['First Task', 'Second Task', 'Third Task']), new ScavHunt('Freshman Icebreaker', ['Johnny Appleseed', 'Nikola Tesla', 'Sergei Eisenstein'], ['First Task', 'Second Task', 'Third Task', 'Fourth Task']), new ScavHunt('Ms. Clemens 5th Grade History Hunt', ['Little Timmy', 'Jennifer', 'T-bone'], ['First Task', 'Second Task'])],
       hunts: []
     }
   }
 
   componentWillMount() {
-    axios.get('http://localhost:4200/scav/hunts')
-         .then(hunts => this.setState({ hunts: hunts }));
+    let hunts;
+    axios.get('/scav/hunts')
+         .then(res => {
+           hunts = res.data;
+           hunts.forEach(hunt => {
+            axios.get(`/task/${hunt.hunt_id}`)
+                 .then(res => hunt.tasks = res.data);
+            axios.get(`/recipient/${hunt.hunt_id}`)
+                 .then(res => hunt.recipients = res.data);
+           })
+          })
+          .then(() => this.setState({ hunts: hunts }));
   }
 
   handleInput(huntName) {
@@ -31,26 +40,26 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state.hunts);
+    console.log(this.state);
 
-    const scavHunts = this.state.scavHunts.map(hunt => {
-      const tasks = hunt.tasks.map(task => <li>{task}</li>);
-      return(
-        <Card className='scav-hunt-summary'>
-          <CardHeader
-            title={hunt.title}
-            subtitle={`with ${hunt.recipients.join(', ')}`}
-            actasExpander={true}
-            showExpandableButton={true}
-          />
-          <CardText expandable={true}>
-            <ul>
-              {tasks}
-            </ul>
-          </CardText>
-        </Card>
-      );
-    })
+    // const scavHunts = this.state.scavHunts.map(hunt => {
+    //   const tasks = hunt.tasks.map(task => <li>{task}</li>);
+    //   return(
+    //     <Card className='scav-hunt-summary'>
+    //       <CardHeader
+    //         title={hunt.title}
+    //         subtitle={`with ${hunt.recipients.join(', ')}`}
+    //         actasExpander={true}
+    //         showExpandableButton={true}
+    //       />
+    //       <CardText expandable={true}>
+    //         <ul>
+    //           {tasks}
+    //         </ul>
+    //       </CardText>
+    //     </Card>
+    //   );
+    // })
     return(
     <div className='dashboard'>
       <div className='dashboard-contents'>
@@ -60,7 +69,7 @@ export default class Dashboard extends Component {
         </div>
         <div className='container scav-hunts'>
           <h2>My scavenger hunts</h2>
-          { scavHunts }
+          {/* { scavHunts } */ }
         </div>
         <div className='container new-scav-hunt'>
           <h2>Create a new scavenger hunt</h2>
