@@ -3,6 +3,7 @@
   height: 3.5%;
   display: flex;
   justify-content: space-between;
+  font-size: 1.15em;
 }
 .nav-content {
   display: flex;
@@ -12,4 +13,7 @@
   padding: 0.5em;
   padding-bottom: 1.25em;
   margin-right: 0.25em;
+}
+.nav p:hover {
+  color: $highlight-bg;
 }

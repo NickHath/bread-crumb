@@ -8,6 +8,7 @@ $font-color: #424242;
 $primary-bg: #EEE;
 $container-bg: #FFF;
 $highlight-bg: #FFA000;
+$secondary-bg: #FF0051;
 
 @mixin text-container($width: 60%) {
   width: $width;

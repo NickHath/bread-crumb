@@ -27,6 +27,6 @@ export default {
   iconWrapper: {
     width: 120,
     height: 120,
-    fill: '#424242'
+    fill: '#424242',
   }
 };

@@ -5,19 +5,10 @@ import { Link } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
-import { amber500 } from 'material-ui/styles/colors';
+import styles from './DashboardMuiStyles';
 
 // models
 import ScavHunt from '../../models/ScavHunt';
-
-const styles = {
-  buttonStyle: {
-    margin: 12
-  },
-  underlineFocusStyle: {
-    borderColor: amber500
-  }
-}
 
 export default class Dashboard extends Component {
   constructor() {
@@ -33,7 +24,6 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state.huntName);
     const scavHunts = this.state.scavHunts.map(hunt => {
       const tasks = hunt.tasks.map(task => <li>{task}</li>);
       return(
