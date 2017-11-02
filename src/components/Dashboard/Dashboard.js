@@ -95,7 +95,7 @@ export default class Dashboard extends Component {
           }) 
           }) 
           .then(() => this.setState({ hunts: hunts }))
-          .then(() => this.refresh()); 
+    this.refresh();
   } 
 
   handleInput(huntName) {
