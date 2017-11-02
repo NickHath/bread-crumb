@@ -1,2 +1,2 @@
 SELECT * FROM tasks
-WHERE task_id = $1;
+WHERE hunt_id = $1;

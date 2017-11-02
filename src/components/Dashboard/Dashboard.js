@@ -40,26 +40,29 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log('this.state.hunts', this.state.hunts);    
 
-    // const scavHunts = this.state.scavHunts.map(hunt => {
-    //   const tasks = hunt.tasks.map(task => <li>{task}</li>);
-    //   return(
-    //     <Card className='scav-hunt-summary'>
-    //       <CardHeader
-    //         title={hunt.title}
-    //         subtitle={`with ${hunt.recipients.join(', ')}`}
-    //         actasExpander={true}
-    //         showExpandableButton={true}
-    //       />
-    //       <CardText expandable={true}>
-    //         <ul>
-    //           {tasks}
-    //         </ul>
-    //       </CardText>
-    //     </Card>
-    //   );
-    // })
+    const scavHunts = this.state.hunts.map((hunt, index) => {
+      console.log('hunt from this.state.hunts.map:', hunt);
+      const tasks = hunt.tasks ? hunt.tasks.map(task => <li>{task.task}</li>) : [];
+      const recipients = hunt.recipients ? 'with ' + hunt.recipients.join(', ') : [];
+      console.log('tasks and recipients', tasks, recipients);
+      return(
+        <Card key={ index } className='scav-hunt-summary'>
+          <CardHeader
+            title={hunt.title}
+            subtitle={recipients}
+            actasExpander={true}
+            showExpandableButton={true}
+          />
+          <CardText expandable={true}>
+            <ul>
+              {tasks}
+            </ul>
+          </CardText>
+        </Card>
+      );
+    })
     return(
     <div className='dashboard'>
       <div className='dashboard-contents'>
@@ -69,7 +72,7 @@ export default class Dashboard extends Component {
         </div>
         <div className='container scav-hunts'>
           <h2>My scavenger hunts</h2>
-          {/* { scavHunts } */ }
+          { scavHunts }
         </div>
         <div className='container new-scav-hunt'>
           <h2>Create a new scavenger hunt</h2>
