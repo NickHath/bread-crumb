@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 // Material UI
@@ -98,9 +99,11 @@ export default class Creator extends Component{
               <ControlPoint />
             </IconButton>
           </div>
-          <RaisedButton label='Finalize' 
-                        style={ styles.buttonStyle } 
-                        onClick={ this.sendScavengerHunt }/>
+          <Link className='link' to='/dashboard'>
+            <RaisedButton label='Finalize' 
+                          style={ styles.buttonStyle } 
+                          onClick={ this.sendScavengerHunt }/>
+          </Link>
         </div>
       </div>
      </div>
