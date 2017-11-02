@@ -6,6 +6,7 @@
   "build-css": "node-sass-chokidar src/ -o src/",
   "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
   "dependencies": {
+    "axios": "^0.17.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",

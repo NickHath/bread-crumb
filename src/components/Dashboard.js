@@ -23,11 +23,17 @@ export default class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      scavHunts: [new ScavHunt('25th Anniversary', ['My GF'], ['First Task', 'Second Task', 'Third Task']), new ScavHunt('Freshman Icebreaker', ['Johnny Appleseed', 'Nikola Tesla', 'Sergei Eisenstein'], ['First Task', 'Second Task', 'Third Task', 'Fourth Task']), new ScavHunt('Ms. Clemens 5th Grade History Hunt', ['Little Timmy', 'Jennifer', 'T-bone'], ['First Task', 'Second Task'])]
+      scavHunts: [new ScavHunt('25th Anniversary', ['My GF'], ['First Task', 'Second Task', 'Third Task']), new ScavHunt('Freshman Icebreaker', ['Johnny Appleseed', 'Nikola Tesla', 'Sergei Eisenstein'], ['First Task', 'Second Task', 'Third Task', 'Fourth Task']), new ScavHunt('Ms. Clemens 5th Grade History Hunt', ['Little Timmy', 'Jennifer', 'T-bone'], ['First Task', 'Second Task'])],
+      huntName: ''
     }
   }
 
+  handleInput(huntName) {
+    this.setState({ huntName });
+  }
+
   render() {
+    console.log(this.state.huntName);
     const scavHunts = this.state.scavHunts.map(hunt => {
       const tasks = hunt.tasks.map(task => <li>{task}</li>);
       return(
@@ -60,7 +66,8 @@ export default class Dashboard extends Component {
         <div className='container new-scav-hunt'>
           <h2>Create a new scavenger hunt</h2>
           <TextField placeholder='My scavenger hunt'
-                     underlineFocusStyle={styles.underlineFocusStyle} />
+                     underlineFocusStyle={styles.underlineFocusStyle} 
+                     onChange={ (e) => this.handleInput(e.target.value) }/>
           <Link className='link' to='/creator'><RaisedButton label='Begin' style={styles.buttonStyle}/></Link>
         </div>
       </div>
