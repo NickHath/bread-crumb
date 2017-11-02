@@ -16,8 +16,49 @@ export default class Dashboard extends Component {
     super();
     this.state = {
       // scavHunts: [new ScavHunt('25th Anniversary', ['My GF'], ['First Task', 'Second Task', 'Third Task']), new ScavHunt('Freshman Icebreaker', ['Johnny Appleseed', 'Nikola Tesla', 'Sergei Eisenstein'], ['First Task', 'Second Task', 'Third Task', 'Fourth Task']), new ScavHunt('Ms. Clemens 5th Grade History Hunt', ['Little Timmy', 'Jennifer', 'T-bone'], ['First Task', 'Second Task'])],
-      hunts: [{'temp': {}}]
+      hunts: [],
+      dummyHunts: [
+        {
+          title: '25th Wedding Anniversary',
+          recipients: ['+14657838457'],
+          tasks: [
+            {
+              task: 'Go to the restaurant where we met',
+              hint: 'It\'s Italian',
+              answer: 'Grimaldi\'s'
+            },
+            {
+              task: 'Find the park with the blue tree',
+              hint: 'South of 42nd',
+              answer: 'Old Town\'s Maple'
+            }
+          ]
+        },
+        {
+          title: 'Ms. Frizzle\' Wacky Ride',
+          recipients: ['+16577688349', '+12345678475', '+17689435678', '+11234957687'],
+          tasks: [
+            {
+              task: 'Travel into the bloodstream of an unsuspecting human',
+              hint: 'We use magic here',
+              answer: 'We didn\'t go to jail, yay!'
+            }
+          ]
+        },
+        {
+          title: 'Cafe Nero\'s Scavenger Hunt',
+          recipients: ['+16577688349', '+12345678475', '+17689435678', '+11234957687', '+15829457689'],
+          tasks: [
+            {
+              task: 'Name the first mayor of Placeholdertown',
+              hint: 'Starts with a W',
+              answer: 'William Williamson III'
+            }
+          ]
+        },
+    ]
     }
+    this.refresh = this.refresh.bind(this);
   }
 
 //   componentDidMount() {
@@ -53,11 +94,16 @@ export default class Dashboard extends Component {
                 .then(res => hunt.recipients = [...res.data]); 
           }) 
           }) 
-          .then(() => this.setState({ hunts: hunts })); 
+          .then(() => this.setState({ hunts: hunts }))
+          .then(() => this.refresh()); 
   } 
 
   handleInput(huntName) {
     this.setState({ huntName });
+  }
+
+  refresh() {
+    this.setState(this.state);
   }
 
   render() {
