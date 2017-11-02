@@ -16,37 +16,64 @@ export default class Dashboard extends Component {
     super();
     this.state = {
       // scavHunts: [new ScavHunt('25th Anniversary', ['My GF'], ['First Task', 'Second Task', 'Third Task']), new ScavHunt('Freshman Icebreaker', ['Johnny Appleseed', 'Nikola Tesla', 'Sergei Eisenstein'], ['First Task', 'Second Task', 'Third Task', 'Fourth Task']), new ScavHunt('Ms. Clemens 5th Grade History Hunt', ['Little Timmy', 'Jennifer', 'T-bone'], ['First Task', 'Second Task'])],
-      hunts: []
+      hunts: [{'temp': {}}]
     }
   }
 
-  componentWillMount() {
-    let hunts;
-    axios.get('/scav/hunts')
-         .then(res => {
-           hunts = res.data;
-           hunts.forEach(hunt => {
-            axios.get(`/task/${hunt.hunt_id}`)
-                 .then(res => hunt.tasks = res.data);
-            axios.get(`/recipient/${hunt.hunt_id}`)
-                 .then(res => hunt.recipients = res.data);
-           })
-          })
-          .then(() => this.setState({ hunts: hunts }));
-  }
+//   componentDidMount() {
+//     let hunts = {};
+//     axios.get('/scav/hunts')
+//          .then(res => {
+//             hunts = res.data;
+//             hunts.forEach(hunt => {
+//               axios.get(`/task/${hunt.hunt_id}`)
+//                    .then(res => hunt.tasks = res.data)
+//                    .then(() => {
+//                       axios.get(`/recipient/${hunt.hunt_id}`)
+//                            .then(res => hunt.recipients = res.data)
+//                            .then(() => hunts);
+//                     })
+//             })
+//           })
+//            .then(() => {
+//              console.log('setstate', hunts);
+//              this.setState({ hunts: hunts })
+//           });
+// }
+
+  componentWillMount() { 
+    let hunts = []; 
+    axios.get('/scav/hunts') 
+        .then(res => { 
+          hunts = [...res.data]; 
+          hunts.forEach(hunt => { 
+            axios.get(`/task/${hunt.hunt_id}`) 
+                .then(res => hunt.tasks = [...res.data]); 
+            axios.get(`/recipient/${hunt.hunt_id}`) 
+                .then(res => hunt.recipients = [...res.data]); 
+          }) 
+          }) 
+          .then(() => this.setState({ hunts: hunts })); 
+  } 
 
   handleInput(huntName) {
     this.setState({ huntName });
   }
 
   render() {
-    console.log('this.state.hunts', this.state.hunts);    
-
+    console.log('FROM STATE', this.state.hunts);
+    console.log('FROM STATE JSON', JSON.stringify(this.state.hunts));
     const scavHunts = this.state.hunts.map((hunt, index) => {
-      console.log('hunt from this.state.hunts.map:', hunt);
-      const tasks = hunt.tasks ? hunt.tasks.map(task => <li>{task.task}</li>) : [];
-      const recipients = hunt.recipients ? 'with ' + hunt.recipients.join(', ') : [];
-      console.log('tasks and recipients', tasks, recipients);
+      console.log('hunt from this.state.hunts.map:', hunt);      
+      console.log('hunt from this.state.hunts.map JSON:', JSON.stringify(hunt));
+      
+      console.log('tasks and recipients', hunt.tasks, hunt.recipients);
+      let tasks, recipients;
+      if (hunt.tasks && hunt.recipients) {
+        console.log('We made it into our task and recipient maps!!!');
+        tasks = hunt.tasks.map(task => <li>{task.task}</li>);
+        recipients = 'with ' + hunt.recipients.join(', ');
+      }
       return(
         <Card key={ index } className='scav-hunt-summary'>
           <CardHeader
