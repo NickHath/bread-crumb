@@ -20,24 +20,23 @@ export default class MuiListTest extends Component {
 
   render() {
     return (
-      <div>
-        <MobileTearSheet>
-          <List>
-            <ListItem primaryText='Task 1'/>
-            <ListItem primaryText='Task 2'/>
-            <ListItem primaryText='Task 3'
-                      initiallyOpen={ false }
-                      primaryTogglesNestedList={ true }
-                      nestedItems={
-                        [
-                          <ListItem key={1} primaryTest='Prompt 1'/>,
-                          <ListItem key={2} primaryTest='Hint 1'/>,
-                          <ListItem key={3} primaryTest='Answer 1'/>
-                        ]
-                      }
-                      />
-          </List>
-        </MobileTearSheet>
+      <div style={ {'width':'20%'} }>
+        <List>
+          <ListItem primaryText='Task 1' hoverColor='#FFA000'/>
+          <ListItem primaryText='Task 2' hoverColor='#FFA000'/>
+          <ListItem primaryText='Task 3' 
+                    hoverColor='#FFA000'
+                    initiallyOpen={ false }
+                    primaryTogglesNestedList={ true }
+                    nestedItems={
+                      [
+                        <ListItem key={1} primaryText='Prompt 1' hoverColor='#FFA000'/>,
+                        <ListItem key={2} primaryText='Hint 1' hoverColor='#FFA000'/>,
+                        <ListItem key={3} primaryText='Answer 1' hoverColor='#FFA000'/>
+                      ]
+                    }
+                    />
+        </List>
       </div>
     )
   }

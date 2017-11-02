@@ -9,6 +9,8 @@ import Editor from '../components/Editor/Editor';
 import Creator from '../components/Creator/Creator';
 import Settings from '../components/Settings/Settings';
 
+import MuiListTest from '../components/MuiTesting/MuiListTest';
+
 const RouteWithNav = ({component, ...rest}) => {
   return (
     <div className='view-wrapper'>
@@ -27,6 +29,7 @@ export default (
     <RouteWithNav path='/editor' component={ Editor }/>
     <RouteWithNav path='/creator' component={ Creator }/>
     <RouteWithNav path='/settings' component={ Settings }/>
+    <Route path='/list' component={ MuiListTest }/>
     <Route path='*' component={ PageNotFound }/>
   </Switch>
 );

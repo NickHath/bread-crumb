@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 // Mui components and colors
@@ -15,8 +16,14 @@ export default class Dashboard extends Component {
     super();
     this.state = {
       scavHunts: [new ScavHunt('25th Anniversary', ['My GF'], ['First Task', 'Second Task', 'Third Task']), new ScavHunt('Freshman Icebreaker', ['Johnny Appleseed', 'Nikola Tesla', 'Sergei Eisenstein'], ['First Task', 'Second Task', 'Third Task', 'Fourth Task']), new ScavHunt('Ms. Clemens 5th Grade History Hunt', ['Little Timmy', 'Jennifer', 'T-bone'], ['First Task', 'Second Task'])],
-      huntName: ''
+      huntName: '',
+      hunts: []
     }
+  }
+
+  componentWillMount() {
+    axios.get('http://localhost:4200/scav/hunts')
+         .then(hunts => this.setState({ hunts: hunts }));
   }
 
   handleInput(huntName) {
@@ -24,6 +31,8 @@ export default class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.state.hunts);
+
     const scavHunts = this.state.scavHunts.map(hunt => {
       const tasks = hunt.tasks.map(task => <li>{task}</li>);
       return(
