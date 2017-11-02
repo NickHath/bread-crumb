@@ -68,7 +68,7 @@ export default class Creator extends Component{
         hunt_id: 3
       }
       console.log(task);
-      axios.post('http://localhost:4200/task/create', task);
+      // axios.post('http://localhost:4200/task/create', task);
     }
   }
 
