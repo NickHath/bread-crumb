@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 // my components
-import NavBar from '../components/NavBar';
-import Login from '../components/Login';
-import Dashboard from '../components/Dashboard';
-import Editor from '../components/Editor';
-import Creator from '../components/Creator';
-import Settings from '../components/Settings';
+import NavBar from '../components/NavBar/NavBar';
+import Login from '../components/Login/Login';
+import Dashboard from '../components/Dashboard/Dashboard';
+import Editor from '../components/Editor/Editor';
+import Creator from '../components/Creator/Creator';
+import Settings from '../components/Settings/Settings';
 
 const RouteWithNav = ({component, ...rest}) => {
   return (

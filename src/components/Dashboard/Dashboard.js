@@ -8,7 +8,7 @@ import { Card, CardHeader, CardText } from 'material-ui/Card';
 import { amber500 } from 'material-ui/styles/colors';
 
 // models
-import ScavHunt from '../models/ScavHunt';
+import ScavHunt from '../../models/ScavHunt';
 
 const styles = {
   buttonStyle: {
