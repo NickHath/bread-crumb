@@ -9,7 +9,7 @@ import Editor from '../components/Editor';
 import Creator from '../components/Creator';
 import Settings from '../components/Settings';
 
-const RouteWithLayout = ({component, ...rest}) => {
+const RouteWithNav = ({component, ...rest}) => {
   return (
     <div className='view-wrapper'>
       <NavBar />
@@ -18,13 +18,15 @@ const RouteWithLayout = ({component, ...rest}) => {
   )
 }
 
+const PageNotFound = () => <h1>Page Not Found</h1>
 
 export default (
   <Switch>
     <Route exact path='/' component={ Login }/>
-    <Route path='/dashboard' component={ Dashboard }/>
-    <Route path='/editor' component={ Editor }/>
-    <Route path='/creator' component={ Creator }/>
-    <Route path='/settings' component={ Settings }/>
+    <RouteWithNav path='/dashboard' component={ Dashboard }/>
+    <RouteWithNav path='/editor' component={ Editor }/>
+    <RouteWithNav path='/creator' component={ Creator }/>
+    <RouteWithNav path='/settings' component={ Settings }/>
+    <Route path='*' component={ PageNotFound }/>
   </Switch>
 );

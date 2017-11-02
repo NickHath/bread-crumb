@@ -9,9 +9,11 @@
 }
 .landing-nav {
   padding: 1.5em;
+  height: 10vh;
+  box-sizing: border-box;
 }
 .landing {
-  height: 100%;
+  height: calc(100% - 10vh);
   width: 100%;
   display: flex;
   justify-content: center;

@@ -20,7 +20,7 @@ const Login = () => (
     </div>
     <div className='landing'>
       <div className='landing-content'>
-        <i className='fa fa-book' style={{"color": "white"}}/>      
+        {<i className='fa fa-book' style={{"color": "white"}}/>      }
         <h1>Start your adventure.</h1>
         <div className='login-buttons'>
           <a href={ process.env.REACT_APP_LOGIN }>
