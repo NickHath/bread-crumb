@@ -36,7 +36,10 @@ export default class Dashboard extends Component {
   handleClick() {
     if (!this.state.huntName) {
       this.setState({ error: 'Please name your scavenger hunt' })
-    } 
+    } else {
+      let scavHunt = { title: this.state.huntName, description: '' };
+      axios.post('/scav/create', scavHunt);
+    }
   }
 
   render() {
@@ -92,7 +95,8 @@ export default class Dashboard extends Component {
             this.state.huntName ?
              <Link className='link' to='/creator'>
               <RaisedButton label='Begin' 
-                            style={styles.buttonStyle}/>
+                            style={styles.buttonStyle}
+                            onClick={ () => this.handleClick() }/>
              </Link> :
              <RaisedButton label='Begin' 
                            style={styles.buttonStyle}

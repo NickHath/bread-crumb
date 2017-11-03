@@ -37,8 +37,8 @@ module.exports = {
 
   createHunt: function(req, res) {
     const db = req.app.get('db');
-    const { title, description, account_id } = req.body;
-    db.scavenger_hunts.create_scavenger_hunt([title, description, account_id])
+    const { title, description } = req.body;
+    db.scavenger_hunts.create_scavenger_hunt([title, description, req.user.account_id])
       .then(hunt => res.status(200).send(hunt))
       .catch(err => res.status(500).send(err));
   },
