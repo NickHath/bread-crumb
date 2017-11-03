@@ -4,16 +4,21 @@
   display: flex;
   justify-content: space-between;
   font-size: 1.15em;
+  // box-shadow: 0.25em 0.25em 0.125em rgba(255, 160, 0, 0.2);
+  box-shadow: 0.25em 0.25em 0.125em rgba(66, 66, 66, 0.15);
+  margin-bottom: 2em;
 }
 .nav-content {
   display: flex;
   justify-content: flex-end;
 }
 .nav * {
-  padding: 0.5em;
-  padding-bottom: 1.25em;
+  padding: 0.5em 0.5em 0 0.5em;
   margin-right: 0.25em;
 }
 .nav p:hover {
   color: $highlight-bg;
+}
+.logo:hover, .link:hover {
+  background-color: rgba(66, 66, 66, 0.2)
 }
