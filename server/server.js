@@ -83,7 +83,7 @@ const taskController = require('./controllers/taskController');
 
 // ---- endpoints ---- //
 // accountController -- wait to test Auth0 before writitng these endpoints
-app.get('/account/', accountController.getAccount);
+app.get('/account', accountController.getAccount);
 app.get('/accounts', accountController.getAccounts);
 app.put('/account/edit/:id', accountController.editAccount);
 app.delete('/account/delete/:id', accountController.deleteAccount);

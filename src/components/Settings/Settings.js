@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import TextField from 'material-ui/TextField';
@@ -29,7 +30,8 @@ class Settings extends Component {
 
   componentWillUpdate() {
     // set state to user info, render as placeholders for input fields
-    axios.get('')
+    axios.get('/account')
+         .then(account => console.log('In Settings:', account));
   }
 
   render() {

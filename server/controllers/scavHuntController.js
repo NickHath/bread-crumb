@@ -1,21 +1,30 @@
 module.exports = {
   getHunts: function(req, res) {
+    let scavHunts = [], count = 0;
     const db = req.app.get('db');
     if (!req.user) { res.status(200).send([]); };
     db.scavenger_hunts.get_scavenger_hunt_by_account_id([req.user.account_id])
-      .then(hunts => {
-        hunts.forEach(hunt => {
+      .then( hunts => {
+        hunts.forEach((hunt, index) => {
           db.recipients.get_recipients([hunt.hunt_id])
             .then(recipients => hunt.recipients = recipients)
-            .catch(err => res.status(500).send(err))
-          db.tasks.get_tasks([hunt.hunt_id])
-            .then(tasks => {hunt.tasks = tasks})
-            .then(() => console.log(hunt))
-            .catch(err => res.status(500).send(err))
+            .then(() => {
+              db.tasks.get_tasks([hunt.hunt_id])
+                .then(tasks => {
+                  hunt.tasks = tasks;
+                  scavHunts.push(hunt);
+                  count++;
+                })
+                .then(() => {
+                  scavHunts.sort((a, b) => a.hunt_id - b.hunt_id); 
+                  if (count === hunts.length) { res.status(200).send(scavHunts) }
+                })
+            })
         })
       })
       .catch(err => res.status(500).send(err))
   },
+
 
   getHunt: function(req, res) {
     const db = req.app.get('db');

@@ -40,12 +40,13 @@ export default class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.state);
     const scavHunts = this.state.hunts.map((hunt, index) => {
-      console.log('hunt from this.state.hunts.map:', hunt);      
-      console.log('tasks and recipients from this.state.hunts.map', hunt.tasks, hunt.recipients);
+      // console.log('hunt from this.state.hunts.map:', hunt);      
+      // console.log('tasks and recipients from this.state.hunts.map', hunt.tasks, hunt.recipients);
       let tasks, recipients;
       if (hunt.tasks && hunt.recipients) {
-        console.log('We made it into our task and recipient maps!!!');
+        // console.log('We made it into our task and recipient maps!!!');
         tasks = hunt.tasks.map(task => <li>{task.task}</li>);
         recipients = [];
         hunt.recipients.forEach(recipient => recipients.push(recipient.phone));
@@ -54,7 +55,7 @@ export default class Dashboard extends Component {
       return(
         <Card key={ index } className='scav-hunt-summary'>
           <CardHeader
-            title={hunt.title}
+            title={hunt.title + ` ${hunt.hunt_id}`}
             subtitle={recipients}
             actasExpander={true}
             showExpandableButton={true}
