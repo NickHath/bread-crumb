@@ -4,3 +4,12 @@
 .settings-contents {
   @include text-container;  
 }
+.settings h2 {
+  margin: 0;
+}
+.settings h1 {
+  margin-bottom: 0.75em;
+}
+.settings-input {
+  margin-bottom: 2.5em;
+}

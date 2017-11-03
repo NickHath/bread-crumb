@@ -75,7 +75,7 @@ export default class Creator extends Component{
           <TextField className='answers' 
                     placeholder='Accepted Answers' 
                     underlineFocusStyle={styles.answerFocusStyle}
-                  ref={`answer${i}`}/>
+                    ref={`answer${i}`}/>
         </div> 
       )
     }
