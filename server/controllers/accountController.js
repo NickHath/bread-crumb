@@ -9,7 +9,7 @@ module.exports = {
 
   getAccount: function(req, res) {
     const db = req.app.get('db');
-    db.accounts.get_account_by_id([req.params.id])
+    db.accounts.get_account_by_id([req.user.account_id])
       .then(account => res.status(200).send(account))
       .catch(err => res.status(500).send(err));
   },

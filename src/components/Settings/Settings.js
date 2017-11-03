@@ -29,6 +29,7 @@ class Settings extends Component {
 
   componentWillUpdate() {
     // set state to user info, render as placeholders for input fields
+    axios.get('')
   }
 
   render() {

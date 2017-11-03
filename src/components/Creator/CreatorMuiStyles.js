@@ -22,11 +22,11 @@ export default {
   },
   iconStyle: {
     width: 60,
-    height: 60
+    height: 60,
+    fill: '#FFC107'
   },
   iconWrapper: {
     width: 120,
     height: 120,
-    fill: '#424242',
   }
 };

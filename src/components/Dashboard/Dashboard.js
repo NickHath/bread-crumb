@@ -19,6 +19,8 @@ export default class Dashboard extends Component {
     super();
     this.state = {
       hunts: [],
+      huntName: '',
+      error: ''
     }
   }
 
@@ -29,6 +31,12 @@ export default class Dashboard extends Component {
 
   handleInput(huntName) {
     this.setState({ huntName });
+  }
+
+  handleClick() {
+    if (!this.state.huntName) {
+      this.setState({ error: 'Please name your scavenger hunt' })
+    } 
   }
 
   render() {
@@ -76,8 +84,19 @@ export default class Dashboard extends Component {
           </div>
           <TextField placeholder='My scavenger hunt'
                      underlineFocusStyle={styles.underlineFocusStyle} 
-                     onChange={ (e) => this.handleInput(e.target.value) }/>
-          <Link className='link' to='/creator'><RaisedButton label='Begin' style={styles.buttonStyle}/></Link>
+                     onChange={ (e) => this.handleInput(e.target.value) }
+                     errorText={ this.state.error }
+                     />
+          {
+            this.state.huntName ?
+             <Link className='link' to='/creator'>
+              <RaisedButton label='Begin' 
+                            style={styles.buttonStyle}/>
+             </Link> :
+             <RaisedButton label='Begin' 
+                           style={styles.buttonStyle}
+                           onClick={ () => this.handleClick() }/>
+          }
         </div>
       </div>
     </div>
