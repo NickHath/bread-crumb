@@ -19,6 +19,14 @@
 .nav p:hover {
   color: $highlight-bg;
 }
+
 .logo:hover, .link:hover {
-  background-color: rgba(66, 66, 66, 0.2)
+  background-color: rgba(66, 66, 66, 0.1);
+  border: none;
+}
+.link {
+  border-left: 2px solid white;
+}
+.logo {
+  border-right: 2px solid white;
 }
