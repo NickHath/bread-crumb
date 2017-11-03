@@ -7,8 +7,8 @@ module.exports = {
       .then( hunts => {
         hunts.forEach((hunt, index) => {
           db.recipients.get_recipients([hunt.hunt_id])
-            .then(recipients => hunt.recipients = recipients)
-            .then(() => {
+            .then(recipients => {
+              hunt.recipients = recipients
               db.tasks.get_tasks([hunt.hunt_id])
                 .then(tasks => {
                   hunt.tasks = tasks;
@@ -19,7 +19,8 @@ module.exports = {
                   scavHunts.sort((a, b) => a.hunt_id - b.hunt_id); 
                   if (count === hunts.length) { res.status(200).send(scavHunts) }
                 })
-            })
+              })
+
         })
       })
       .catch(err => res.status(500).send(err))

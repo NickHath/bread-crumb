@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ChipInput from 'material-ui-chip-input';
 
 // Material UI
 import styles from './CreatorMuiStyles';
@@ -15,7 +16,7 @@ export default class Creator extends Component{
   constructor() {
     super();
     this.state = {
-      recipients: ['+1234567890', '+1234567890'],
+      recipients: [],
       numTasks: 1,
     }
     this.sendScavengerHunt = this.sendScavengerHunt.bind(this);
@@ -28,6 +29,10 @@ export default class Creator extends Component{
 
   handleRequestDelete() {
     console.log('Someone is tring to delete me!');
+  }
+
+  handleChange(chips) {
+    this.setState({ recipients: chips });
   }
 
   // stores recipients and tasks (which are associated to a hunt_id)
@@ -87,8 +92,8 @@ export default class Creator extends Component{
           <h1 className='creator-heading'>New Scavenger Hunt</h1>
           <h2>Recipients:</h2>              
           <div className='recipients' style={ styles.wrapper }>
-            <Chip style={ styles.chip } onRequestDelete={this.handleRequestDelete}>+1727654164</Chip>
-            <Chip style={ styles.chip } onRequestDelete={this.handleRequestDelete}>+1234567890</Chip>
+            <ChipInput defaultValue={this.state.recipients}
+                       onChange={(chips) => this.handleChange(chips)}/>
           </div>
           { allTasks }
           <div className='new-task'>
