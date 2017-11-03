@@ -5,6 +5,6 @@ export default {
     margin: 12
   },
   underlineFocusStyle: {
-    borderColor: amber500
+    borderColor: '#424242'
   }
 }

@@ -49,12 +49,10 @@ passport.use(new Auth0Strategy({
        })
 }));
 passport.serializeUser((account_id, done) => {
-  console.log('serialize')
   done(null, account_id);
 });
 passport.deserializeUser((account_id, done) => {
   const db = app.get('db');
-  console.log('deserialize')
   db.accounts.get_account_by_id([account_id])
     .then(user => done(null, user[0]));
 });
@@ -98,14 +96,14 @@ app.put('/scav/edit/:id', scavHuntController.editHunt);
 app.delete('/scav/delete/:id', scavHuntController.deleteHunt);
 
 // recipientController
-app.get('/recipients', recipientController.getRecipients);
+app.get('/recipients/:hunt_id', recipientController.getRecipients);
 app.get('/recipient/:id', recipientController.getRecipient);
 app.post('/recipient/create', recipientController.createRecipient);
 app.put('/recipient/edit/:id', recipientController.editRecipient);
 app.delete('/recipient/delete/:id', recipientController.deleteRecipient);
 
 // taskHuntController
-app.get('/tasks', taskController.getTasks);
+app.get('/tasks/:hunt_id', taskController.getTasks);
 app.get('/task/:id', taskController.getTask);
 app.post('/task/create', taskController.createTask);
 app.put('/task/edit/:id', taskController.editTask);

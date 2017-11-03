@@ -1,7 +1,7 @@
 module.exports = {
   getTasks: function(req, res) {
     const db = req.app.get('db');
-    db.tasks.get_tasks()
+    db.tasks.get_tasks([req.params.hunt_id])
       .then(tasks => res.status(200).send(tasks))
       .catch(err => res.status(500).send(err));
 

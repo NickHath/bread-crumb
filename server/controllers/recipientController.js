@@ -1,7 +1,7 @@
 module.exports = {
   getRecipients: function(req, res) {
     const db = req.app.get('db');
-    db.recipients.get_recipients()
+    db.recipients.get_recipients([req.params.hunt_id])
       .then(recipients => res.status(200).send(recipients))
       .catch(err => res.status(500).send(err));
   },

@@ -23,18 +23,8 @@ export default class Dashboard extends Component {
   }
 
   componentWillMount() { 
-    let hunts = []; 
     axios.get('/scav/hunts') 
-         .then(res => { 
-          hunts = [...res.data]; 
-          hunts.forEach(hunt => { 
-            axios.get(`/task/${hunt.hunt_id}`) 
-                .then(res => hunt.tasks = [...res.data]); 
-            axios.get(`/recipient/${hunt.hunt_id}`) 
-                .then(res => hunt.recipients = [...res.data]); 
-          }) 
-          }) 
-          .then(() => this.setState({ hunts: hunts }))
+         .then(res => this.setState({ hunts: res.data }))
   } 
 
   handleInput(huntName) {
@@ -75,11 +65,15 @@ export default class Dashboard extends Component {
           <p>Create and send scavenger hunts to your friends</p>
         </div>
         <div className='container scav-hunts'>
-          <h2>My scavenger hunts</h2>
+          <div className='dashboard-header existing-header'>
+            <h2>My scavenger hunts</h2>
+          </div>
           { scavHunts }
         </div>
         <div className='container new-scav-hunt'>
-          <h2>Create a new scavenger hunt</h2>
+          <div className='dashboard-header new-header'>
+            <h2>Create a new scavenger hunt</h2>
+          </div>
           <TextField placeholder='My scavenger hunt'
                      underlineFocusStyle={styles.underlineFocusStyle} 
                      onChange={ (e) => this.handleInput(e.target.value) }/>
