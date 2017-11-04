@@ -7,8 +7,12 @@ const NavBar = () => (
       <Link className='link' to='/dashboard'><p>Home</p></Link>
     </div>
     <div className='nav-content'>
-      <Link className='link' to='/settings'><p>Settings</p></Link>
-      <a className='link' href='http://localhost:4200/logout'><p>Sign Out</p></a>
+      <div className='nav-link'>
+        <Link className='link' to='/settings'><p>Settings</p></Link>
+      </div>
+      <div className='nav-link'>      
+        <a className='link' href='http://localhost:4200/logout'><p>Sign Out</p></a>
+      </div>
     </div>
   </div>
 )
