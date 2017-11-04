@@ -11,8 +11,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ControlPoint from 'material-ui-icons/ControlPoint';
 
+// redux
+import { connect } from 'react-redux';
 
-export default class Creator extends Component{
+class Creator extends Component{
   constructor() {
     super();
     this.state = {
@@ -37,33 +39,32 @@ export default class Creator extends Component{
 
   // stores recipients and tasks (which are associated to a hunt_id)
   sendScavengerHunt() {
-    // SEND ARRAY OF RECIPIENTS, ONE AT A TIME
-    // test with boilerplate
+    // send recipients one at a time
     this.state.recipients.forEach(recipient => {
       axios.post('/recipient/create', 
       { 
         first_name: '', 
         last_name: '', 
         phone: recipient, 
-        hunt_id: 3 
+        hunt_id: this.props.currentHunt 
       });
     })
     
     // send hunts one at a time
-    // hardcoded hunt_id 3
     for (let i = 1; i <= this.state.numTasks; i++) {
       let currentTask = `prompt${i}`, currentHint = `hint${i}`, currentAnswer = `answer${i}`;
       let task = {
         task: this.refs[currentTask].input.value,
         hint: this.refs[currentHint].input.value,
         answer: this.refs[currentAnswer].input.value,
-        hunt_id: 3
+        hunt_id: this.props.currentHunt
       }
       axios.post('/task/create', task);
     }
   }
 
   render() {
+    console.log(this.props);
     let allTasks = [];
     for (let i = 1; i <= this.state.numTasks; i++) {
       allTasks.push(
@@ -115,3 +116,11 @@ export default class Creator extends Component{
     );
   }
 };
+
+function mapStateToProps(state) {
+  return {
+    currentHunt: state.currentHunt
+  }
+}
+
+export default connect(mapStateToProps)(Creator);

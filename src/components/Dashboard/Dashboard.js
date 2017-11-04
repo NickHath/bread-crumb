@@ -14,7 +14,11 @@ import styles from './DashboardMuiStyles';
 // models
 import ScavHunt from '../../models/ScavHunt';
 
-export default class Dashboard extends Component {
+// redux
+import { connect } from 'react-redux';
+import { updateCurrHunt } from '../../ducks/reducer';
+
+class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
@@ -38,18 +42,15 @@ export default class Dashboard extends Component {
       this.setState({ error: 'Please name your scavenger hunt' })
     } else {
       let scavHunt = { title: this.state.huntName, description: '' };
-      axios.post('/scav/create', scavHunt);
+      axios.post('/scav/create', scavHunt)
+           .then(res => this.props.updateCurrHunt(res.data[0].hunt_id));
     }
   }
 
   render() {
-    console.log(this.state);
     const scavHunts = this.state.hunts.map((hunt, index) => {
-      // console.log('hunt from this.state.hunts.map:', hunt);      
-      // console.log('tasks and recipients from this.state.hunts.map', hunt.tasks, hunt.recipients);
       let tasks, recipients;
       if (hunt.tasks && hunt.recipients) {
-        // console.log('We made it into our task and recipient maps!!!');
         tasks = hunt.tasks.map(task => <li>{task.task}</li>);
         recipients = [];
         hunt.recipients.forEach(recipient => recipients.push(recipient.phone));
@@ -108,3 +109,11 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    currentHunt: state.currentHunt
+  }
+}
+
+export default connect(mapStateToProps, { updateCurrHunt })(Dashboard);
