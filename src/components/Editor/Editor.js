@@ -1,12 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 class Editor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentHunt: props.currentHunt
-    }
-  }
 
   render() {
     return(
@@ -14,3 +8,5 @@ class Editor extends Component {
     )
   }
 }
+
+export default Editor;
