@@ -66,6 +66,12 @@ class Dashboard extends Component {
           />
           <CardText expandable={true}>
             <ScavHuntList tasks={ hunt.tasks }/>
+            <Link className='link' to='/editor'>
+              <RaisedButton label='Edit'
+                            style={ styles.buttonStyle }/>
+            </Link>
+            <RaisedButton label='Send'
+                          style={ styles.buttonStyle }/>
           </CardText>
         </Card>
       );

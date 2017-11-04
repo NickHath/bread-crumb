@@ -1,7 +1,16 @@
 import React from 'react';
 
-const Editor = () => (
-  <div>Editor Component</div>
-);
+class Editor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentHunt: props.currentHunt
+    }
+  }
 
-export default Editor;
+  render() {
+    return(
+      <div>Editor Component</div>      
+    )
+  }
+}
