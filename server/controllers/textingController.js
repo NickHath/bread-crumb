@@ -32,6 +32,11 @@ module.exports = {
   receiveText: (req, res) => {
     console.log(req.body);
     const { From, Body } = req.body;
+    const db = req.app.get('db');
+    db.recipients.get_recipient_by_phone([From])
+      .then(recipient => {
+        
+      });
     res.send(`
       <Response>
         <Message>
