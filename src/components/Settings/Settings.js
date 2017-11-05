@@ -28,13 +28,19 @@ class Settings extends Component {
     console.log(this.state);
   }
 
-  componentWillUpdate() {
+  componentDidMount() {
     // set state to user info, render as placeholders for input fields
     axios.get('/account')
-         .then(account => console.log('In Settings:', account));
+         .then(res => this.setState({
+           first: res.data[0].first_name,
+           last: res.data[0].last_name,
+           email: res.data[0].email,
+           phone: res.data[0].phone
+         }));
   }
 
   render() {
+    console.log(this.state);
     return(
       <div className='settings-wrapper'>
         <div className='settings'>
@@ -43,22 +49,26 @@ class Settings extends Component {
             <div className='settings-input'>
               <h2>First Name</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
-                         ref='first'/>
+                         ref='first'
+                         defaultValue={this.state.first}/>
             </div>
             <div className='settings-input'>
               <h2>Last Name</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
-                         ref='last'/>
+                         ref='last'
+                         defaultValue={this.state.last}/>
             </div>
             <div className='settings-input'>
               <h2>Email</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
-                         ref='email'/>
+                         ref='email'
+                         defaultValue={this.state.email}/>
             </div>
             <div className='settings-input'>
               <h2>Phone</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
-                         ref='phone'/>
+                         ref='phone'
+                         defaultValue={this.state.phone}/>
             </div>
             <Link className='link' to='/dashboard'>
               <RaisedButton label='Save' 
