@@ -3,16 +3,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 // components
-import ScavHuntList from '../ScavHuntList/ScavHuntList';
+import ScavHunt from '../ScavHunt/ScavHunt';
 
 // Mui components and colors
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
 import styles from './DashboardMuiStyles';
-
-// models
-import ScavHunt from '../../models/ScavHunt';
 
 // redux
 import { connect } from 'react-redux';
@@ -57,23 +53,10 @@ class Dashboard extends Component {
         recipients = 'with ' + recipients.join(', ');
       }
       return(
-        <Card key={ index } className='scav-hunt-summary'>
-          <CardHeader
-            title={hunt.title + ` ${hunt.hunt_id}`}
-            subtitle={recipients}
-            actasExpander={true}
-            showExpandableButton={true}
-          />
-          <CardText expandable={true}>
-            <ScavHuntList tasks={ hunt.tasks }/>
-            <Link className='link' to='/editor'>
-              <RaisedButton label='Edit'
-                            style={ styles.buttonStyle }/>
-            </Link>
-            <RaisedButton label='Send'
-                          style={ styles.buttonStyle }/>
-          </CardText>
-        </Card>
+        <ScavHunt key={ index } 
+                  hunt={ hunt } 
+                  recipients={ recipients } 
+                  tasks={ tasks }/>
       );
     })
     return(
