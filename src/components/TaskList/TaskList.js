@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
-import styles from './ScavHuntListStyle';
+import styles from './TaskListMuiStyles';
 
-export default class MuiListTest extends Component {
+export default class TaskList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,9 +20,9 @@ export default class MuiListTest extends Component {
   }
 
   render() {
-    let scavHunts = [];
+    let tasks = [];
     if (this.state.tasks) {
-      scavHunts = this.state.tasks.map((task, index) => (
+      tasks = this.state.tasks.map((task, index) => (
       <ListItem primaryText={`${index + 1}:\t${task.task}`}
                 hoverColor={styles.mainColor}
                 initiallyOpen={ false }
@@ -41,7 +41,7 @@ export default class MuiListTest extends Component {
     return (
       <div style={ {'width':'100%'} }>
         <List>
-          { scavHunts }
+          { tasks }
         </List>
       </div>
     )

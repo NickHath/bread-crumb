@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ScavHuntList from '../ScavHuntList/ScavHuntList';
+import TaskList from '../TaskList/TaskList';
 
 // material-ui
 import RaisedButton from 'material-ui/RaisedButton';
@@ -19,7 +19,7 @@ export default class ScavHunt extends Component {
     ;
   }
 
-  // reverse task list when passing to ScavHuntList
+  // reverse task list when passing to TaskList
   render() {
     return(
       <Card className='scav-hunt-summary'>
@@ -30,7 +30,7 @@ export default class ScavHunt extends Component {
           showExpandableButton={true}
         />
         <CardText expandable={true}>
-          <ScavHuntList tasks={ this.props.hunt.tasks.reverse() }/>
+          <TaskList tasks={ this.props.hunt.tasks.reverse() }/>
           <Link className='link' to='/editor'>
             <RaisedButton label='Edit'
                           style={ styles.buttonStyle }/>
