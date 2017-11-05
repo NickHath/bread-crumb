@@ -23,7 +23,8 @@ export default class TaskList extends Component {
     let tasks = [];
     if (this.state.tasks) {
       tasks = this.state.tasks.map((task, index) => (
-      <ListItem primaryText={`${index + 1}:\t${task.task}`}
+      <ListItem key={index}
+                primaryText={`${index + 1}:\t${task.task}`}
                 hoverColor={styles.mainColor}
                 initiallyOpen={ false }
                 primaryTogglesNestedList={ true }

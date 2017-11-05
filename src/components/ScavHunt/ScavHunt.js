@@ -7,7 +7,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import styles from './ScavHuntMuiStyles';
 
-export default class ScavHunt extends Component {
+// redux
+import { connect } from 'react-redux';
+import { updateCurrHunt } from '../../ducks/reducer';
+
+class ScavHunt extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +20,10 @@ export default class ScavHunt extends Component {
   }
 
   beginScavHunt() {
-    ;
+  }
+
+  editHunt() {
+    this.props.updateCurrHunt(this.state.hunt_id);
   }
 
   // reverse task list when passing to TaskList
@@ -33,7 +40,8 @@ export default class ScavHunt extends Component {
           <TaskList tasks={ this.props.hunt.tasks.reverse() }/>
           <Link className='link' to='/editor'>
             <RaisedButton label='Edit'
-                          style={ styles.buttonStyle }/>
+                          style={ styles.buttonStyle }
+                          onClick={ () => this.editHunt() }/>
           </Link>
           <RaisedButton label='Send'
                         style={ styles.buttonStyle }/>
@@ -42,3 +50,11 @@ export default class ScavHunt extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    currentHunt: state.currentHunt
+  }
+}
+
+export default connect(mapStateToProps, { updateCurrHunt })(ScavHunt);
