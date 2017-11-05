@@ -99,6 +99,7 @@ app.delete('/scav/delete/:id', scavHuntController.deleteHunt);
 app.get('/recipients/:hunt_id', recipientController.getRecipients);
 app.get('/recipient/:id', recipientController.getRecipient);
 app.post('/recipient/create', recipientController.createRecipient);
+app.post('/recipient/updatetask/:hunt_id', recipientController.updateCurrentTask);
 app.put('/recipient/edit/:id', recipientController.editRecipient);
 app.delete('/recipient/delete/:id', recipientController.deleteRecipient);
 

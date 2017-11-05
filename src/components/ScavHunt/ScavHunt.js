@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import TaskList from '../TaskList/TaskList';
 
@@ -20,31 +21,36 @@ class ScavHunt extends Component {
   }
 
   beginScavHunt() {
+    this.props.recipients.map(recipient => {
+      let updateTask = { phone: recipient, next_task: '0' };
+      axios.post(`/recipient/updatetask/${this.state.hunt_id}`, updateTask)
+           .then(() => {axios.post('/send', { to: recipient, body: this.props.hunt.tasks[0].task })});
+    })
   }
 
   editHunt() {
     this.props.updateCurrHunt(this.state.hunt_id);
   }
 
-  // reverse task list when passing to TaskList
   render() {
     return(
       <Card className='scav-hunt-summary'>
         <CardHeader
           title={this.props.hunt.title + ` ${this.state.hunt_id}`}
-          subtitle={this.props.recipients}
+          subtitle={this.props.textRecipients}
           actasExpander={true}
           showExpandableButton={true}
         />
         <CardText expandable={true}>
-          <TaskList tasks={ this.props.hunt.tasks.reverse() }/>
+          <TaskList tasks={ this.props.hunt.tasks }/>
           <Link className='link' to='/editor'>
             <RaisedButton label='Edit'
                           style={ styles.buttonStyle }
                           onClick={ () => this.editHunt() }/>
           </Link>
           <RaisedButton label='Send'
-                        style={ styles.buttonStyle }/>
+                        style={ styles.buttonStyle }
+                        onClick={() => this.beginScavHunt()}/>
         </CardText>
       </Card>
     )

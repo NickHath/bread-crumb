@@ -14,7 +14,9 @@ const client = new Twilio(twilioSID, twilioAuthToken);
 // controller methods
 module.exports = {
   sendText: (req, res) => {
-    const { body, to } = req.body;
+    let { body, to, from } = req.body;
+    // let user = req.user.given_name ? req.user.given_name : from;
+    body = `TEMP NAME has created a scavenger hunt for you. Your first task: ${body}.`;
     client.messages.create({ 
       body: body, 
       to: to, 

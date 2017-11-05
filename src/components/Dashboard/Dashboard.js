@@ -45,16 +45,17 @@ class Dashboard extends Component {
 
   render() {
     const scavHunts = this.state.hunts.map((hunt, index) => {
-      let tasks, recipients;
+      let tasks, recipients, textRecipients;
       if (hunt.tasks && hunt.recipients) {
         tasks = hunt.tasks.map(task => <li>{task.task}</li>);
         recipients = [];
         hunt.recipients.forEach(recipient => recipients.push(recipient.phone));
-        recipients = 'with ' + recipients.join(', ');
+        textRecipients = 'with ' + recipients.join(', ');
       }
       return(
         <ScavHunt key={ index } 
                   hunt={ hunt } 
+                  textRecipients={ textRecipients }
                   recipients={ recipients } 
                   tasks={ tasks }/>
       );

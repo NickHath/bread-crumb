@@ -24,6 +24,14 @@ module.exports = {
   },
 
 
+  updateCurrentTask: function(req, res) {
+    const db = req.app.get('db');
+    const { phone, next_task } = req.body;
+    db.recipients.update_current_task([phone, req.params.hunt_id, next_task])
+      .then(() => res.status(200).send('Updated current task'))
+      .catch(err => res.status(500).send(err))
+  },
+
   editRecipient: function(req, res) {
     const db = req.app.get('db');
     const { first_name, last_name, phone } = req.body;
