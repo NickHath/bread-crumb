@@ -16,8 +16,9 @@ const client = new Twilio(twilioSID, twilioAuthToken);
 module.exports = {
   sendText: (req, res) => {
     let { body, to, from } = req.body;
-    // let user = req.user.given_name ? req.user.given_name : from;
-    body = `TEMP NAME has created a scavenger hunt for you. Your first task: ${body}.`;
+    const { first_name, last_name } = req.user;
+    let user = `${first_name[0].toUpperCase() + first_name.slice(1)} ${last_name[0].toUpperCase() + last_name.slice(1)}` || from || 'Someone';
+    body = `${user} has created a scavenger hunt for you. Your first task: ${body}.`;
     client.messages.create({ 
       body: body, 
       to: to, 
