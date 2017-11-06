@@ -49,7 +49,7 @@ module.exports = {
                 console.log('ANSWER:\n', tasks[recipient.current_task].answer);
                 console.log('WHAT YOU TEXTED:\n', Body);
                 console.log('GUESS MATCHES ANSWER:\n', Body === tasks[recipient.current_task].answer);
-                if (Body === tasks[recipient.current_task].answer) {
+                if (checkGuess.exactMatch(Body, tasks[recipient.current_task].answer)) {
                   db.recipients.update_current_task([From, recipient.hunt_id, ++recipient.current_task])
                     .then(() => {
                       if (recipient.current_task === tasks.length) {
@@ -69,7 +69,15 @@ module.exports = {
                         </Response>
                       `)
                     })
-                } else if (Body.toLowerCase() === 'hint') {
+                } else if (checkGuess.closeMatch(Body, tasks[recipient.current_task].answer)) {
+                  res.send(`
+                    <Response>
+                      <Message>
+                        ${ checkGuess.matchingWords(Body, tasks[recipient.current_task].answer) }
+                      </Message>
+                    </Response>
+                  `)
+                } else if (Body.toLowerCase().strip() === 'hint') {
                   res.send(`
                     <Response>
                       <Message>
@@ -90,13 +98,6 @@ module.exports = {
           }
         })
       });
-    // res.send(`
-    //   <Response>
-    //     <Message>
-    //       Hello ${From}. You said: "${Body}"
-    //     </Message>
-    //   </Response>
-    // `);
   },
 
 
