@@ -41,6 +41,7 @@ module.exports = {
           if (recipient.current_task !== null) {
             db.tasks.get_tasks([recipient.hunt_id])
               .then(tasks => {
+                // SORT BY TASK ORDER HERE
                 tasks.sort((a, b) => a.task_id - b.task_id);
                 console.log('TASKS:\n', tasks);
                 console.log('Current Task:\n', recipient.current_task);
