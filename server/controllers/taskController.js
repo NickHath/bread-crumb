@@ -18,8 +18,8 @@ module.exports = {
 
   createTask: function(req, res) {
     const db = req.app.get('db');
-    const { task, hint, answer, hunt_id } = req.body;
-    db.tasks.create_task([task, hint, answer, hunt_id])
+    const { task, hint, answer, hunt_id, task_order } = req.body;
+    db.tasks.create_task([task, hint, answer, hunt_id, task_order])
       .then(() => res.status(200).send(`Created new task`))
       .catch(err => res.status(500).send(err));
   },

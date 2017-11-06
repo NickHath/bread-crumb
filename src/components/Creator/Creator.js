@@ -57,7 +57,8 @@ class Creator extends Component{
         task: this.refs[currentTask].input.value,
         hint: this.refs[currentHint].input.value,
         answer: this.refs[currentAnswer].input.value,
-        hunt_id: this.props.currentHunt
+        hunt_id: this.props.currentHunt,
+        task_order: i
       }
       axios.post('/task/create', task);
     }
