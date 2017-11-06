@@ -47,7 +47,7 @@ module.exports = {
                 console.log('Current Task:\n', recipient.current_task);
                 console.log('ANSWER:\n', tasks[recipient.current_task].answer);
                 console.log('WHAT YOU TEXTED:\n', Body);
-                console.log('CONDITIONAL:\n', Body === tasks[recipient.current_task].answer);
+                console.log('GUESS MATCHES ANSWER:\n', Body === tasks[recipient.current_task].answer);
                 if (Body === tasks[recipient.current_task].answer) {
                   db.recipients.update_current_task([From, recipient.hunt_id, ++recipient.current_task])
                     .then(() => {
@@ -80,7 +80,7 @@ module.exports = {
                   res.send(`
                     <Response>
                       <Message>
-                        Invalid response.
+                        Sorry, try again.
                       </Message>
                     </Response>
                   `)
