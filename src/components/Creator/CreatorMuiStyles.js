@@ -23,7 +23,7 @@ export default {
   iconStyle: {
     width: 60,
     height: 60,
-    fill: '#FFC107'
+    fill: '#424242'
   },
   iconWrapper: {
     width: 120,

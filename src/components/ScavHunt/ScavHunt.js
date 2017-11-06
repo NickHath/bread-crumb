@@ -40,7 +40,7 @@ class ScavHunt extends Component {
     return(
       <Card className='scav-hunt-summary'>
         <CardHeader
-          title={this.props.hunt.title + ` ${this.props.hunt.hunt_id}`}
+          title={this.props.hunt.title}
           subtitle={this.props.textRecipients}
           actasExpander={true}
           showExpandableButton={true}

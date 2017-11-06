@@ -62,8 +62,8 @@ class Creator extends Component{
       }
       tasks.push(task);
     }
-    axios.post('/task/create', tasks)
     axios.post('/recipient/create', recipients)
+    axios.post('/task/create', tasks)
          .then(() => () => this.props.getAllHunts())
   }
 
