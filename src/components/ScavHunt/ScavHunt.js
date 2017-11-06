@@ -27,7 +27,6 @@ export default class ScavHunt extends Component {
             axios.delete(`/recipient/delete/${this.props.hunt.hunt_id}`)
                  .then(() => {
                    axios.delete(`/scav/delete/${this.props.hunt.hunt_id}`)
-                        // .then(() => this.props.refresh());
                 })
          })
   }

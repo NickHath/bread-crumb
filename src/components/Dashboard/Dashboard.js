@@ -57,8 +57,7 @@ class Dashboard extends Component {
                   hunt={ hunt } 
                   textRecipients={ textRecipients }
                   recipients={ recipients } 
-                  tasks={ tasks }
-                  refresh={ this.refresh }/>
+                  tasks={ tasks }/>
       );
     })
     return(
