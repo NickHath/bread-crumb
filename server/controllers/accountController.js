@@ -17,8 +17,8 @@ module.exports = {
 
   editAccount: function(req, res) {
     const db = req.app.get('db');
-    const { first_name, last_name } = req.body;
-    db.accounts.edit_account([req.params.id, first_name, last_name])
+    const { first_name, last_name, email } = req.body;
+    db.accounts.edit_account([req.user.account_id, first_name, last_name, email])
       .then(() => res.status(200).send(`Edited account ${req.params.id}`))
       .catch(err => res.status(500).send(err));
   },

@@ -19,11 +19,14 @@ module.exports = {
   createTask: function(req, res) {
     const db = req.app.get('db');
     let tasks = req.body;
+    let count = 0;
     tasks.forEach(prompt => {
       const { task, hint, answer, hunt_id, task_order } = prompt;
       db.tasks.create_task([task, hint, answer, hunt_id, task_order])
-        .then(() => res.status(200).send(`Created new task`))
-        .catch(err => res.status(500).send(err));
+              .then(() => {
+                ++count;
+                if (count === tasks.length) { res.status(200).send('Added tasks'); };
+              });
     })
   },
 

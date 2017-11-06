@@ -8,42 +8,20 @@ import styles from './SettingsMuiStyles';
 
 // redux
 import { connect } from 'react-redux';
-import { updateFirstName, updateLastName, updateEmail } from '../../ducks/reducer';
+import { updateAccount } from '../../ducks/reducer';
 
 class Settings extends Component {
-  constructor() {
-    super();
-    this.state = {
-      first: '',
-      last: '',
-      email: '',
-      phone: ''
-    }
-  }
-
   sendUpdatedSettings() {
     // update db with new user data
-    this.setState({
-      first: this.refs.first.input.value,
-      last: this.refs.last.input.value,
-      email: this.refs.email.input.value,
-      phone: this.refs.phone.input.value
-    })
-    console.log(this.state);
-  }
-
-  componentDidMount() {
-    // set state to user info, render as placeholders for input fields
-    axios.get('/account')
-         .then(res => this.setState({
-           first: res.data[0].first_name,
-           last: res.data[0].last_name,
-           email: res.data[0].email,
-         }));
+    let first_name = this.refs.first.input.value;
+    let last_name = this.refs.last.input.value;
+    let email = this.refs.email.input.value;
+    this.props.updateAccount(first_name, last_name, email);
+    axios.put(`/account/edit`, { first_name, last_name, email });
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     return(
       <div className='settings-wrapper'>
         <div className='settings'>
@@ -53,25 +31,19 @@ class Settings extends Component {
               <h2>First Name</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
                          ref='first'
-                         defaultValue={this.state.first}/>
+                         defaultValue={this.props.first}/>
             </div>
             <div className='settings-input'>
               <h2>Last Name</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
                          ref='last'
-                         defaultValue={this.state.last}/>
+                         defaultValue={this.props.last}/>
             </div>
             <div className='settings-input'>
               <h2>Email</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
                          ref='email'
-                         defaultValue={this.state.email}/>
-            </div>
-            <div className='settings-input'>
-              <h2>Phone</h2>
-              <TextField underlineFocusStyle={styles.underlineFocusStyle}
-                         ref='phone'
-                         defaultValue={this.state.phone}/>
+                         defaultValue={this.props.email}/>
             </div>
             <Link className='link' to='/dashboard'>
               <RaisedButton label='Save' 
@@ -93,4 +65,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { updateFirstName, updateLastName, updateEmail })(Settings);
+export default connect(mapStateToProps, { updateAccount })(Settings);

@@ -18,12 +18,14 @@ module.exports = {
   createRecipient: function(req, res) {
     const db = req.app.get('db');
     let recipients = req.body;
-    console.log(req.body);
+    let count = 0;
     recipients.forEach(recipient => {
       const { first_name, last_name, phone, hunt_id } = recipient;  
       db.recipients.create_recipient([first_name, last_name, phone, hunt_id])
-        .then(() => res.status(200).send(`Created new recipient`))
-        .catch(err => res.status(500).send(err));  
+                   .then(() => {
+                      ++count;
+                      if (count === tasks.length) { res.status(200).send('Added recipients'); };
+                   })
     })
   },
 

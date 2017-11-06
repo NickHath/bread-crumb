@@ -21,6 +21,13 @@ class Editor extends Component {
   }
   
   componentWillMount() {
+    // for (let i = 0; i < this.props.hunts.length; i++) {
+    //   if (this.props.hunts[i].hunt_id === this.props.currentHunt) {
+    //     tasks = this.props.hunts[i].tasks;
+
+    //   }
+    // }
+
     axios.get(`/scav/hunt/${this.props.currentHunt}`)
          .then(res => this.setState({ huntName: res.data[0].title })); 
     axios.get(`/recipients/${this.props.currentHunt}`)

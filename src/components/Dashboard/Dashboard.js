@@ -12,7 +12,7 @@ import styles from './DashboardMuiStyles';
 
 // redux
 import { connect } from 'react-redux';
-import { getAllHunts, updateCurrHunt } from '../../ducks/reducer';
+import { getAllHunts, updateCurrHunt, updateAccount } from '../../ducks/reducer';
 
 class Dashboard extends Component {
   constructor() {
@@ -23,8 +23,13 @@ class Dashboard extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.getAllHunts();
+  componentWillMount() {
+    this.props.getAllHunts();    
+    axios.get('/account')
+         .then(res => {
+            const { first_name, last_name, email } = res.data[0];
+            this.props.updateAccount(first_name, last_name, email);
+         });
   }
 
   handleInput(huntName) {
@@ -59,6 +64,7 @@ class Dashboard extends Component {
                   tasks={ tasks }/>
       );
     })
+    console.log('DASHBOARD:\n', this.props);
     return(
     <div className='dashboard'>
       <div className='dashboard-contents'>
@@ -106,4 +112,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { getAllHunts, updateCurrHunt })(Dashboard);
+export default connect(mapStateToProps, { getAllHunts, updateCurrHunt, updateAccount })(Dashboard);

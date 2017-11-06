@@ -5,6 +5,7 @@ module.exports = {
     if (!req.user) { res.status(200).send([]); };
     db.scavenger_hunts.get_scavenger_hunt_by_account_id([req.user.account_id])
       .then( hunts => {
+        if (hunts.length === 0) { res.status(200).send([]); };
         hunts.forEach((hunt, index) => {
           db.recipients.get_recipients([hunt.hunt_id])
             .then(recipients => {

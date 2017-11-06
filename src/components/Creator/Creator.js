@@ -12,6 +12,7 @@ import ControlPoint from 'material-ui-icons/ControlPoint';
 
 // redux
 import { connect } from 'react-redux';
+import { getAllHunts } from '../../ducks/reducer';
 
 class Creator extends Component{
   constructor() {
@@ -61,8 +62,9 @@ class Creator extends Component{
       }
       tasks.push(task);
     }
-    axios.post('/recipient/create', recipients);
-    axios.post('/task/create', tasks);
+    axios.post('/task/create', tasks)
+    axios.post('/recipient/create', recipients)
+         .then(() => () => this.props.getAllHunts())
   }
 
   render() {

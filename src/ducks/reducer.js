@@ -9,22 +9,21 @@ const initialState = {
   currentName: ''
 }
 
-const UPDATE_FIRST_NAME = 'UPDATE_FIRST_NAME'
-    , UPDATE_LAST_NAME = 'UPDATE_LAST_NAME'
-    , UPDATE_EMAIL = 'UPDATE_EMAIL'
+const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT'
     , GET_ALL_HUNTS = 'GET_ALL_HUNTS'
     , UPDATE_CURR_HUNT_ID = 'UPDATE_CURR_HUNT_ID'
     , UPDATE_CURR_NAME = 'UPDATE_CURR_NAME'
     , SEND_TASKS = 'SEND_TASKS';
 
 export default function reducer(state=initialState, action) {
+  console.log(action.type);
   switch(action.type) {
-    case UPDATE_FIRST_NAME:
-      return Object.assign({}, state, { first: action.payload })
-    case UPDATE_LAST_NAME:
-      return Object.assign({}, state, { last: action.payload })
-    case UPDATE_EMAIL:
-      return Object.assign({}, state, { email: action.payload })
+    case UPDATE_ACCOUNT:
+      return Object.assign({}, state, { 
+        first: action.payload.first, 
+        last: action.payload.last,
+        email: action.payload.email
+      })
     case GET_ALL_HUNTS + '_FULFILLED':
       return Object.assign({}, state, { hunts: action.payload });
     case UPDATE_CURR_HUNT_ID:
@@ -40,24 +39,14 @@ export default function reducer(state=initialState, action) {
   }
 }
 
-export function updateFirstName(name) {
+export function updateAccount(first, last, email) {
   return {
-    type: UPDATE_FIRST_NAME,
-    payload: name
-  }
-}
-
-export function updateLastName(name) {
-  return {
-    type: UPDATE_LAST_NAME,
-    payload: name
-  }
-}
-
-export function updateEmail(email) {
-  return {
-    type: UPDATE_EMAIL,
-    payload: email
+    type: UPDATE_ACCOUNT,
+    payload: {
+      first,
+      last,
+      email
+    }
   }
 }
 

@@ -8,7 +8,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import styles from './ScavHuntMuiStyles';
 
-export default class ScavHunt extends Component {
+// redux
+import { connect } from 'react-redux';
+import { updateCurrHunt, getAllHunts } from '../../ducks/reducer';
+
+class ScavHunt extends Component {
   beginScavHunt() {
     this.props.recipients.map(recipient => {
       let updateTask = { phone: recipient, next_task: '0' };
@@ -27,6 +31,7 @@ export default class ScavHunt extends Component {
             axios.delete(`/recipient/delete/${this.props.hunt.hunt_id}`)
                  .then(() => {
                    axios.delete(`/scav/delete/${this.props.hunt.hunt_id}`)
+                        .then(() => this.props.getAllHunts())
                 })
          })
   }
@@ -58,3 +63,11 @@ export default class ScavHunt extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    currentHunt: state.currentHunt
+  }
+}
+
+export default connect(mapStateToProps, { updateCurrHunt, getAllHunts })(ScavHunt);
