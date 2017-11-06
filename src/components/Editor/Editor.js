@@ -5,7 +5,6 @@ import axios from 'axios';
 // material ui
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import Chip from 'material-ui/Chip';
 import styles from './EditorMuiStyles';
 
 // redux 

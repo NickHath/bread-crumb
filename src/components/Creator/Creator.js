@@ -6,7 +6,6 @@ import ChipInput from 'material-ui-chip-input';
 // Material UI
 import styles from './CreatorMuiStyles';
 import TextField from 'material-ui/TextField';
-import Chip from 'material-ui/Chip';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ControlPoint from 'material-ui-icons/ControlPoint';
@@ -40,14 +39,14 @@ class Creator extends Component{
   // stores recipients and tasks (which are associated to a hunt_id)
   sendScavengerHunt() {
     // send recipients one at a time
+    let recipients = [], tasks = [];
     this.state.recipients.forEach(recipient => {
-      axios.post('/recipient/create', 
-      { 
+      recipients.push({ 
         first_name: '', 
         last_name: '', 
         phone: recipient, 
         hunt_id: this.props.currentHunt 
-      });
+      })
     })
     
     // send hunts one at a time
@@ -60,12 +59,13 @@ class Creator extends Component{
         hunt_id: this.props.currentHunt,
         task_order: i
       }
-      axios.post('/task/create', task);
+      tasks.push(task);
     }
+    axios.post('/recipient/create', recipients);
+    axios.post('/task/create', tasks);
   }
 
   render() {
-    console.log(this.props);
     let allTasks = [];
     for (let i = 1; i <= this.state.numTasks; i++) {
       allTasks.push(

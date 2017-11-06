@@ -17,10 +17,14 @@ module.exports = {
 
   createRecipient: function(req, res) {
     const db = req.app.get('db');
-    const { first_name, last_name, phone, hunt_id } = req.body;
-    db.recipients.create_recipient([first_name, last_name, phone, hunt_id])
-      .then(() => res.status(200).send(`Created new recipient`))
-      .catch(err => res.status(500).send(err));
+    let recipients = req.body;
+    console.log(req.body);
+    recipients.forEach(recipient => {
+      const { first_name, last_name, phone, hunt_id } = recipient;  
+      db.recipients.create_recipient([first_name, last_name, phone, hunt_id])
+        .then(() => res.status(200).send(`Created new recipient`))
+        .catch(err => res.status(500).send(err));  
+    })
   },
 
 

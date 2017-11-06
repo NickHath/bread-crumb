@@ -8,37 +8,26 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import styles from './ScavHuntMuiStyles';
 
-// redux
-import { connect } from 'react-redux';
-import { updateCurrHunt } from '../../ducks/reducer';
-
-class ScavHunt extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hunt_id: props.hunt.hunt_id
-    }
-  }
-
+export default class ScavHunt extends Component {
   beginScavHunt() {
     this.props.recipients.map(recipient => {
       let updateTask = { phone: recipient, next_task: '0' };
-      axios.post(`/recipient/updatetask/${this.state.hunt_id}`, updateTask)
+      axios.post(`/recipient/updatetask/${this.props.hunt.hunt_id}`, updateTask)
            .then(() => {axios.post('/send', { to: recipient, body: this.props.hunt.tasks[0].task })});
     })
   }
 
   editHunt() {
-    this.props.updateCurrHunt(this.state.hunt_id);
+    this.props.updateCurrHunt(this.props.hunt.hunt_id);
   }
 
   deleteScavHunt() {
-    axios.delete(`/task/delete/${this.state.hunt_id}`)
+    axios.delete(`/task/delete/${this.props.hunt.hunt_id}`)
          .then(() => {
-            axios.delete(`/recipient/delete/${this.state.hunt_id}`)
+            axios.delete(`/recipient/delete/${this.props.hunt.hunt_id}`)
                  .then(() => {
-                   axios.delete(`/scav/delete/${this.state.hunt_id}`)
-                        .then(() => this.props.refresh());
+                   axios.delete(`/scav/delete/${this.props.hunt.hunt_id}`)
+                        // .then(() => this.props.refresh());
                 })
          })
   }
@@ -47,7 +36,7 @@ class ScavHunt extends Component {
     return(
       <Card className='scav-hunt-summary'>
         <CardHeader
-          title={this.props.hunt.title + ` ${this.state.hunt_id}`}
+          title={this.props.hunt.title + ` ${this.props.hunt.hunt_id}`}
           subtitle={this.props.textRecipients}
           actasExpander={true}
           showExpandableButton={true}
@@ -70,11 +59,3 @@ class ScavHunt extends Component {
     )
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    currentHunt: state.currentHunt
-  }
-}
-
-export default connect(mapStateToProps, { updateCurrHunt })(ScavHunt);

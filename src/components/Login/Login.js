@@ -2,16 +2,7 @@ import React from 'react';
 
 // Mui components and colors
 import RaisedButton from 'material-ui/RaisedButton';
-
-const styles = {
-  buttonStyle: {
-    margin: 12
-  },
-  buttonText: {
-    color: '#FFA000',
-    fontWeight: 700
-  }
-}
+import styles from './LoginMuiStyles'
 
 const Login = () => (
   <div className='landing-wrapper'>

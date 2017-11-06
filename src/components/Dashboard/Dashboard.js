@@ -12,23 +12,20 @@ import styles from './DashboardMuiStyles';
 
 // redux
 import { connect } from 'react-redux';
-import { updateCurrHunt } from '../../ducks/reducer';
+import { getAllHunts, updateCurrHunt } from '../../ducks/reducer';
 
 class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      hunts: [],
       huntName: '',
       error: ''
     }
-    this.refresh = this.refresh.bind(this);
   }
 
-  componentWillMount() { 
-    axios.get('/scav/hunts') 
-         .then(res => this.setState({ hunts: res.data }))
-  } 
+  componentDidMount() {
+    this.props.getAllHunts();
+  }
 
   handleInput(huntName) {
     this.setState({ huntName });
@@ -44,13 +41,8 @@ class Dashboard extends Component {
     }
   }
 
-  refresh() {
-    axios.get('/scav/hunts') 
-         .then(res => this.setState({ hunts: res.data }))
-  }
-
   render() {
-    const scavHunts = this.state.hunts.map((hunt, index) => {
+    const scavHunts = this.props.hunts.map((hunt, index) => {
       let tasks, recipients, textRecipients;
       if (hunt.tasks && hunt.recipients) {
         // SORT BY TASK ORDER
@@ -111,8 +103,9 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
+    hunts: state.hunts,
     currentHunt: state.currentHunt
   }
 }
 
-export default connect(mapStateToProps, { updateCurrHunt })(Dashboard);
+export default connect(mapStateToProps, { getAllHunts, updateCurrHunt })(Dashboard);
