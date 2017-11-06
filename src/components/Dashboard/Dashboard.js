@@ -45,7 +45,6 @@ class Dashboard extends Component {
     const scavHunts = this.props.hunts.map((hunt, index) => {
       let tasks, recipients, textRecipients;
       if (hunt.tasks && hunt.recipients) {
-        // SORT BY TASK ORDER
         hunt.tasks.sort((a, b) => a.task_order - b.task_order);
         tasks = hunt.tasks.map(task => <li>{task.task}</li>);
         recipients = [];
