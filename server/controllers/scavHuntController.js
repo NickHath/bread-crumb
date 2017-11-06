@@ -57,6 +57,9 @@ module.exports = {
     const db = req.app.get('db');
     db.scavenger_hunts.delete_scavenger_hunt([req.params.id])
       .then(() => res.status(200).send(`Deleted scavenger hunt ${req.params.id}`))
-      .catch(err => res.status(500).send(err));
+      .catch(err => {
+        console.log(err);
+        res.status(500).send(err);
+      });
   }
 }

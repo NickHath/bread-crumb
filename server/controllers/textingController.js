@@ -42,7 +42,7 @@ module.exports = {
             db.tasks.get_tasks([recipient.hunt_id])
               .then(tasks => {
                 // SORT BY TASK ORDER HERE
-                tasks.sort((a, b) => a.task_id - b.task_id);
+                tasks.sort((a, b) => a.task_order - b.task_order);
                 console.log('TASKS:\n', tasks);
                 console.log('Current Task:\n', recipient.current_task);
                 console.log('ANSWER:\n', tasks[recipient.current_task].answer);

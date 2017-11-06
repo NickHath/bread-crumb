@@ -28,7 +28,7 @@ class Editor extends Component {
          .then(res => this.setState({ recipients: res.data }));
     axios.get(`/tasks/${this.props.currentHunt}`)
           // SORT BY TASK ORDER
-         .then(res => this.setState({ tasks: res.data }));
+         .then(res => this.setState({ tasks: res.data.sort((a, b) => a.task_order - b.task_order) }));
   }
 
   handleChange(chips) {

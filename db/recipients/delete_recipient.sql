@@ -1,2 +1,2 @@
 DELETE FROM recipients
-WHERE recipient_id = $1;
+WHERE hunt_id = $1;

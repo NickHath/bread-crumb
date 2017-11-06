@@ -22,6 +22,7 @@ class Dashboard extends Component {
       huntName: '',
       error: ''
     }
+    this.refresh = this.refresh.bind(this);
   }
 
   componentWillMount() { 
@@ -43,22 +44,29 @@ class Dashboard extends Component {
     }
   }
 
+  refresh() {
+    axios.get('/scav/hunts') 
+         .then(res => this.setState({ hunts: res.data }))
+  }
+
   render() {
     const scavHunts = this.state.hunts.map((hunt, index) => {
       let tasks, recipients, textRecipients;
       if (hunt.tasks && hunt.recipients) {
         // SORT BY TASK ORDER
+        hunt.tasks.sort((a, b) => a.task_order - b.task_order);
         tasks = hunt.tasks.map(task => <li>{task.task}</li>);
         recipients = [];
         hunt.recipients.forEach(recipient => recipients.push(recipient.phone));
         textRecipients = 'with ' + recipients.join(', ');
       }
       return(
-        <ScavHunt key={ index } 
+        <ScavHunt key={ hunt.hunt_id } 
                   hunt={ hunt } 
                   textRecipients={ textRecipients }
                   recipients={ recipients } 
-                  tasks={ tasks }/>
+                  tasks={ tasks }
+                  refresh={ this.refresh }/>
       );
     })
     return(

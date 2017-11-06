@@ -32,6 +32,17 @@ class ScavHunt extends Component {
     this.props.updateCurrHunt(this.state.hunt_id);
   }
 
+  deleteScavHunt() {
+    axios.delete(`/task/delete/${this.state.hunt_id}`)
+         .then(() => {
+            axios.delete(`/recipient/delete/${this.state.hunt_id}`)
+                 .then(() => {
+                   axios.delete(`/scav/delete/${this.state.hunt_id}`)
+                        .then(() => this.props.refresh());
+                })
+         })
+  }
+
   render() {
     return(
       <Card className='scav-hunt-summary'>
@@ -51,6 +62,9 @@ class ScavHunt extends Component {
           <RaisedButton label='Send'
                         style={ styles.buttonStyle }
                         onClick={() => this.beginScavHunt()}/>
+          <RaisedButton label='Delete'
+                        style={ styles.buttonStyle }
+                        onClick={() => this.deleteScavHunt()}/>
         </CardText>
       </Card>
     )
