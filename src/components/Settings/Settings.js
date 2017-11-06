@@ -6,6 +6,10 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import styles from './SettingsMuiStyles';
 
+// redux
+import { connect } from 'react-redux';
+import { updateFirstName, updateLastName, updateEmail } from '../../ducks/reducer';
+
 class Settings extends Component {
   constructor() {
     super();
@@ -35,7 +39,6 @@ class Settings extends Component {
            first: res.data[0].first_name,
            last: res.data[0].last_name,
            email: res.data[0].email,
-           phone: res.data[0].phone
          }));
   }
 
@@ -82,4 +85,12 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+function mapStateToProps(state) {
+  return {
+    first: state.first,
+    last: state.last,
+    email: state.email
+  }
+}
+
+export default connect(mapStateToProps, { updateFirstName, updateLastName, updateEmail })(Settings);
