@@ -1,5 +1,6 @@
 // setup Twilio
 const Twilio = require('twilio');
+const checkGuess = require('../checkGuess');
 
 // phone numbers
 const twilioNumber = process.env.TWILIO_PHONE_NUMBER;
