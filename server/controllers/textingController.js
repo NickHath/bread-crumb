@@ -33,17 +33,68 @@ module.exports = {
     console.log(req.body);
     const { From, Body } = req.body;
     const db = req.app.get('db');
+    // check if recipient exists (phone and hunt_id)
+    // then get all tasks with that hunt_id and index it at current_task
     db.recipients.get_recipient_by_phone([From])
-      .then(recipient => {
-        
+      .then(recipients => {
+        recipients.forEach(recipient => {
+          if (recipient.current_task !== null) {
+            db.tasks.get_tasks([recipient.hunt_id])
+              .then(tasks => {
+                tasks.sort((a, b) => a.task_id - b.task_id);
+                console.log('TASKS:\n', tasks);
+                console.log('Current Task:\n', recipient.current_task);
+                console.log('ANSWER:\n', tasks[recipient.current_task].answer);
+                console.log('WHAT YOU TEXTED:\n', Body);
+                console.log('CONDITIONAL:\n', Body === tasks[recipient.current_task].answer);
+                if (Body === tasks[recipient.current_task].answer) {
+                  db.recipients.update_current_task([From, recipient.hunt_id, ++recipient.current_task])
+                    .then(() => {
+                      if (recipient.current_task === tasks.length) {
+                        res.send(`
+                          <Response>
+                            <Message>
+                              Congratulations. You win! Should have some custom text here.
+                            </Message>
+                          </Response>
+                        `)
+                      }
+                      res.send(`
+                        <Response>
+                         <Message>
+                           Correct. Your next task: ${tasks[recipient.current_task].task}
+                          </Message>
+                        </Response>
+                      `)
+                    })
+                } else if (Body.toLowerCase() === 'hint') {
+                  res.send(`
+                    <Response>
+                      <Message>
+                        Your hint is: ${tasks[recipient.current_task].hint}
+                      </Message>
+                    </Response>
+                  `)
+                } else {
+                  res.send(`
+                    <Response>
+                      <Message>
+                        Invalid response.
+                      </Message>
+                    </Response>
+                  `)
+                }
+              });
+          }
+        })
       });
-    res.send(`
-      <Response>
-        <Message>
-          Hello ${From}. You said: "${Body}"
-        </Message>
-      </Response>
-    `);
+    // res.send(`
+    //   <Response>
+    //     <Message>
+    //       Hello ${From}. You said: "${Body}"
+    //     </Message>
+    //   </Response>
+    // `);
   },
 
 
