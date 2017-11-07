@@ -42,7 +42,7 @@ class Dashboard extends Component {
     } else {
       let scavHunt = { title: this.state.huntName, description: '' };
       axios.post('/scav/create', scavHunt)
-           .then(res => this.props.updateCurrHunt(res.data[0].hunt_id));
+           .then(res => window.location = `/creator/${res.data[0].hunt_id}`)
     }
   }
 
@@ -89,11 +89,9 @@ class Dashboard extends Component {
                      />
           {
             this.state.huntName ?
-             <Link className='link' to='/creator'>
               <RaisedButton label='Begin' 
                             style={styles.buttonStyle}
-                            onClick={ () => this.handleClick() }/>
-             </Link> :
+                            onClick={ () => this.handleClick() }/> :
              <RaisedButton label='Begin' 
                            style={styles.buttonStyle}
                            onClick={ () => this.handleClick() }/>

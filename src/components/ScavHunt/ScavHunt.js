@@ -47,7 +47,7 @@ class ScavHunt extends Component {
         />
         <CardText expandable={true}>
           <TaskList tasks={ this.props.hunt.tasks }/>
-          <Link className='link' to='/editor'>
+          <Link className='link' to={`/editor/${this.props.hunt.hunt_id}`}>
             <RaisedButton label='Edit'
                           style={ styles.buttonStyle }
                           onClick={ () => this.editHunt() }/>

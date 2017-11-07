@@ -24,8 +24,8 @@ export default (
   <Switch>
     <Route exact path='/' component={ Login }/>
     <RouteWithNav path='/dashboard' component={ Dashboard }/>
-    <RouteWithNav path='/editor' component={ Editor }/>
-    <RouteWithNav path='/creator' component={ Creator }/>
+    <RouteWithNav path='/editor/:hunt_id' component={ Editor }/>
+    <RouteWithNav path='/creator/:hunt_id' component={ Creator }/>
     <RouteWithNav path='/settings' component={ Settings }/>
     <Route path='*' component={ PageNotFound }/>
   </Switch>

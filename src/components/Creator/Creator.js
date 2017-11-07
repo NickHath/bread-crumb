@@ -20,6 +20,7 @@ class Creator extends Component{
     this.state = {
       recipients: [],
       numTasks: 1,
+      hunt_id: window.location.pathname.split('/')[2]
     }
     this.sendScavengerHunt = this.sendScavengerHunt.bind(this);
     this.addTask = this.addTask.bind(this);
@@ -39,25 +40,25 @@ class Creator extends Component{
 
   // stores recipients and tasks (which are associated to a hunt_id)
   sendScavengerHunt() {
-    // send recipients one at a time
+    // send recipients as an array of objects
     let recipients = [], tasks = [];
     this.state.recipients.forEach(recipient => {
       recipients.push({ 
         first_name: '', 
         last_name: '', 
         phone: recipient, 
-        hunt_id: this.props.currentHunt 
+        hunt_id: this.state.hunt_id
       })
     })
     
-    // send hunts one at a time
+    // send tasks as an array of objects
     for (let i = 1; i <= this.state.numTasks; i++) {
       let currentTask = `prompt${i}`, currentHint = `hint${i}`, currentAnswer = `answer${i}`;
       let task = {
         task: this.refs[currentTask].input.value,
         hint: this.refs[currentHint].input.value,
         answer: this.refs[currentAnswer].input.value,
-        hunt_id: this.props.currentHunt,
+        hunt_id: this.state.hunt_id,
         task_order: i
       }
       tasks.push(task);

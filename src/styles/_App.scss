@@ -55,8 +55,9 @@ p {
 }
 .container {
   background-color: $container-bg;
-  width: 100%;
+  // width: 100%;
   padding: 2em;
   box-shadow: 0.15em 0.15em 0.15em rgba(66, 66, 66, 0.2);
   border-top: 1em solid #FFCC80;
+  margin: auto;
 }

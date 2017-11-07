@@ -9,6 +9,7 @@ import styles from './EditorMuiStyles';
 
 // redux 
 import { connect } from 'react-redux';
+import { getAllHunts } from '../../ducks/reducer';
 
 class Editor extends Component {
   constructor() {
@@ -21,16 +22,20 @@ class Editor extends Component {
   }
   
   componentWillMount() {
-    for (let i = 0; i < this.props.hunts.length; i++) {
-      let hunt = this.props.hunts[i];
-      if (hunt.hunt_id === this.props.currentHunt) {
-        this.setState({
-          huntName: hunt.title,
-          recipients: hunt.recipients.map(recipient => recipient.phone),
-          tasks: hunt.tasks
-        })
+    this.props.getAllHunts().then(() => {
+      for (let i = 0; i < this.props.hunts.length; i++) {
+        let hunt = this.props.hunts[i];
+        console.log(window.location.pathname.split('/')[2]);
+        if (hunt.hunt_id === 1*window.location.pathname.split('/')[2]) {
+          this.setState({
+            huntName: hunt.title,
+            recipients: hunt.recipients.map(recipient => recipient.phone),
+            tasks: hunt.tasks
+          })
+        }
       }
-    }
+    });  
+    
   }
 
   handleChange(chips) {
@@ -90,10 +95,11 @@ class Editor extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     currentHunt: state.currentHunt,
     hunts: state.hunts
   }
 }
 
-export default connect(mapStateToProps)(Editor);
+export default connect(mapStateToProps, { getAllHunts })(Editor);
