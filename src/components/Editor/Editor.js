@@ -21,20 +21,16 @@ class Editor extends Component {
   }
   
   componentWillMount() {
-    // for (let i = 0; i < this.props.hunts.length; i++) {
-    //   if (this.props.hunts[i].hunt_id === this.props.currentHunt) {
-    //     tasks = this.props.hunts[i].tasks;
-
-    //   }
-    // }
-
-    axios.get(`/scav/hunt/${this.props.currentHunt}`)
-         .then(res => this.setState({ huntName: res.data[0].title })); 
-    axios.get(`/recipients/${this.props.currentHunt}`)
-         .then(res => this.setState({ recipients: res.data }));
-    axios.get(`/tasks/${this.props.currentHunt}`)
-          // SORT BY TASK ORDER
-         .then(res => this.setState({ tasks: res.data.sort((a, b) => a.task_order - b.task_order) }));
+    for (let i = 0; i < this.props.hunts.length; i++) {
+      let hunt = this.props.hunts[i];
+      if (hunt.hunt_id === this.props.currentHunt) {
+        this.setState({
+          huntName: hunt.title,
+          recipients: hunt.recipients.map(recipient => recipient.phone),
+          tasks: hunt.tasks
+        })
+      }
+    }
   }
 
   handleChange(chips) {
@@ -46,6 +42,7 @@ class Editor extends Component {
   }
 
   render() {
+    console.log('EDITOR:\n', this.state);
     const tasks = this.state.tasks.map((task, i) => {
       return(
         <div className='editor-input' key={i}>
@@ -94,7 +91,8 @@ class Editor extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentHunt: state.currentHunt
+    currentHunt: state.currentHunt,
+    hunts: state.hunts
   }
 }
 
