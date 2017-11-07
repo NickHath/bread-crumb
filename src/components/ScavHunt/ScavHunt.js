@@ -53,7 +53,7 @@ class ScavHunt extends Component {
                           onClick={ () => this.editHunt() }/>
           </Link>
           <RaisedButton label='Send'
-                        style={ styles.buttonStyle }
+                        style={ {...styles.buttonStyle, ...styles.sendButton } }
                         onClick={() => this.beginScavHunt()}/>
           <RaisedButton label='Delete'
                         style={ styles.buttonStyle }
