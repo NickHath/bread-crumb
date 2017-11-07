@@ -30,7 +30,7 @@ export default class TaskList extends Component {
                 primaryTogglesNestedList={ true }
                 nestedItems={
                       [
-                        <ListItem key={2} primaryText={`Hint: ${task.hint}`} hoverColor={styles.hintColor}/>,
+                        <ListItem key={2} primaryText={`Hint: ${task.hint}`} hoverColor={styles.mainColor}/>,
                         <ListItem key={3} primaryText={`Answer: ${task.answer}`} hoverColor={styles.answerColor}/>
                       ]
                     }
