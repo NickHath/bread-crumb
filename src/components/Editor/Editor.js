@@ -77,7 +77,8 @@ class Editor extends Component {
               <h2>Recipients</h2>
               <div className='recipients' style={ styles.wrapper }>
               <ChipInput defaultValue={this.state.recipients}
-                         onChange={(chips) => this.handleChange(chips)}/>
+                         onChange={(chips) => this.handleChange(chips)}
+                         underlineFocusStyle={styles.taskFocusStyle}/>
               </div>
             </div>
             { tasks }
