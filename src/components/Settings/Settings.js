@@ -24,8 +24,8 @@ class Settings extends Component {
   render() {
     return(
       <div className='settings-wrapper'>
-        <div className='settings'>
-          <div className='container settings-contents'>
+        <div className='settings'> 
+          <div className='container settings-contents'> 
             <h1>Settings</h1>
             <div className='settings-input'>
               <h2>First Name</h2>

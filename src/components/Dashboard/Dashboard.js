@@ -69,7 +69,7 @@ class Dashboard extends Component {
     <div className='dashboard'>
       <div className='dashboard-contents'>
         <div className='header'>
-          <h1>BreadCrumb</h1>        
+          <h1 className='site-header'>Bread<span style={{color: '#FFCC80'}}>Crumb</span></h1>        
           <p>Create and send scavenger hunts to your friends</p>
         </div>
         <div className='container scav-hunts'>

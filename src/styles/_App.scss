@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,700,600i');
 @import url('https://fonts.googleapis.com/css?family=Rozha+One');
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
 
 // font styling
 $header-font: 'Rozha One', serif;
@@ -12,7 +13,7 @@ $container-bg: #FFF;
 $highlight-bg: #FFA000;
 $secondary-bg: #FF0051;
 
-@mixin text-container($width: 60%) {
+@mixin text-container($width: 50%) {
   width: $width;
   margin: auto;
 }
@@ -33,6 +34,11 @@ h1 {
   font-size: 3em;
   font-weight: 700;
 }
+.site-header {
+  font-family: 'Abril Fatface', serif;
+  font-size: 4.5em;
+  letter-spacing: 0.05em;
+}
 h2 {
   font-size: 1.5em;
   font-weight: 700;
@@ -52,4 +58,5 @@ p {
   width: 100%;
   padding: 2em;
   box-shadow: 0.15em 0.15em 0.15em rgba(66, 66, 66, 0.2);
+  border-top: 1em solid #FFCC80;
 }
