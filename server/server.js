@@ -100,14 +100,14 @@ app.get('/recipients/:hunt_id', recipientController.getRecipients);
 app.get('/recipient/:id', recipientController.getRecipient);
 app.post('/recipient/create', recipientController.createRecipient);
 app.post('/recipient/updatetask/:hunt_id', recipientController.updateCurrentTask);
-app.put('/recipient/edit/:id', recipientController.editRecipient);
+app.put('/recipient/edit/:id', recipientController.updateRecipients);
 app.delete('/recipient/delete/:id', recipientController.deleteRecipient);
 
 // taskHuntController
 app.get('/tasks/:hunt_id', taskController.getTasks);
 app.get('/task/:id', taskController.getTask);
 app.post('/task/create', taskController.createTask);
-app.put('/task/edit/:id', taskController.editTask);
+app.put('/task/edit', taskController.updateTasks);
 app.delete('/task/delete/:id', taskController.deleteTask);
 
 // ----------------  TWILIO  ----------------- //

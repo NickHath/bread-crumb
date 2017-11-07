@@ -38,12 +38,16 @@ module.exports = {
       .catch(err => res.status(500).send(err))
   },
 
-  editRecipient: function(req, res) {
+  updateRecipients: function(req, res) {
     const db = req.app.get('db');
-    const { first_name, last_name, phone } = req.body;
-    db.recipients.edit_recipient([req.params.id, first_name, last_name, phone])
-      .then(() => res.status(200).send(`Edited recipient ${req.params.id}`))
-      .catch(err => res.status(500).send(err));
+    let recipients = req.body;
+    recipients.forEach(recipient => {
+      const { recipient_id, first_name, last_name, phone } = recipient;      
+      db.recipients.edit_recipient([recipient_id, first_name, last_name, phone])
+    })
+      // .then(() => res.status(200).send(`Edited recipient ${req.params.id}`))
+      // .catch(err => res.status(500).send(err));
+      res.status(200).send();
   },
 
 

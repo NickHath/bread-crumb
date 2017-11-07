@@ -10,14 +10,14 @@ import styles from './ScavHuntMuiStyles';
 
 // redux
 import { connect } from 'react-redux';
-import { updateCurrHunt, getAllHunts } from '../../ducks/reducer';
+import { getAllHunts } from '../../ducks/reducer';
 
 class ScavHunt extends Component {
   beginScavHunt() {
     this.props.recipients.map(recipient => {
       let updateTask = { phone: recipient, next_task: '0' };
       axios.post(`/recipient/updatetask/${this.props.hunt.hunt_id}`, updateTask)
-           .then(() => {axios.post('/send', { to: recipient, body: this.props.hunt.tasks[0].task })});
+           .then(() => { axios.post('/send', { to: recipient, body: this.props.hunt.tasks[0].task })});
     })
   }
 

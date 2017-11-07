@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import axios from 'axios';
 
@@ -17,6 +18,7 @@ class Editor extends Component {
     this.state = {
       huntName: '',
       recipients: [],
+      recipientPhoneNumbers: [],
       tasks: []
     }
   }
@@ -27,8 +29,10 @@ class Editor extends Component {
         let hunt = this.props.hunts[i];
         if (hunt.hunt_id === 1*window.location.pathname.split('/')[2]) {
           this.setState({
+            hunt_id: 1 * window.location.pathname.split('/')[2],
             huntName: hunt.title,
-            recipients: hunt.recipients.map(recipient => recipient.phone),
+            recipients: hunt.recipients,
+            recipientPhoneNumbers: hunt.recipients.map(recipient => recipient.phone),
             tasks: hunt.tasks
           })
         }
@@ -38,11 +42,23 @@ class Editor extends Component {
   }
 
   handleChange(chips) {
-    this.setState({ recipients: chips });
+    this.setState({ recipientPhoneNumbers: chips });
   }
 
   saveChanges() {
-    console.log(this.refs);    
+    let newTasks = []; 
+    let numTasks = Object.keys(this.refs).length / 3;
+    for (let i = 0; i < numTasks; i++) {
+      let currentTask = `prompt${i}`, currentHint = `hint${i}`, currentAnswer = `answer${i}`;      
+      newTasks.push({
+        task_id: this.state.tasks[i].task_id,
+        task: this.refs[currentTask].input.value,
+        hint: this.refs[currentHint].input.value,
+        answer: this.refs[currentAnswer].input.value,
+        task_order: i
+      })
+    }
+    axios.put('/task/edit', newTasks);
   }
 
   render() {
@@ -77,15 +93,17 @@ class Editor extends Component {
             <div className='editor-input'>
               <h2>Recipients</h2>
               <div className='recipients' style={ styles.wrapper }>
-              <ChipInput value={this.state.recipients}
+              <ChipInput defaultValue={this.state.recipientPhoneNumbers}
                          onChange={(chips) => this.handleChange(chips)}
                          underlineFocusStyle={styles.taskFocusStyle}/>
               </div>
             </div>
             { tasks }
-            <RaisedButton label='Save Changes' 
-                          style={styles.buttonStyle}
-                          onClick={() => this.saveChanges()}/>
+            <Link className='link' to='/dashboard'>
+              <RaisedButton label='Save Changes' 
+                            style={styles.buttonStyle}
+                            onClick={() => this.saveChanges()}/>
+            </Link>
           </div>
         </div>
       </div>      

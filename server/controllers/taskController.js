@@ -31,12 +31,17 @@ module.exports = {
   },
 
 
-  editTask: function(req, res) {
+  updateTasks: function(req, res) {
     const db = req.app.get('db');
     const { task, hint, answer } = req.body;
-    db.tasks.edit_task([req.params.id, task, hint, answer])
-      .then(() => res.status(200).send(`Edited task ${req.params.id}`))
-      .catch(err => res.status(500).send(err));
+    let tasks = req.body;
+    tasks.forEach(currentTask => {
+      const { task_id, task, hint, answer, task_order } = currentTask;
+      db.tasks.edit_task([task_id, task, hint, answer, task_order])  
+    })
+      // .then(() => res.status(200).send(`Edited task ${req.params.id}`))
+      // .catch(err => res.status(500).send(err));
+    res.status(200).send();
   },
 
 

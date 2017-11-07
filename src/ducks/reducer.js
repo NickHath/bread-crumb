@@ -8,8 +8,7 @@ const initialState = {
 }
 
 const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT'
-    , GET_ALL_HUNTS = 'GET_ALL_HUNTS'
-    , SEND_TASKS = 'SEND_TASKS';
+    , GET_ALL_HUNTS = 'GET_ALL_HUNTS';
 
 export default function reducer(state=initialState, action) {
   console.log(action.type);
