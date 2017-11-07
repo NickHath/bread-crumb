@@ -12,7 +12,7 @@ import styles from './DashboardMuiStyles';
 
 // redux
 import { connect } from 'react-redux';
-import { getAllHunts, updateCurrHunt, updateAccount } from '../../ducks/reducer';
+import { getAllHunts, updateAccount } from '../../ducks/reducer';
 
 class Dashboard extends Component {
   constructor() {
@@ -105,9 +105,8 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    hunts: state.hunts,
-    currentHunt: state.currentHunt
+    hunts: state.hunts
   }
 }
 
-export default connect(mapStateToProps, { getAllHunts, updateCurrHunt, updateAccount })(Dashboard);
+export default connect(mapStateToProps, { getAllHunts, updateAccount })(Dashboard);

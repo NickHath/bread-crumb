@@ -21,10 +21,6 @@ class ScavHunt extends Component {
     })
   }
 
-  editHunt() {
-    this.props.updateCurrHunt(this.props.hunt.hunt_id);
-  }
-
   deleteScavHunt() {
     axios.delete(`/task/delete/${this.props.hunt.hunt_id}`)
          .then(() => {
@@ -49,8 +45,7 @@ class ScavHunt extends Component {
           <TaskList tasks={ this.props.hunt.tasks }/>
           <Link className='link' to={`/editor/${this.props.hunt.hunt_id}`}>
             <RaisedButton label='Edit'
-                          style={ styles.buttonStyle }
-                          onClick={ () => this.editHunt() }/>
+                          style={ styles.buttonStyle }/>
           </Link>
           <RaisedButton label='Send'
                         style={ {...styles.buttonStyle, ...styles.sendButton } }
@@ -65,9 +60,7 @@ class ScavHunt extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    currentHunt: state.currentHunt
-  }
+  return state;
 }
 
-export default connect(mapStateToProps, { updateCurrHunt, getAllHunts })(ScavHunt);
+export default connect(mapStateToProps, { getAllHunts })(ScavHunt);

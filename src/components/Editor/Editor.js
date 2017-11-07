@@ -25,7 +25,6 @@ class Editor extends Component {
     this.props.getAllHunts().then(() => {
       for (let i = 0; i < this.props.hunts.length; i++) {
         let hunt = this.props.hunts[i];
-        console.log(window.location.pathname.split('/')[2]);
         if (hunt.hunt_id === 1*window.location.pathname.split('/')[2]) {
           this.setState({
             huntName: hunt.title,
@@ -78,7 +77,7 @@ class Editor extends Component {
             <div className='editor-input'>
               <h2>Recipients</h2>
               <div className='recipients' style={ styles.wrapper }>
-              <ChipInput defaultValue={this.state.recipients}
+              <ChipInput value={this.state.recipients}
                          onChange={(chips) => this.handleChange(chips)}
                          underlineFocusStyle={styles.taskFocusStyle}/>
               </div>
@@ -97,7 +96,6 @@ class Editor extends Component {
 function mapStateToProps(state) {
   console.log(state)
   return {
-    currentHunt: state.currentHunt,
     hunts: state.hunts
   }
 }

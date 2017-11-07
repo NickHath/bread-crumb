@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ControlPoint from 'material-ui-icons/ControlPoint';
 
-// redux
+// // redux
 import { connect } from 'react-redux';
 import { getAllHunts } from '../../ducks/reducer';
 
@@ -124,8 +124,8 @@ class Creator extends Component{
 
 function mapStateToProps(state) {
   return {
-    currentHunt: state.currentHunt
+    hunts: state.hunts
   }
 }
 
-export default connect(mapStateToProps)(Creator);
+export default connect(mapStateToProps, { getAllHunts })(Creator);
