@@ -9,5 +9,10 @@ export default {
     borderColor: green500,
     backgroundColor: green500,
     labelColor: '#FFF'
+  },
+  dialogTitle: {
+    textAlign: 'center',
+    fontSize: '2em',
+    lineHeight: '1.25em'
   }
 }

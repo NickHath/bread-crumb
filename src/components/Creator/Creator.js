@@ -65,7 +65,7 @@ class Creator extends Component{
     }
     axios.post('/recipient/create', recipients)
     axios.post('/task/create', tasks)
-         .then(() => () => this.props.getAllHunts())
+         .then(() => window.location = '/dashboard')
   }
 
   render() {
@@ -110,11 +110,9 @@ class Creator extends Component{
               <ControlPoint />
             </IconButton>
           </div>
-          <Link className='link' to='/dashboard'>
-            <RaisedButton label='Finalize' 
-                          style={ styles.buttonStyle } 
-                          onClick={ this.sendScavengerHunt }/>
-          </Link>
+          <RaisedButton label='Finalize' 
+                        style={ styles.buttonStyle } 
+                        onClick={ this.sendScavengerHunt }/>
         </div>
       </div>
      </div>

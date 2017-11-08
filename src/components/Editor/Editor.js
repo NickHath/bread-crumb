@@ -56,6 +56,7 @@ class Editor extends Component {
   }
 
   saveChanges() {
+    // update tasks
     let newTasks = []; 
     let numTasks = Object.keys(this.refs).length / 3;
     for (let i = 0; i < numTasks; i++) {
@@ -68,7 +69,19 @@ class Editor extends Component {
         task_order: i
       })
     }
-    axios.put('/task/edit', newTasks);
+    axios.put('/task/edit', newTasks)
+         .then(() => window.location = '/dashboard');
+    
+    // delete recipients
+    const { deletedNumbers, recipients } = this.state;
+    for (let i = 0; i < deletedNumbers.length; i++) {
+      for (let j = 0; j < recipients.length; j++) {
+        if (deletedNumbers[i] === recipients[j].phone) {
+          console.log('recipient_id:\n', recipients[j].recipient_id);
+          // axios.delete(`/recipient/delete/${recipients[j].recipient_id}`);
+        }
+      }
+    }
   }
 
   render() {
@@ -111,11 +124,9 @@ class Editor extends Component {
               </div>
             </div>
             { tasks }
-            <Link className='link' to='/dashboard'>
-              <RaisedButton label='Save Changes' 
-                            style={styles.buttonStyle}
-                            onClick={() => this.saveChanges()}/>
-            </Link>
+            <RaisedButton label='Save Changes' 
+                          style={styles.buttonStyle}
+                          onClick={() => this.saveChanges()}/>
           </div>
         </div>
       </div>      

@@ -19,7 +19,7 @@ class Dashboard extends Component {
     super();
     this.state = {
       huntName: '',
-      error: ''
+      error: '',
     }
   }
 
