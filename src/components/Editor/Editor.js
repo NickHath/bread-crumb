@@ -19,6 +19,7 @@ class Editor extends Component {
       huntName: '',
       recipients: [],
       recipientPhoneNumbers: [],
+      deletedNumbers: [],
       tasks: []
     }
   }
@@ -41,8 +42,17 @@ class Editor extends Component {
     
   }
 
-  handleChange(chips) {
-    this.setState({ recipientPhoneNumbers: chips });
+  handleAddChip(chip) {
+    this.setState({ recipientPhoneNumbers: [...this.state.recipientPhoneNumbers, chip] })
+  }
+  
+  handleDeleteChip(chip, index) {
+    let newNumbers = [...this.state.recipientPhoneNumbers];
+    let deletedNumber = newNumbers.splice(index, 1)[0];
+    this.setState({
+      recipientPhoneNumbers: newNumbers, 
+      deletedNumbers: [...this.state.deletedNumbers, deletedNumber]
+    });
   }
 
   saveChanges() {
@@ -93,8 +103,10 @@ class Editor extends Component {
             <div className='editor-input'>
               <h2>Recipients</h2>
               <div className='recipients' style={ styles.wrapper }>
-              <ChipInput defaultValue={this.state.recipientPhoneNumbers}
-                         onChange={(chips) => this.handleChange(chips)}
+              <ChipInput value={this.state.recipientPhoneNumbers}
+                         onRequestAdd={(chip) => this.handleAddChip(chip)}
+                         onRequestDelete={(chip, index) => this.handleDeleteChip(chip, index)}
+                         /* {onChange={(chips) => this.handleChange(chips)}} */
                          underlineFocusStyle={styles.taskFocusStyle}/>
               </div>
             </div>
