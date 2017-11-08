@@ -16,9 +16,16 @@ class Settings extends Component {
     let first_name = this.refs.first.input.value;
     let last_name = this.refs.last.input.value;
     let email = this.refs.email.input.value;
-    console.log(first_name, last_name, email);
     this.props.updateAccount(first_name, last_name, email);
     axios.put(`/account/edit`, { first_name, last_name, email });
+  }
+
+  componentWillMount() {
+    axios.get('/account')
+         .then(res => {
+           const { first_name, last_name, email } = res.data[0];
+           this.props.updateAccount(first_name, last_name, email);
+         })
   }
 
   render() {
