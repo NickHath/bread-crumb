@@ -8,6 +8,7 @@ import ScavHunt from '../ScavHunt/ScavHunt';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import styles from './DashboardMuiStyles';
+import logo from '../../assets/bread-logo-light-orange-200px-wide.png';
 
 // redux
 import { connect } from 'react-redux';
@@ -68,6 +69,7 @@ class Dashboard extends Component {
     <div className='dashboard'>
       <div className='dashboard-contents'>
         <div className='header'>
+          {/* <img src={ logo }/> */}
           <h1 className='site-header'>Bread<span style={{color: '#FFCC80'}}>Crumb</span></h1>        
           <p>Create and send scavenger hunts to your friends</p>
         </div>

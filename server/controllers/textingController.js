@@ -18,7 +18,7 @@ module.exports = {
     let { body, to, from } = req.body;
     const { first_name, last_name } = req.user;
     let user = `${first_name[0].toUpperCase() + first_name.slice(1)} ${last_name[0].toUpperCase() + last_name.slice(1)}` || from || 'Someone';
-    body = `${user} has created a scavenger hunt for you. Your first task: ${body}.`;
+    body = `${user} has created a scavenger hunt for you. Type 'Hint' for a clue. Your first task: ${body} `;
     client.messages.create({ 
       body: body, 
       to: to, 
