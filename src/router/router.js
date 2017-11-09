@@ -27,19 +27,20 @@ const RouteWithNavAndAuth = ({component, ...rest}) => {
                         .then(res => res.data.length > 0);
 
   return (
-    <Async promise={isLoggedIn} then={ val => {
-      return (
-        <div className='view-wrapper'>
-          <NavBar />
-          <Route {...rest} render={() => {
-            return val ? 
-              React.createElement(component) :
-              <Redirect to ='/'/>
-          }}/>
-        </div>
-      )
-    }}/>
-  )
+    <div className='view-wrapper'>
+     <NavBar />
+      <Async promise={isLoggedIn} then={ val => {
+        return (
+
+            <Route {...rest} render={() => {
+              return val ? 
+                React.createElement(component) :
+                <Redirect to ='/'/>
+            }}/>
+        )
+      }}/>      
+    </div>
+   )
 }
 
 const PageNotFound = () => <h1>Page Not Found</h1>
