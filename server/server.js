@@ -5,9 +5,11 @@ const express = require('express')
     , passport = require('passport')
     , Auth0Strategy = require('passport-auth0')
     , bodyParser = require('body-parser')
-    , cors = require('cors');
+    , cors = require('cors')
+    , path = require('path');
 
 const app = express();
+app.use( express.static( `${__dirname}/../build` ) );
 
 // set up postgres DB
 massive(process.env.CONNECTION_STRING).then(db => app.set('db', db));
@@ -132,5 +134,9 @@ app.get('/callerids', textingController.listCallerIDs);
 app.post('/addcaller', textingController.addCallerID);
 
 // -------------------------------------------- //
+
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+})
 
 app.listen(process.env.SERVER_PORT, console.log(`I'm listening... port: ${process.env.SERVER_PORT}`));
