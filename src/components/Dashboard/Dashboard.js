@@ -27,8 +27,10 @@ class Dashboard extends Component {
     this.props.getAllHunts();    
     axios.get('/account')
          .then(res => {
-            const { first_name, last_name, email } = res.data[0];
-            this.props.updateAccount(first_name, last_name, email);
+            if (res.data.length > 0) {
+              const { first_name, last_name, email } = res.data[0];
+              this.props.updateAccount(first_name, last_name, email);
+            }
          });
   }
 
