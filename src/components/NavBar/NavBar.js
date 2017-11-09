@@ -11,7 +11,7 @@ const NavBar = () => (
         <Link className='link' to='/settings'><p>Settings</p></Link>
       </div>
       <div className='nav-link'>      
-        <a className='link' href='http://localhost:4200/logout'><p>Sign Out</p></a>
+        <a className='link' href={ process.env.REACT_APP_LOGOUT }><p>Sign Out</p></a>
       </div>
     </div>
   </div>
