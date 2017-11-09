@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ChipInput from 'material-ui-chip-input';
 
-// Material UI
+// Material UI and styling
 import styles from './CreatorMuiStyles';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
