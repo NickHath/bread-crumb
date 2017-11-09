@@ -11,9 +11,17 @@ import Editor from '../components/Editor/Editor';
 import Creator from '../components/Creator/Creator';
 import Settings from '../components/Settings/Settings';
 
+const RouteWithNav = ({component, ...rest}) => {
+  return (
+    <div className='view-wrapper'>
+      <NavBar />
+      <Route {...rest} render={() => React.createElement(component)}/>
+    </div>
+  )
+}
 
 // Async prevents routing users to unauthorized pages
-const RouteWithNav = ({component, ...rest}) => {
+const RouteWithNavAndAuth = ({component, ...rest}) => {
   // check if user is logged in
   let isLoggedIn = axios.get('/account')
                         .then(res => res.data.length > 0);
@@ -46,9 +54,9 @@ export default (
   <Switch>
     <Route exact path='/' component={ Login } />
     <RouteWithNav path='/dashboard' component={ Dashboard }/>
-    <RouteWithNav path='/editor/:hunt_id' component={ Editor }/>
-    <RouteWithNav path='/creator/:hunt_id' component={ Creator }/>
-    <RouteWithNav path='/settings' component={ Settings }/> 
+    <RouteWithNavAndAuth path='/editor/:hunt_id' component={ Editor }/>
+    <RouteWithNavAndAuth path='/creator/:hunt_id' component={ Creator }/>
+    <RouteWithNavAndAuth path='/settings' component={ Settings }/> 
     <Route path='*' component={ PageNotFound }/>
   </Switch>
 );

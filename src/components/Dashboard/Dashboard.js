@@ -93,9 +93,9 @@ class Dashboard extends Component {
               <RaisedButton label='Begin' 
                             style={styles.buttonStyle}
                             onClick={ () => this.handleClick() }/> :
-             <RaisedButton label='Begin' 
-                           style={styles.buttonStyle}
-                           onClick={ () => this.handleClick() }/>
+              <RaisedButton label='Begin' 
+                            style={styles.buttonStyle}
+                            onClick={ () => this.handleClick() }/>
           }
         </div>
       </div>
