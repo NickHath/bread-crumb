@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import Async from 'react-promise';
 
 // my components
 import NavBar from '../components/NavBar/NavBar';
@@ -10,26 +11,35 @@ import Editor from '../components/Editor/Editor';
 import Creator from '../components/Creator/Creator';
 import Settings from '../components/Settings/Settings';
 
+
+// Async prevents routing users to unauthorized pages
 const RouteWithNav = ({component, ...rest}) => {
-  let isLoggedIn = loggedIn();
+  // check if user is logged in
+  let isLoggedIn = axios.get('/account')
+                        .then(res => res.data.length > 0);
+
   return (
-    <div className='view-wrapper'>
-      <NavBar />
-        <Route {...rest} render={() => (
-          isLoggedIn ? (
-            <Redirect to='/'/>) : (
-            React.createElement(component))
-          )
-        }/>
-    </div>
+    <Async promise={isLoggedIn} then={ val => {
+      return (
+        <div className='view-wrapper'>
+          <NavBar />
+          <Route {...rest} render={() => {
+            return val ? 
+              React.createElement(component) :
+              <Redirect to ='/'/>
+          }}/>
+        </div>
+      )
+    }}/>
   )
 }
 
 const PageNotFound = () => <h1>Page Not Found</h1>
 
-const loggedIn = () => {
-  return axios.get('/account')
-       .then(res => res.data.length > 0);
+const loggedIn = async () => {
+  let isLoggedIn;
+  isLoggedIn = await axios.get('/account')
+                          .then(res => res.data.length > 0);
 }
 
 export default (
@@ -42,3 +52,4 @@ export default (
     <Route path='*' component={ PageNotFound }/>
   </Switch>
 );
+
