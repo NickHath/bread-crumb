@@ -62,7 +62,7 @@ passport.deserializeUser((account_id, done) => {
 // auth0 endpoints
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/auth/callback', passport.authenticate('auth0', {
-  successRedirect: `${process.env.BASE_URL}dashboard'`,
+  successRedirect: `/dashboard'`,
   failureRedirect: '/auth'
 }));
 app.get('/auth/me', (req, res) => {
@@ -74,7 +74,7 @@ app.get('/auth/me', (req, res) => {
 });
 app.get('/logout', (req, res) => {
   req.logOut();
-  res.redirect(process.env.BASE_URL);
+  res.redirect('/dashboard');
 })
 
 // require controllers
