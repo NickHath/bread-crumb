@@ -7,6 +7,11 @@ import router from './router/router';
 import './styles/main.css';
 
 class App extends Component {
+  componentWillMount() {
+    console.log(window.location.pathname);
+    // if (window.location.pathname)
+  }
+
   render() {
     return (
       <div className='main-wrapper'>
