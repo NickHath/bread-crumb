@@ -19,5 +19,14 @@ export default {
   },
   buttonStyle: {
     margin: 12
+  },
+  iconStyle: {
+    width: 60,
+    height: 60,
+    fill: '#424242'
+  },
+  iconWrapper: {
+    width: 120,
+    height: 120,
   }
 };

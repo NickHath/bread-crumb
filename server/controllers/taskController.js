@@ -26,7 +26,8 @@ module.exports = {
               .then(() => {
                 ++count;
                 if (count === tasks.length) { res.status(200).send('Added tasks'); };
-              });
+              })
+              .catch(() => res.status(500).send('Didn\'t create tasks'));
     })
   },
 

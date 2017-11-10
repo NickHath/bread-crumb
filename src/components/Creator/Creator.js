@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import phone from 'phone';
 import ChipInput from 'material-ui-chip-input';
 
 // Material UI and styling
@@ -35,6 +36,10 @@ class Creator extends Component{
   }
 
   handleChange(chips) {
+    chips = chips.map(phoneNumber => {
+      let parsedNumber = phone(phoneNumber);
+      return parsedNumber.length === 0 ? '' : parsedNumber[0];
+    })
     this.setState({ recipients: chips });
   }
 
@@ -69,6 +74,7 @@ class Creator extends Component{
   }
 
   render() {
+    console.log(this.state);
     let allTasks = [];
     for (let i = 1; i <= this.state.numTasks; i++) {
       allTasks.push(

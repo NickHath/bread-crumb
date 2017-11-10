@@ -6,6 +6,8 @@ import axios from 'axios';
 // material ui
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+import ControlPoint from 'material-ui-icons/ControlPoint';
 import styles from './EditorMuiStyles';
 
 // redux 
@@ -55,22 +57,36 @@ class Editor extends Component {
     });
   }
 
+  addTask() {
+    this.setState({
+      tasks: [
+        ...this.state.tasks, 
+        { task: '', hint: '', answer: '', hunt_id: this.state.hunt_id }
+      ]
+    })
+  }
+
   saveChanges() {
     // update tasks
-    let newTasks = []; 
+    let putTasks = [], postTasks = [], newTasks = []; 
     let numTasks = Object.keys(this.refs).length / 3;
     for (let i = 0; i < numTasks; i++) {
-      let currentTask = `prompt${i}`, currentHint = `hint${i}`, currentAnswer = `answer${i}`;      
+      let currentTask = `prompt${i}`, currentHint = `hint${i}`, currentAnswer = `answer${i}`;  
+      newTasks = this.state.tasks[i].task_id ? putTasks : postTasks;
       newTasks.push({
         task_id: this.state.tasks[i].task_id,
         task: this.refs[currentTask].input.value,
         hint: this.refs[currentHint].input.value,
         answer: this.refs[currentAnswer].input.value,
+        hunt_id: this.state.hunt_id,
         task_order: i
       })
     }
-    axios.put('/task/edit', newTasks)
-         .then(() => window.location = '/dashboard');
+
+    // might cause dashboard to not render data appropariately
+    axios.post(`/task/create`, postTasks)
+    axios.put('/task/edit', putTasks)
+         .then(() => window.location='/dashboard')
     
     // delete recipients
     const { deletedNumbers, recipients } = this.state;
@@ -86,6 +102,7 @@ class Editor extends Component {
 
   render() {
     console.log('EDITOR:\n', this.state);
+    console.log('EDITOR REFS:\n', this.refs);
     const tasks = this.state.tasks.map((task, i) => {
       return(
         <div className='editor-input' key={i}>
@@ -124,6 +141,14 @@ class Editor extends Component {
               </div>
             </div>
             { tasks }
+            <div className='new-task'>
+              <h2>Add New Task</h2>            
+              <IconButton iconStyle={ styles.iconStyle } 
+                          style={ styles.iconWrapper }
+                          onClick={ () => this.addTask() }>
+                <ControlPoint />
+              </IconButton>
+            </div>
             <RaisedButton label='Save Changes' 
                           style={styles.buttonStyle}
                           onClick={() => this.saveChanges()}/>
