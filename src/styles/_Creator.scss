@@ -19,6 +19,15 @@
   margin-bottom: 0;
 }
 .delete {
-  width: 36px;
-  height: 36px;
+  width: 1.5em;
+  height: 1.5em;
+}
+.task-header {
+  display: flex;
+}
+.task-header h2 {
+  margin-right: .5em;
+}
+.delete:hover {
+  cursor: pointer;
 }

@@ -10,7 +10,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ControlPoint from 'material-ui-icons/ControlPoint';
 import DeleteForever from 'material-ui-icons/DeleteForever';
-import deleteIcon from '../../assets/delete_forever_black_48x48.png';
+import redDeleteIcon from '../../assets/delete_red_500.png';
+import blackDeleteIcon from '../../assets/delete_black.png';
 
 // // redux
 import { connect } from 'react-redux';
@@ -105,8 +106,13 @@ class Creator extends Component{
       if (this.state.tasks[i]) {
         allTasks.push(
           <div key={i} className='creator-task'>
-            <img className='delete' src={deleteIcon} id={i} onClick={e => this.deleteTask(e)} />
-            <h2>Task #{taskNum}</h2>
+            <div className='task-header'>
+              <h2>Task #{taskNum}</h2>              
+              <img className='delete' 
+                   src={redDeleteIcon} 
+                   id={i} 
+                   onClick={e => this.deleteTask(e)}/>
+            </div>
             <TextField className='prompt' 
                       placeholder='Task Description' 
                       underlineFocusStyle={styles.taskFocusStyle}
