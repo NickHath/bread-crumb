@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import axios from 'axios';
+import phone from 'phone';
 
 // material ui
 import TextField from 'material-ui/TextField';
@@ -45,7 +46,10 @@ class Editor extends Component {
   }
 
   handleAddChip(chip) {
-    this.setState({ recipientPhoneNumbers: [...this.state.recipientPhoneNumbers, chip] })
+    chip = phone(chip);
+    if (chip.length > 0) {
+      this.setState({ recipientPhoneNumbers: [...this.state.recipientPhoneNumbers, chip[0]] })      
+    }
   }
   
   handleDeleteChip(chip, index) {
@@ -136,7 +140,7 @@ class Editor extends Component {
               <ChipInput value={this.state.recipientPhoneNumbers}
                          onRequestAdd={(chip) => this.handleAddChip(chip)}
                          onRequestDelete={(chip, index) => this.handleDeleteChip(chip, index)}
-                         /* {onChange={(chips) => this.handleChange(chips)}} */
+                         placeholder='(555) 555 5555'
                          underlineFocusStyle={styles.taskFocusStyle}/>
               </div>
             </div>

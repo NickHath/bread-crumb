@@ -105,7 +105,8 @@ class Creator extends Component{
           <div className='recipients' style={ styles.wrapper }>
             <ChipInput defaultValue={this.state.recipients}
                        onChange={(chips) => this.handleChange(chips)}
-                       underlineFocusStyle={styles.taskFocusStyle}/>
+                       underlineFocusStyle={styles.taskFocusStyle}
+                       placeholder='(555) 555 5555'/>
           </div>
           { allTasks }
           <div className='new-task'>
