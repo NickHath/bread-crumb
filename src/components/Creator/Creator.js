@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import phone from 'phone';
 import ChipInput from 'material-ui-chip-input';
+import SVG from 'react-inlinesvg';
 
 // Material UI and styling
 import styles from './CreatorMuiStyles';
@@ -21,14 +22,17 @@ class Creator extends Component{
     this.state = {
       recipients: [],
       numTasks: 1,
+      tasks: [true],
       hunt_id: window.location.pathname.split('/')[2]
     }
     this.sendScavengerHunt = this.sendScavengerHunt.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   addTask() {
     this.setState({ numTasks: ++this.state.numTasks });
+    this.setState({ tasks: [...this.state.tasks, true] })
   }
 
   handleRequestDelete() {
@@ -65,7 +69,12 @@ class Creator extends Component{
     })
     
     // send tasks as an array of objects
-    for (let i = 1; i <= this.state.numTasks; i++) {
+    for (let i = 0; i < this.state.tasks.length; i++) {
+      // if there is no ref for this index, skip!
+      if (!this.state.tasks[i]) {
+        continue;
+      }
+
       let currentTask = `prompt${i}`, currentHint = `hint${i}`, currentAnswer = `answer${i}`;
       let task = {
         task: this.refs[currentTask].input.value,
@@ -81,27 +90,37 @@ class Creator extends Component{
          .then(() => window.location = '/dashboard')
   }
 
+  deleteTask(e) {
+    let newTasks = this.state.tasks;
+    newTasks[e.target.id] = false;
+    this.setState({ tasks: newTasks })
+  }
+
   render() {
+    console.log('CREATOR:\n', this.refs);    
     console.log(this.state);
-    let allTasks = [];
-    for (let i = 1; i <= this.state.numTasks; i++) {
-      allTasks.push(
-        <div key={i} className='creator-task'>
-          <h2>Task #{i}</h2>
-          <TextField className='prompt' 
-                    placeholder='Task Description' 
-                    underlineFocusStyle={styles.taskFocusStyle}
-                    ref={`prompt${i}`}/>
-          <TextField className='hint' 
-                    placeholder='Hint' 
-                    underlineFocusStyle={styles.hintFocusStyle}
-                    ref={`hint${i}`}/>
-          <TextField className='answers' 
-                    placeholder='Accepted Answers' 
-                    underlineFocusStyle={styles.answerFocusStyle}
-                    ref={`answer${i}`}/>
-        </div> 
-      )
+    let allTasks = [], taskNum = 1;
+    for (let i = 0; i < this.state.tasks.length; i++) {
+      if (this.state.tasks[i]) {
+        allTasks.push(
+          <div key={i} className='creator-task'>
+            <h2 id={i} onClick={e => this.deleteTask(e)}>Task #{taskNum}</h2>
+            <TextField className='prompt' 
+                      placeholder='Task Description' 
+                      underlineFocusStyle={styles.taskFocusStyle}
+                      ref={`prompt${i}`}/>
+            <TextField className='hint' 
+                      placeholder='Hint' 
+                      underlineFocusStyle={styles.hintFocusStyle}
+                      ref={`hint${i}`}/>
+            <TextField className='answers' 
+                      placeholder='Accepted Answers' 
+                      underlineFocusStyle={styles.answerFocusStyle}
+                      ref={`answer${i}`}/>
+          </div> 
+        )  
+        taskNum++;
+      }      
     }
 
     return(

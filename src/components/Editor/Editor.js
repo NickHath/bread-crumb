@@ -71,7 +71,17 @@ class Editor extends Component {
   }
 
   saveChanges() {
-    // update tasks
+    // create recipients
+    for (let i = 0; i < this.state.recipientPhoneNumbers.length; i++) {
+      let currNum = this.state.recipientPhoneNumbers[i];
+      console.log('currNum:\n', currNum);
+      axios.post('/recipient/create', {
+        phone: currNum,
+        hunt_id: this.state.hunt_id
+      })
+    }
+    
+    // create & update tasks
     let putTasks = [], postTasks = [], newTasks = []; 
     let numTasks = Object.keys(this.refs).length / 3;
     for (let i = 0; i < numTasks; i++) {
@@ -87,7 +97,7 @@ class Editor extends Component {
       })
     }
 
-    // might cause dashboard to not render data appropariately
+    // might cause dashboard to not render data immediately
     axios.post(`/task/create`, postTasks)
     axios.put('/task/edit', putTasks)
          .then(() => window.location='/dashboard')
