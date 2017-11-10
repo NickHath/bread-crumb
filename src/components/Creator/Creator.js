@@ -43,6 +43,14 @@ class Creator extends Component{
     this.setState({ recipients: chips });
   }
 
+  handleFocusOut(number) {
+    number = phone(number);
+    number = number.length === 0 ? '' : number[0];
+    if (this.state.recipients.length === 0) {
+      this.setState({ recipients: [...this.state.recipients, number] })      
+    }
+  }
+
   // stores recipients and tasks (which are associated to a hunt_id)
   sendScavengerHunt() {
     // send recipients as an array of objects
@@ -106,6 +114,8 @@ class Creator extends Component{
             <ChipInput defaultValue={this.state.recipients}
                        onChange={(chips) => this.handleChange(chips)}
                        underlineFocusStyle={styles.taskFocusStyle}
+                       clearOnBlur={false}
+                       onBlur={(e) => this.handleFocusOut(e.target.value)}
                        placeholder='(555) 555 5555'/>
           </div>
           { allTasks }
