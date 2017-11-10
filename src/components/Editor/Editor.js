@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import axios from 'axios';
 import phone from 'phone';
@@ -80,7 +79,7 @@ class Editor extends Component {
         hunt_id: this.state.hunt_id
       })
     }
-    
+
     // create & update tasks
     let putTasks = [], postTasks = [], newTasks = []; 
     let numTasks = Object.keys(this.refs).length / 3;

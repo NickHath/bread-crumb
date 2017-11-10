@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import phone from 'phone';
 import ChipInput from 'material-ui-chip-input';
-import SVG from 'react-inlinesvg';
 
 // Material UI and styling
 import styles from './CreatorMuiStyles';
@@ -11,6 +9,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ControlPoint from 'material-ui-icons/ControlPoint';
+import DeleteForever from 'material-ui-icons/DeleteForever';
+import deleteIcon from '../../assets/delete_forever_black_48x48.png';
 
 // // redux
 import { connect } from 'react-redux';
@@ -91,6 +91,7 @@ class Creator extends Component{
   }
 
   deleteTask(e) {
+    console.log('deleting:\n', e.target)
     let newTasks = this.state.tasks;
     newTasks[e.target.id] = false;
     this.setState({ tasks: newTasks })
@@ -104,6 +105,7 @@ class Creator extends Component{
       if (this.state.tasks[i]) {
         allTasks.push(
           <div key={i} className='creator-task'>
+            <img className='delete' src={deleteIcon} id={i} onClick={e => this.deleteTask(e)} />
             <h2 id={i} onClick={e => this.deleteTask(e)}>Task #{taskNum}</h2>
             <TextField className='prompt' 
                       placeholder='Task Description' 
