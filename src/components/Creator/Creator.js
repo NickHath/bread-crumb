@@ -106,7 +106,7 @@ class Creator extends Component{
         allTasks.push(
           <div key={i} className='creator-task'>
             <img className='delete' src={deleteIcon} id={i} onClick={e => this.deleteTask(e)} />
-            <h2 id={i} onClick={e => this.deleteTask(e)}>Task #{taskNum}</h2>
+            <h2>Task #{taskNum}</h2>
             <TextField className='prompt' 
                       placeholder='Task Description' 
                       underlineFocusStyle={styles.taskFocusStyle}
