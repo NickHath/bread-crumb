@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ControlPoint from 'material-ui-icons/ControlPoint';
+import redDeleteIcon from '../../assets/delete_red_500.png';
 import styles from './EditorMuiStyles';
 
 // redux 
@@ -24,6 +25,7 @@ class Editor extends Component {
       deletedNumbers: [],
       tasks: []
     }
+    this.deleteTask = this.deleteTask.bind(this);
   }
   
   componentWillMount() {
@@ -69,6 +71,18 @@ class Editor extends Component {
     })
   }
 
+  deleteTask(e) {
+    // splice an index from this.state.tasks
+    // and delete the task by task_id from database
+    console.log('INDEX OF TASK I WANT TO DELETE:\n', e.target.id);    
+    let task_id = this.state.tasks[e.target.id].task_id;
+    let updatedTasks = [...this.state.tasks];
+    updatedTasks.splice(e.target.id, 1, false);
+
+    task_id ? axios.delete(`/task/delete/${task_id}`) : null;
+    this.setState({ tasks: updatedTasks })
+  }
+
   saveChanges() {
     // create recipients
     let newRecipients = [];
@@ -86,8 +100,9 @@ class Editor extends Component {
 
     // create & update tasks
     let putTasks = [], postTasks = [], newTasks = []; 
-    let numTasks = Object.keys(this.refs).length / 3;
-    for (let i = 0; i < numTasks; i++) {
+    // let numTasks = Object.keys(this.refs).length / 3;
+    for (let i = 0; i < this.state.tasks.length; i++) {
+      if (!this.state.tasks[i]) { continue }
       let currentTask = `prompt${i}`, currentHint = `hint${i}`, currentAnswer = `answer${i}`;  
       newTasks = this.state.tasks[i].task_id ? putTasks : postTasks;
       newTasks.push({
@@ -97,7 +112,7 @@ class Editor extends Component {
         answer: this.refs[currentAnswer].input.value,
         hunt_id: this.state.hunt_id,
         task_order: i
-      })
+      })        
     }
     
     // delete recipients
@@ -113,18 +128,29 @@ class Editor extends Component {
     }
 
     // might cause dashboard to not render data immediately
+    console.log('TASKS WE\'RE ADDING', postTasks);
+    console.log('TASKS WE\'RE UPDATING', putTasks);
     axios.post(`/task/create`, postTasks)
     axios.put('/task/edit', putTasks)
-          .then(() => window.location='/dashboard')
+         .then(() => window.location='/dashboard')
   }
 
   render() {
     console.log('EDITOR:\n', this.state);
     console.log('EDITOR REFS:\n', this.refs);
+    let taskNum = 0;
     const tasks = this.state.tasks.map((task, i) => {
+      if (!this.state.tasks[i]) { return }
+      taskNum++;
       return(
         <div className='editor-input' key={i}>
-          <h2>Task #{i + 1}</h2>
+          <div className='task-header'>
+            <h2>Task #{taskNum}</h2>
+            <img className='delete' 
+                    src={redDeleteIcon} 
+                    id={i} 
+                    onClick={e => this.deleteTask(e)}/>
+          </div>
           <TextField className='prompt' 
                      placeholder='Task Description' 
                      underlineFocusStyle={styles.taskFocusStyle}

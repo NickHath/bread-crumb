@@ -48,7 +48,15 @@ module.exports = {
 
   deleteTask: function(req, res) {
     const db = req.app.get('db');
-    db.tasks.delete_task([req.params.id])
+    db.tasks.delete_task([req.params.hunt_id])
+      .then(() => res.status(200).send(`Deleted task ${req.params.hunt_id}`))
+      .catch(err => res.status(500).send(err));
+  },
+
+
+  deleteTaskById: function(req, res) {
+    const db = req.app.get('db');
+    db.tasks.delete_task_by_id([req.params.id])
       .then(() => res.status(200).send(`Deleted task ${req.params.id}`))
       .catch(err => res.status(500).send(err));
   }

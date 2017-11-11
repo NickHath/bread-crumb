@@ -111,7 +111,8 @@ app.get('/tasks/:hunt_id', taskController.getTasks);
 app.get('/task/:id', taskController.getTask);
 app.post('/task/create', taskController.createTask);
 app.put('/task/edit', taskController.updateTasks);
-app.delete('/task/delete/:id', taskController.deleteTask);
+app.delete('/tasks/delete/:hunt_id', taskController.deleteTask);
+app.delete('/task/delete/:id', taskController.deleteTaskById);
 
 // ----------------  TWILIO  ----------------- //
 const textingController = require('./controllers/textingController');

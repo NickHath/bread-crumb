@@ -34,7 +34,7 @@ class ScavHunt extends Component {
   }
 
   deleteScavHunt() {
-    axios.delete(`/task/delete/${this.props.hunt.hunt_id}`)
+    axios.delete(`/tasks/delete/${this.props.hunt.hunt_id}`)
          .then(() => {
             axios.delete(`/recipients/delete/${this.props.hunt.hunt_id}`)
                  .then(() => {
