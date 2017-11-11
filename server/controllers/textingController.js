@@ -52,6 +52,17 @@ module.exports = {
                       </Message>
                     </Response>
                   `)
+                } else if (Body.toLowerCase().replace(/s/g, '') === 'quit') {
+                    db.recipients.delete_recipient_by_id([recipient.recipient_id])
+                      .then(() => {
+                        res.send(`
+                          <Response>
+                            <Message>
+                              You have successfully opted out of your hunt. 
+                            </Message>
+                          </Response>
+                        `)
+                      })
                 } else if (checkGuess.exactMatch(Body, tasks[recipient.current_task].answer)) {
                     db.recipients.update_current_task([From, recipient.hunt_id, ++recipient.current_task])
                       .then(() => {
