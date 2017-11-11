@@ -28,11 +28,20 @@
   border-radius: 3px;
   margin-top: 4.5em;
 }
+.top-left-header * {
+  display: inline;
+  margin-right: 0.3em;
+}
 .landing h1 {
   font-size: 4.5em;
   margin-bottom: 0.15em;
 }
-.landing img {
+.text-logo {
+  max-width: 2em;
+  max-height: auto;
+
+}
+.bread-logo {
   margin-left: -1.1em;
   margin-bottom: 1em;
   max-width: 215px;

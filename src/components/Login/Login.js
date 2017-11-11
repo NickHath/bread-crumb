@@ -3,16 +3,20 @@ import React from 'react';
 // Mui components and colors
 import RaisedButton from 'material-ui/RaisedButton';
 import styles from './LoginMuiStyles';
-import logo from '../../assets/bread-logo-white.png';
+import textLogo from '../../assets/text-logo-white.png';
+import breadLogo from '../../assets/bread-logo-white.png';
 
 const Login = () => (
   <div className='landing-wrapper'>
     <div className='landing-nav'>
-      <h1>BreadCrumb</h1>
+      <div className='top-left-header'>
+        <img className='text-logo' src={ textLogo } />
+        <h1>BreadCrumb</h1>
+      </div>
     </div>
     <div className='landing'>
       <div className='landing-content'>
-        <img src={ logo } />
+        <img className='bread-logo' src={ breadLogo } />
         <h1>Start your adventure.</h1>
         <div className='login-buttons'>
           <a href={ process.env.REACT_APP_LOGIN }>
