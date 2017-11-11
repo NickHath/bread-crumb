@@ -45,8 +45,6 @@ module.exports = {
       const { recipient_id, first_name, last_name, phone } = recipient;      
       db.recipients.edit_recipient([recipient_id, first_name, last_name, phone])
     })
-      // .then(() => res.status(200).send(`Edited recipient ${req.params.id}`))
-      // .catch(err => res.status(500).send(err));
       res.status(200).send();
   },
 

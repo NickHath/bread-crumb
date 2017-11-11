@@ -19,8 +19,8 @@ module.exports = {
     const { first_name, last_name } = req.user;
     let user = `${first_name[0].toUpperCase() + first_name.slice(1)} ${last_name[0].toUpperCase() + last_name.slice(1)}` || from || 'Someone';
     body = `${user} has created a scavenger hunt for you. Type 'Hint' for a clue or 'Quit' to unsubscribe. Your first task: ${body} `;
-    db.recipients.get_recipient_by_phone([to])
-      .then(recipient => console.log(recipient));
+    // db.recipients.get_recipient_by_phone([to])
+    //   .then(recipient => console.log(recipient));
     client.messages.create({ 
       body: body, 
       to: to, 
