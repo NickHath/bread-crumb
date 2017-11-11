@@ -44,39 +44,39 @@ module.exports = {
             db.tasks.get_tasks([recipient.hunt_id])
               .then(tasks => {
                 tasks.sort((a, b) => a.task_order - b.task_order);
-                if (checkGuess.exactMatch(Body, tasks[recipient.current_task].answer)) {
-                  db.recipients.update_current_task([From, recipient.hunt_id, ++recipient.current_task])
-                    .then(() => {
-                      if (recipient.current_task === tasks.length) {
+                if (Body.toLowerCase().replace(/\s/g, '') === 'hint') {
+                  res.send(`
+                    <Response>
+                      <Message>
+                        Your hint is: ${tasks[recipient.current_task].hint}
+                      </Message>
+                    </Response>
+                  `)
+                } else if (checkGuess.exactMatch(Body, tasks[recipient.current_task].answer)) {
+                    db.recipients.update_current_task([From, recipient.hunt_id, ++recipient.current_task])
+                      .then(() => {
+                        if (recipient.current_task === tasks.length) {
+                          res.send(`
+                            <Response>
+                              <Message>
+                                Congratulations. You win! Should have some custom text here.
+                              </Message>
+                            </Response>
+                          `)
+                        }
                         res.send(`
                           <Response>
-                            <Message>
-                              Congratulations. You win! Should have some custom text here.
+                          <Message>
+                            Correct. Your next task: ${tasks[recipient.current_task].task}
                             </Message>
                           </Response>
                         `)
-                      }
-                      res.send(`
-                        <Response>
-                         <Message>
-                           Correct. Your next task: ${tasks[recipient.current_task].task}
-                          </Message>
-                        </Response>
-                      `)
-                    })
+                      })
                 } else if (checkGuess.closeMatch(Body, tasks[recipient.current_task].answer)) {
                   res.send(`
                     <Response>
                       <Message>
                         ${ checkGuess.matchingWords(Body, tasks[recipient.current_task].answer) }
-                      </Message>
-                    </Response>
-                  `)
-                } else if (Body.toLowerCase().replace(/\s/g, '') === 'hint') {
-                  res.send(`
-                    <Response>
-                      <Message>
-                        Your hint is: ${tasks[recipient.current_task].hint}
                       </Message>
                     </Response>
                   `)
