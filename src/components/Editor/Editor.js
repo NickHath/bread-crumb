@@ -71,14 +71,17 @@ class Editor extends Component {
 
   saveChanges() {
     // create recipients
+    let newRecipients = [];
+    let existingRecipients = this.state.recipients.map(recipient => recipient.phone);    
     for (let i = 0; i < this.state.recipientPhoneNumbers.length; i++) {
       let currNum = this.state.recipientPhoneNumbers[i];
-      console.log('currNum:\n', currNum);
-      axios.post('/recipient/create', {
-        phone: currNum,
-        hunt_id: this.state.hunt_id
-      })
+      console.log(existingRecipients, currNum);
+      console.log('TEST:\n', existingRecipients.includes(currNum));
+      if (!existingRecipients.includes(currNum)) {
+        newRecipients.push({ hunt_id: this.state.hunt_id, phone: currNum })        
+      }
     }
+    axios.post('/recipient/create', newRecipients);
 
     // create & update tasks
     let putTasks = [], postTasks = [], newTasks = []; 
@@ -173,7 +176,6 @@ class Editor extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     hunts: state.hunts
   }

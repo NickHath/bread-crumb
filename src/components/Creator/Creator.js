@@ -22,7 +22,6 @@ class Creator extends Component{
     super();
     this.state = {
       recipients: [],
-      numTasks: 1,
       tasks: [true],
       hunt_id: window.location.pathname.split('/')[2]
     }
@@ -32,7 +31,6 @@ class Creator extends Component{
   }
 
   addTask() {
-    this.setState({ numTasks: ++this.state.numTasks });
     this.setState({ tasks: [...this.state.tasks, true] })
   }
 
