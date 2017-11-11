@@ -53,7 +53,14 @@ module.exports = {
 
   deleteRecipient: function(req, res) {
     const db = req.app.get('db');
-    db.recipients.delete_recipient([req.params.id])
+    db.recipients.delete_recipient([req.params.hunt_id])
+      .then(() => res.status(200).send(`Deleted recipient ${req.params.hunt_id}`))
+      .catch(err => res.status(500).send(err));
+  },
+
+  deleteRecipientById: function(req, res) {
+    const db = req.app.get('db');
+    db.recipients.delete_recipient_by_id([req.params.id])
       .then(() => res.status(200).send(`Deleted recipient ${req.params.id}`))
       .catch(err => res.status(500).send(err));
   }

@@ -103,7 +103,8 @@ app.get('/recipient/:id', recipientController.getRecipient);
 app.post('/recipient/create', recipientController.createRecipient);
 app.post('/recipient/updatetask/:hunt_id', recipientController.updateCurrentTask);
 app.put('/recipient/edit/:id', recipientController.updateRecipients);
-app.delete('/recipient/delete/:id', recipientController.deleteRecipient);
+app.delete('/recipients/delete/:hunt_id', recipientController.deleteRecipient);
+app.delete('/recipient/delete/:id', recipientController.deleteRecipientById);
 
 // taskHuntController
 app.get('/tasks/:hunt_id', taskController.getTasks);

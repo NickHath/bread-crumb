@@ -72,7 +72,8 @@ class Editor extends Component {
   saveChanges() {
     // create recipients
     let newRecipients = [];
-    let existingRecipients = this.state.recipients.map(recipient => recipient.phone);    
+    let existingRecipients = this.state.recipients.map(recipient => recipient.phone);   
+
     for (let i = 0; i < this.state.recipientPhoneNumbers.length; i++) {
       let currNum = this.state.recipientPhoneNumbers[i];
       console.log(existingRecipients, currNum);
@@ -98,22 +99,23 @@ class Editor extends Component {
         task_order: i
       })
     }
+    
+    // delete recipients
+    const { deletedNumbers } = this.state;
+    for (let i = 0; i < deletedNumbers.length; i++) {
+      let recipients = this.state.recipients;
+      for (let j = 0; j < recipients.length; j++) {
+        if (deletedNumbers[i] === recipients[j].phone) {
+          console.log('recipient_id:\n', recipients[j].recipient_id);
+          axios.delete(`/recipient/delete/${recipients[j].recipient_id}`);
+        }
+      }
+    }
 
     // might cause dashboard to not render data immediately
     axios.post(`/task/create`, postTasks)
     axios.put('/task/edit', putTasks)
-         .then(() => window.location='/dashboard')
-    
-    // delete recipients
-    const { deletedNumbers, recipients } = this.state;
-    for (let i = 0; i < deletedNumbers.length; i++) {
-      for (let j = 0; j < recipients.length; j++) {
-        if (deletedNumbers[i] === recipients[j].phone) {
-          console.log('recipient_id:\n', recipients[j].recipient_id);
-          // axios.delete(`/recipient/delete/${recipients[j].recipient_id}`);
-        }
-      }
-    }
+          .then(() => window.location='/dashboard')
   }
 
   render() {
