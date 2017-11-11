@@ -18,13 +18,14 @@ module.exports = {
     let { body, to, from } = req.body;
     const { first_name, last_name } = req.user;
     let user = `${first_name[0].toUpperCase() + first_name.slice(1)} ${last_name[0].toUpperCase() + last_name.slice(1)}` || from || 'Someone';
-    body = `${user} has created a scavenger hunt for you. Type 'Hint' for a clue. Your first task: ${body} `;
+    body = `${user} has created a scavenger hunt for you. Type 'Hint' for a clue or 'Quit' to unsubscribe. Your first task: ${body} `;
+    db.recipients.get_recipient_by_phone([to])
+      .then(recipient => console.log(recipient));
     client.messages.create({ 
       body: body, 
       to: to, 
       from: twilioNumber 
     }).then(message => {
-      console.log(message)
       res.status(200).send(`Sent message "${body}" to ${to}`);
       })
       .catch(err => res.status(500).send(err));
@@ -32,7 +33,6 @@ module.exports = {
 
   
   receiveText: (req, res) => {
-    console.log(req.body);
     const { From, Body } = req.body;
     const db = req.app.get('db');
     // check if recipient exists (phone and hunt_id)
@@ -54,6 +54,7 @@ module.exports = {
                   `)
                 } else if (Body.toLowerCase().replace(/s/g, '') === 'quit') {
                     db.recipients.delete_recipient_by_id([recipient.recipient_id])
+                      // think this is built in
                       .then(() => {
                         res.send(`
                           <Response>
