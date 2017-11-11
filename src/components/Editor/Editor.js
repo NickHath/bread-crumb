@@ -83,6 +83,14 @@ class Editor extends Component {
     this.setState({ tasks: updatedTasks })
   }
 
+  handleFocusOut(number) {
+    number = phone(number);
+    number = number.length === 0 ? '' : number[0];
+    if (this.state.recipientPhoneNumbers.length === 0) {
+      this.setState({ recipientPhoneNumbers: [...this.state.recipientPhoneNumbers, number] })      
+    }
+  }
+
   saveChanges() {
     // create recipients
     let newRecipients = [];
@@ -132,7 +140,7 @@ class Editor extends Component {
     console.log('TASKS WE\'RE UPDATING', putTasks);
     axios.post(`/task/create`, postTasks)
     axios.put('/task/edit', putTasks)
-         .then(() => window.location='/dashboard')
+         .then(() => window.location='/dashboard') 
   }
 
   render() {
@@ -180,6 +188,7 @@ class Editor extends Component {
               <ChipInput value={this.state.recipientPhoneNumbers}
                          onRequestAdd={(chip) => this.handleAddChip(chip)}
                          onRequestDelete={(chip, index) => this.handleDeleteChip(chip, index)}
+                         onBlur={(e) => this.handleFocusOut(e.target.value)}
                          placeholder='(555) 555 5555'
                          underlineFocusStyle={styles.taskFocusStyle}/>
               </div>
