@@ -20,20 +20,29 @@ module.exports = {
     const { first_name, last_name } = req.user;
     let user = `${first_name[0].toUpperCase() + first_name.slice(1)} ${last_name[0].toUpperCase() + last_name.slice(1)}` || from || 'Someone';
     body = `${user} has created a scavenger hunt for you. Type 'Hint' for a clue or 'Quit' to unsubscribe. Your first task: ${body} `;
-    db.recipients.reset_current_tasks([to])
-      .then(() => {
-        db.recipients.update_current_task([to, hunt_id, 0])    
-          .then(() => {
-            client.messages.create({ 
-              body: body, 
-              to: to, 
-              from: twilioNumber 
-            }).then(message => {
-              res.status(200).send(`Sent message "${body}" to ${to}`);
-              })
-              .catch(err => res.status(500).send(err));
-          })
+    db.recipients.get_current_task([to, hunt_id])
+      .then(currTask => {
+        if (currTask[0] === null) {
+          console.log('We\'re settings current_task to 0') 
+          db.recipients.reset_current_tasks([to])
+            .then(() => {
+              db.recipients.update_current_task([to, hunt_id, 0])    
+                .then(() => {
+                  client.messages.create({ 
+                    body: body, 
+                    to: to, 
+                    from: twilioNumber 
+                  }).then(message => {
+                    res.status(200).send(`Sent message "${body}" to ${to}`);
+                    })
+                    .catch(err => res.status(500).send(err));
+                })
+            })
+        } else {
+          res.status(200).send('Recipient is currently on this scavenger hunt');
+        }
       })
+   
   },
 
   
@@ -73,7 +82,6 @@ module.exports = {
                     db.recipients.update_current_task([From, recipient.hunt_id, ++recipient.current_task])
                       .then(() => {
                         if (recipient.current_task === tasks.length) {
-                          console.log(recipient.recipient_id);                                                
                           db.recipients.delete_recipient_by_id([recipient.recipient_id]);
                           res.send(`
                             <Response>
