@@ -20,9 +20,9 @@ module.exports = {
     const { first_name, last_name } = req.user;
     let user = `${first_name[0].toUpperCase() + first_name.slice(1)} ${last_name[0].toUpperCase() + last_name.slice(1)}` || from || 'Someone';
     body = `${user} has created a scavenger hunt for you. Type 'Hint' for a clue or 'Quit' to unsubscribe. Your first task: ${body} `;
-    db.recipients.get_current_task([to, hunt_id])
+    db.recipients.current_task_is_null([to, hunt_id])
       .then(currTask => {
-        if (currTask[0]) {
+        if (currTask.length > 0) {
           db.recipients.reset_current_tasks([to])
             .then(() => {
               db.recipients.update_current_task([to, hunt_id, 0])    
