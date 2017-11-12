@@ -28,5 +28,15 @@ export default {
   iconWrapper: {
     width: 120,
     height: 120,
+  },
+  textInputStyle: {
+    color: '#424242',
+    fontFamily: 'Roboto, sans-serif',
+    fontSize: '3em',
+    fontWeight: '700',
+  },
+  textFieldStyle: {
+    width: '100%', 
+    marginBottom: '1em'
   }
 };

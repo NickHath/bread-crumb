@@ -26,6 +26,7 @@ class Editor extends Component {
       tasks: []
     }
     this.deleteTask = this.deleteTask.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
   }
   
   componentWillMount() {
@@ -91,10 +92,16 @@ class Editor extends Component {
     }
   }
 
+  handleChangeName(newName) {
+    this.setState({ huntName: newName });
+  }
+
   saveChanges() {
     // create recipients
     let newRecipients = [];
-    let existingRecipients = this.state.recipients.map(recipient => recipient.phone);   
+    let existingRecipients = this.state.recipients.map(recipient => recipient.phone); 
+    
+    axios.put(`/scav/edit/${this.state.hunt_id}`, { title: this.state.huntName, description: '' });
 
     for (let i = 0; i < this.state.recipientPhoneNumbers.length; i++) {
       let currNum = this.state.recipientPhoneNumbers[i];
@@ -181,7 +188,13 @@ class Editor extends Component {
       <div className='editor-wrapper'>
         <div className='editor'>
           <div className='container editor-contents'>
-            <h1>Editor</h1>
+            {/* <h1>Editor</h1> */}
+            {/* <h1>{ this.state.huntName }</h1> */}
+            <TextField value={this.state.huntName} 
+                       onChange={(e) => this.handleChangeName(e.target.value)}
+                       underlineStyle={{display: 'none'}} 
+                       inputStyle={styles.textInputStyle}
+                       style={styles.textFieldStyle}/>
             <div className='editor-input'>
               <h2>Recipients</h2>
               <div className='recipients' style={ styles.wrapper }>
