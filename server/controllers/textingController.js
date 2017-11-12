@@ -73,6 +73,8 @@ module.exports = {
                     db.recipients.update_current_task([From, recipient.hunt_id, ++recipient.current_task])
                       .then(() => {
                         if (recipient.current_task === tasks.length) {
+                          console.log(recipient.recipient_id);                                                
+                          db.recipients.delete_recipient_by_id([recipient.recipient_id]);
                           res.send(`
                             <Response>
                               <Message>
