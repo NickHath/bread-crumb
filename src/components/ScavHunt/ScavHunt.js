@@ -7,6 +7,7 @@ import TaskList from '../TaskList/TaskList';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
+import checkMark from '../../assets/checkmark.jpg';
 import styles from './ScavHuntMuiStyles';
 
 // redux
@@ -53,6 +54,11 @@ class ScavHunt extends Component {
     this.setState({ open: false })
   }
 
+  handleEdit() {
+    // edit current scavenger hunt... set ongoing to TRUE
+    // axios.put('/scav/edit')
+  }
+
   render() {
 
     const sendActions = [
@@ -93,7 +99,8 @@ class ScavHunt extends Component {
           <TaskList tasks={ this.props.hunt.tasks }/>
           <Link className='link' to={`/editor/${this.props.hunt.hunt_id}`}>
           <RaisedButton label='Edit'
-                        style={ styles.buttonStyle }/>
+                        style={ styles.buttonStyle }
+                        onClick={() => this.handleEdit()}/>
           </Link>
           <RaisedButton label='Send'
                         style={ {...styles.buttonStyle, ...styles.sendButton } }
@@ -101,6 +108,11 @@ class ScavHunt extends Component {
           <RaisedButton label='Delete'
                         style={ styles.buttonStyle }
                         onClick={() => this.handleOpen('delete')}/>
+          {
+            this.props.progress ? 
+              <img className='checkmark' src={ checkMark }/> :
+              null
+          }
           <Dialog 
             title={`Are you sure you want to ${this.state.buttonPressed} ${this.props.hunt.title}?`}
             actions={this.state.buttonPressed === 'send' ? sendActions : deleteActions}

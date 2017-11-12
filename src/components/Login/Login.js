@@ -28,8 +28,8 @@ const Login = () => (
         </div>
         <p>
           Bread crumb is a tool that lets you create and manage scavenger hunts. 
-          Using Twilio’s texting API, you can send out your first clue to a friend’s number, and we’ll handle the rest. 
-          Plan anything from an anniversary to an interactive history lesson using BreadCrumb's scavenger hunt dashboard.
+          Using Twilio’s texting API, you can send out your first clue to a friend’s number, then we’ll handle the rest. 
+          Plan anything from an anniversary to an interactive history lesson using our scavenger hunt dashboard.
         </p>
       </div>
     </div>

@@ -42,6 +42,7 @@ class Dashboard extends Component {
     if (!this.state.huntName) {
       this.setState({ error: 'Please name your scavenger hunt' })
     } else {
+      // add progress tracker here! set ongoing to false
       let scavHunt = { title: this.state.huntName, description: '' };
       axios.post('/scav/create', scavHunt)
            .then(res => window.location = `/creator/${res.data[0].hunt_id}`)
@@ -60,6 +61,7 @@ class Dashboard extends Component {
       }
       return(
         <ScavHunt key={ hunt.hunt_id } 
+                  progress={ true }
                   hunt={ hunt } 
                   textRecipients={ textRecipients }
                   recipients={ recipients } 
