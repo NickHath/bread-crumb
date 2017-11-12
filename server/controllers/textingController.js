@@ -15,20 +15,25 @@ const client = new Twilio(twilioSID, twilioAuthToken);
 // controller methods
 module.exports = {
   sendText: (req, res) => {
-    let { body, to, from } = req.body;
+    const db = req.app.get('db');    
+    let { body, to, from, hunt_id } = req.body;
     const { first_name, last_name } = req.user;
     let user = `${first_name[0].toUpperCase() + first_name.slice(1)} ${last_name[0].toUpperCase() + last_name.slice(1)}` || from || 'Someone';
     body = `${user} has created a scavenger hunt for you. Type 'Hint' for a clue or 'Quit' to unsubscribe. Your first task: ${body} `;
-    // db.recipients.get_recipient_by_phone([to])
-    //   .then(recipient => console.log(recipient));
-    client.messages.create({ 
-      body: body, 
-      to: to, 
-      from: twilioNumber 
-    }).then(message => {
-      res.status(200).send(`Sent message "${body}" to ${to}`);
+    db.recipients.reset_current_tasks([to])
+      .then(() => {
+        db.recipients.update_current_task([to, hunt_id, 0])    
+          .then(() => {
+            client.messages.create({ 
+              body: body, 
+              to: to, 
+              from: twilioNumber 
+            }).then(message => {
+              res.status(200).send(`Sent message "${body}" to ${to}`);
+              })
+              .catch(err => res.status(500).send(err));
+          })
       })
-      .catch(err => res.status(500).send(err));
   },
 
   
