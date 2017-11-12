@@ -71,7 +71,7 @@ module.exports = {
                           res.send(`
                             <Response>
                               <Message>
-                                Congratulations. You win! Should have some custom text here.
+                                Congratulations. You win!
                               </Message>
                             </Response>
                           `)

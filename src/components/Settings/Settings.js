@@ -7,24 +7,34 @@ import RaisedButton from 'material-ui/RaisedButton';
 import styles from './SettingsMuiStyles';
 
 // redux
-import { connect } from 'react-redux';
-import { updateAccount } from '../../ducks/reducer';
+// import { connect } from 'react-redux';
+// import { updateAccount } from '../../ducks/reducer';
 
 class Settings extends Component {
+  constructor() {
+    super();
+    this.state = {
+      first: '',
+      last: '',
+      email: ''
+    }
+  }
   sendUpdatedSettings() {
     // update db with new user data
     let first_name = this.refs.first.input.value;
     let last_name = this.refs.last.input.value;
     let email = this.refs.email.input.value;
-    this.props.updateAccount(first_name, last_name, email);
+    // this.props.updateAccount(first_name, last_name, email);
     axios.put(`/account/edit`, { first_name, last_name, email });
   }
 
   componentWillMount() {
     axios.get('/account')
          .then(res => {
+           console.log('SETTINGS:\n', res.data);
            const { first_name, last_name, email } = res.data[0];
-           this.props.updateAccount(first_name, last_name, email);
+           this.setState({ first: first_name, last: last_name, email: email })
+          //  this.props.updateAccount(first_name, last_name, email);
          })
   }
 
@@ -38,19 +48,22 @@ class Settings extends Component {
               <h2>First Name</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
                          ref='first'
-                         defaultValue={this.props.first[0].toUpperCase() + this.props.first.slice(1)}/>
+                         onChange={(e) => this.setState({ first: e.target.value })}
+                         value={this.state.first ? this.state.first[0].toUpperCase() + this.state.first.slice(1) : ''}/>
             </div>
             <div className='settings-input'>
               <h2>Last Name</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
                          ref='last'
-                         defaultValue={this.props.last[0].toUpperCase() + this.props.last.slice(1)}/>
+                         onChange={(e) => this.setState({ last: e.target.value })}
+                         value={this.state.last ? this.state.last[0].toUpperCase() + this.state.last.slice(1) : ''}/>
             </div>
             <div className='settings-input'>
               <h2>Email</h2>
               <TextField underlineFocusStyle={styles.underlineFocusStyle}
                          ref='email'
-                         defaultValue={this.props.email}/>
+                         onChange={(e) => this.setState({ email: e.target.value })}
+                         value={this.state.email}/>
             </div>
             <Link className='link' to='/dashboard'>
               <RaisedButton label='Save' 
@@ -64,12 +77,13 @@ class Settings extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    first: state.first,
-    last: state.last,
-    email: state.email
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     first: state.first,
+//     last: state.last,
+//     email: state.email
+//   }
+// }
 
-export default connect(mapStateToProps, { updateAccount })(Settings);
+// export default connect(mapStateToProps, { updateAccount })(Settings);
+export default Settings;
