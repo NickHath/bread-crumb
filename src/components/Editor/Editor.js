@@ -39,7 +39,7 @@ class Editor extends Component {
             huntName: hunt.title,
             recipients: hunt.recipients,
             recipientPhoneNumbers: hunt.recipients.map(recipient => recipient.phone),
-            tasks: hunt.tasks
+            tasks: hunt.tasks.sort((a, b) => a.task_order - b.task_order)
           })
         }
       }
@@ -128,6 +128,7 @@ class Editor extends Component {
         hunt_id: this.state.hunt_id,
         task_order: i
       })        
+      console.log('EDITOR TASK_ORDER:\n', newTasks, i, this.refs[currentTask].input.value);
     }
     
     // delete recipients
@@ -136,23 +137,18 @@ class Editor extends Component {
       let recipients = this.state.recipients;
       for (let j = 0; j < recipients.length; j++) {
         if (deletedNumbers[i] === recipients[j].phone) {
-          console.log('recipient_id:\n', recipients[j].recipient_id);
           axios.delete(`/recipient/delete/${recipients[j].recipient_id}`);
         }
       }
     }
 
     // might cause dashboard to not render data immediately
-    console.log('TASKS WE\'RE ADDING', postTasks);
-    console.log('TASKS WE\'RE UPDATING', putTasks);
     axios.post(`/task/create`, postTasks)
     axios.put('/task/edit', putTasks)
          .then(() => window.location='/dashboard') 
   }
 
   render() {
-    console.log('EDITOR:\n', this.state);
-    console.log('EDITOR REFS:\n', this.refs);
     let taskNum = 0;
     const tasks = this.state.tasks.map((task, i) => {
       if (!this.state.tasks[i]) { return }
@@ -188,8 +184,6 @@ class Editor extends Component {
       <div className='editor-wrapper'>
         <div className='editor'>
           <div className='container editor-contents'>
-            {/* <h1>Editor</h1> */}
-            {/* <h1>{ this.state.huntName }</h1> */}
             <TextField value={this.state.huntName} 
                        onChange={(e) => this.handleChangeName(e.target.value)}
                        underlineStyle={{display: 'none'}} 
