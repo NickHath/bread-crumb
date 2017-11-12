@@ -22,8 +22,7 @@ module.exports = {
     body = `${user} has created a scavenger hunt for you. Type 'Hint' for a clue or 'Quit' to unsubscribe. Your first task: ${body} `;
     db.recipients.get_current_task([to, hunt_id])
       .then(currTask => {
-        if (currTask[0] === null) {
-          console.log('We\'re settings current_task to 0') 
+        if (currTask[0]) {
           db.recipients.reset_current_tasks([to])
             .then(() => {
               db.recipients.update_current_task([to, hunt_id, 0])    
