@@ -111,11 +111,11 @@ class ScavHunt extends Component {
           <RaisedButton label='Delete'
                         style={ styles.buttonStyle }
                         onClick={() => this.handleOpen('delete')}/>
-          {
+          {/* {
             this.props.progress ? 
               <img className='checkmark' src={ checkMark }/> :
               null
-          }
+          } */}
           <Dialog 
             title={`Are you sure you want to ${this.state.buttonPressed} ${this.props.hunt.title}?`}
             actions={this.state.buttonPressed === 'send' ? sendActions : deleteActions}
