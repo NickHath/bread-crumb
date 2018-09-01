@@ -56,3 +56,14 @@ p {
   border-top: 1em solid #FFCC80;
   margin: auto;
 }
+@media screen and (max-width: 480px) {
+  .container {
+    width: 100%;
+  }
+  .header h1 {
+    font-size: 3.75em;
+  }
+  .dashboard-contents {
+    width: 100%;
+  }
+}
