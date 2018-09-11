@@ -47,6 +47,7 @@ module.exports = {
   
   receiveText: (req, res) => {
     const { From, Body } = req.body;
+    console.log(`From, Body:`, From, Body);
     const db = req.app.get('db');
     // check if recipient exists (phone and hunt_id)
     // then get all tasks with that hunt_id and index it at current_task
@@ -58,6 +59,7 @@ module.exports = {
               .then(tasks => {
                 tasks.sort((a, b) => a.task_order - b.task_order);
                 if (Body.toLowerCase().replace(/\s/g, '') === 'hint') {
+                  console.log('Sending hint response');
                   res.send(`
                     <Response>
                       <Message>
