@@ -24,7 +24,7 @@ module.exports = {
       db.recipients.create_recipient([first_name, last_name, phone, hunt_id])
                    .then(() => {
                       ++count;
-                      if (count === tasks.length) { res.status(200).send('Added recipients'); };
+                      if (count === recipients.length) { res.status(200).send('Added recipients'); };
                    })
     })
   },
