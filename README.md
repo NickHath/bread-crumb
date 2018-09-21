@@ -1,7 +1,3 @@
-## bread-crumb
-
-# setup node and dev servers with ngrok re-routing to localhost
-# ngrok http SERVERPORT
-# => then add this url under manage numbers, messaging url (http://randstring.ngrok.io/message)
-# nodemon
-# npm start
+## BreadCrumb
+SMS-based scavenger hunt manager built with React, Express, PostgreSQL, and Twilio. 
+Users can create hunts consisting of prompts, hints, and answers chained together and then dispatch them via text.
